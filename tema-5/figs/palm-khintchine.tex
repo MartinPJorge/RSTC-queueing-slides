@@ -1,0 +1,19 @@
+\begin{tikzpicture}
+    % Time axis
+    \draw[|->] (0,0) -- (5,0) node[anchor=west] {time [sec]};
+
+    % ticks
+    \draw (1,.05) -- (1,-.05) node[pos=1,anchor=north] {1};
+    \draw (2,.05) -- (2,-.05) node[pos=1,anchor=north] {2};
+    \draw (3,.05) -- (3,-.05) node[pos=1,anchor=north] {3};
+    \draw (4,.05) -- (4,-.05) node[pos=1,anchor=north] {4};
+
+    
+    % arrivals A
+    \draw[->,color=Firebrick1,thick] (0.2,1) node[anchor=west,rotate=70] {usuario A.1} --(0.2,0);
+    \draw[->,color=Firebrick4,thick] (0.8,1) node[anchor=west,rotate=70] {usuario B.1} --(0.8,0);
+    \draw[->,color=red,thick] (1.5,1)node[anchor=west,rotate=70] {usuario A.2} --(1.5,0);
+    \draw[->,color=red,thick] (3,1)node[anchor=west,rotate=70] {usuario A.3} --(3,0);
+    \draw[->,color=Firebrick4,thick] (3.8,1) node[anchor=west,rotate=70] {usuario B.2} --(3.8,0);
+
+\end{tikzpicture}

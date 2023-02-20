@@ -1,0 +1,256 @@
+\documentclass[xcolor={x11names}]{beamer}
+\usetheme{Madrid}
+
+\usepackage{amssymb}
+\usepackage{ulem}
+\usepackage[utf8]{inputenc}
+\usepackage{mathtools}
+\usepackage{multicol}
+%\usepackage[x11names]{xcolor}
+\usefonttheme{professionalfonts}
+
+
+
+
+%% MATH commands
+\DeclareMathOperator{\Var}{Var}
+
+
+%% THEOREMS
+%\newtheorem{theorem}{Theorem}
+\newtheorem{thm}{Teorema}[section] % the main one
+
+
+
+%% PFGplots %%
+\usepackage{pgfplots}
+\pgfmathdeclarefunction{poiss}{1}{%
+  \pgfmathparse{(#1^x)*exp(-#1)/(x!)}%
+}
+
+
+
+
+\newcommand{\red}[1]{{\color{red}#1}}
+\newcommand{\blue}[1]{{\color{blue}#1}}
+
+%%%%%%%%%%
+%% TIKZ %%
+%%%%%%%%%%
+\usepackage{tikz}
+\usetikzlibrary{chains,shapes.multipart}
+
+
+
+
+%%% Insert section name before the section %%%
+\AtBeginSection[]{
+  \begin{frame}
+  \vfill
+  \centering
+  \begin{beamercolorbox}[sep=8pt,center,shadow=true,rounded=true]{title}
+    \usebeamerfont{title}\insertsectionhead\par%
+  \end{beamercolorbox}
+  \vfill
+  \end{frame}
+}
+
+
+
+\title[Tema 5]{Tema 5: Introducción al {\sout{Teletráfico}}\\y a la Teoría de Colas}
+\subtitle{Redes y Servicios de Telecomunicaciones (RSTC)\\
+Grado en Ingeniería de Tecnologías y Servicios de Telecomunicación}
+%\author{M. Saiful Bari\inst{1} \and Mr X\inst{2}}
+
+\author{Jorge Martín Pérez\inst{1}}
+\institute{
+    \inst{1}
+    Departamento de Ingeniería Telemática, Universidad Politécnica de Madrid
+}
+
+\date{\today}
+
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%
+%%% SLIDES START %%%
+%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+
+
+%%% TITLE %%%
+\frame{\titlepage}
+
+
+\begin{frame}{Contenido}
+    \tableofcontents
+\end{frame}
+
+
+
+
+\section{Introducción}
+\begin{frame}{\secname}
+    La teoría de colas modela:
+    \begin{itemize}
+        \item colas de supermercado;
+        \item colas en gasolineras;
+        \item colas en taquillas; o
+        \item \textbf{colas de routers}.
+    \end{itemize}
+
+    \vfill
+    Nos interesa saber:
+    \begin{itemize}
+        \item ¿cuánto vamos a esperar?; o
+        \item la probabilidad de que esté llena la cola.
+    \end{itemize}
+\end{frame}
+
+
+
+\begin{frame}{\secname}
+    \begin{figure}
+        \input{figs/mm1.tex}
+    \end{figure}
+
+    En una cola:
+    \begin{itemize}
+        \item llegan $\lambda$ [usuarios/sec]
+        \item hay $q=4$ usuarios encolados;
+        \item hay $n=5$ usuarios en total; y
+        \item se sirven $\mu$ [usuarios/sec].
+    \end{itemize}
+\end{frame}
+
+
+\begin{frame}{\secname}
+    Problema:
+    \begin{itemize}
+        \item las llegadas; y
+        \item tiempos de servicio
+    \end{itemize}
+    son \textbf{aleatorios}.
+
+    \vfill
+
+    \textit{Ejemplo}: la persona que nos
+    atiende en caja tarda más o menos
+    dependiendo de como de cansada esté,
+    o de cuánto tarde la pasarela de pago
+    (aleatorio).
+\end{frame}
+
+
+
+\section{Procesos de llegada de Poisson}
+
+
+
+\begin{frame}{\secname}
+    \begin{figure}
+        \input{figs/arrivals}
+    \end{figure}
+
+    Queremos saber la probabilidad de que
+    lleguen 3 usuarios en 2 segundos.
+
+    Esa probabilidad nos la da la distribución
+    de Poisson si:
+    \begin{itemize}
+        \item llegadas \textbf{equiprobables}; y
+        \item llegadas \textbf{independientes}.
+    \end{itemize}
+\end{frame}
+
+
+\begin{frame}{\secname}
+    Un proceso de llegadas de Poisson nos
+    dice la probabilidad de que lleguen
+    $k$ usuarios en $t$ segundos:
+    \begin{equation}
+        \mathbb{P}(\red{k}\ \text{usuarios en}\ \blue{t})=\frac{(\lambda \blue{t})^\red{k} e^{-\lambda \blue{t} }}{\red{k}!}
+        \label{eq:poisson}
+    \end{equation}
+    donde $\lambda$ es la \textbf{tasa}
+    de llegadas [usuarios/sec].
+
+    \vfill
+
+    \textit{Ejemplo}: si la tasa
+    de llegada es $\lambda=5$ [usuarios/sec],
+    la probabilidad de
+    que lleguen $\red{k=3}$ usuarios en $\blue{t=2}$~sec es
+    $\tfrac{(5\cdot2)^3 e^{-5\cdot2}}{3!}=0.0075$.
+\end{frame}
+
+
+
+
+\begin{frame}{\secname}
+    Propiedades de la distribución de Poisson:
+    \begin{itemize}
+        \item \textbf{media}: $\mathbb{E}[\text{\#usuarios en}\ t\ \text{sec}]=\lambda t$ usuarios
+        \item \textbf{varianza}: $\Var[\text{\#usuarios en}\ t\ \text{sec}]=\lambda t$ usuarios\textsuperscript{2}
+    \end{itemize}
+
+    \begin{figure}
+        \input{figs/poisson}
+    \end{figure}
+\end{frame}
+
+
+\begin{frame}{\secname}
+    ¿Cómo se distribuyen las llegadas
+    de \textbf{\color{Firebrick1}A} y
+    \textbf{\color{Firebrick4}B} juntos?
+
+    \begin{figure}
+        \input{figs/palm-khintchine.tex}
+    \end{figure}
+
+    Vemos que:
+    \begin{itemize}
+        \item {\color{Firebrick1}$\lambda_A=\tfrac{3}{4}$} [usuarios/sec], ya que {\color{Firebrick1}$N_A(t=4sec)=3$} [usuarios]
+        \item {\color{Firebrick4}$\lambda_B=\tfrac{2}{4}$} [usuarios/sec], ya que {\color{Firebrick4}$N_B(t=4sec)=2$} [usuarios]
+    \end{itemize}
+
+\end{frame}
+
+
+
+\begin{frame}{\secname}
+    \begin{thm}[Palm-Khintchine{\color{red}Put Pablos' ref}]
+        Sea $\{N_i(t)\}_i$ un conjunto de $n$
+        procesos de llegada independientes
+        con sendas tasas
+        $\lambda_i$.
+        La superposición de procesos
+        \begin{equation}
+            N(t)=\sum_i^n N_i(t), t\geq0
+        \end{equation}
+        tiende a un \textbf{proceso de Poisson}
+        de tasa $\lambda=\sum_i \lambda_i$
+        cuando $n\to\infty$, siempre y cuando
+        se cumpla:
+        \begin{enumerate}
+            \item carga finita $\lambda<\infty$; y
+            \item ningún proceso domine al
+                agregado $\lambda_i<<\lambda$
+        \end{enumerate}
+    \end{thm}
+    
+\end{frame}
+
+
+
+\section{Distribución Exponencial}
+\section{Sistema M/M/1}
+
+
+
+\end{document}
