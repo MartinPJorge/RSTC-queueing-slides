@@ -10,6 +10,11 @@
 \usefonttheme{professionalfonts}
 
 
+% Subfigures
+\usepackage{caption}
+\usepackage{subcaption}
+
+
 
 
 %% MATH commands
@@ -19,11 +24,21 @@
 %% THEOREMS
 %\newtheorem{theorem}{Theorem}
 \newtheorem{thm}{Teorema}[section] % the main one
+% Definición
+%\theoremstyle{definition}
+\newtheorem{definicion}{Definición}[section]
 
 
 
 %% PFGplots %%
 \usepackage{pgfplots}
+
+%% Exponential distribution
+\pgfmathdeclarefunction{exponential}{1}{%
+  \pgfmathparse{(#1)*exp(-#1*x)}%
+}
+
+%% Poisson distribution
 \pgfmathdeclarefunction{poiss}{1}{%
   \pgfmathparse{(#1^x)*exp(-#1)/(x!)}%
 }
@@ -147,6 +162,90 @@ Grado en Ingeniería de Tecnologías y Servicios de Telecomunicación}
 
 
 
+
+
+
+\section{Distribución Exponencial}
+
+\begin{frame}{\secname}
+    \begin{figure}
+        \input{figs/exp-arrivals}
+    \end{figure}
+    El tiempo entre los usuarios que
+    llegan a la cola \blue{$t$} se puede
+    modelar con la \textbf{distribución exponencial}.
+\end{frame}
+
+
+
+\begin{frame}{\secname}
+    \begin{definicion}[Distribución exponencial]
+        Se dice que una variable aleatoria
+        continua $t\in\mathbb{N}$ sigue una
+        distribución exponencial si su
+        función de densidad es:
+        \begin{equation}
+            f_t(\tau) = \mathbb{P}(t=\tau) = \lambda e^{-\lambda \tau}
+        \end{equation}
+        donde $\lambda>0$ es el parámetro
+        que caracteriza la distribución.
+    \end{definicion}
+\end{frame}
+
+
+
+
+\begin{frame}{\secname: propiedades}
+    \begin{figure}
+        \input{figs/exponential}
+    \end{figure}
+
+
+    \begin{itemize}
+        \item \textbf{media}: $\mathbb{E}[t]=\tfrac{1}{\lambda}$
+        \item \textbf{varianza}: $\Var[t]=\tfrac{1}{\lambda^2}$
+    \end{itemize}
+\end{frame}
+
+
+
+
+\begin{frame}{\secname: ejemplo gasolinera}
+    \textit{Ejemplo}: el tiempo medio
+    que pasa un coche en un surtidor es
+    $\mathbb{E}[\blue{t}]=\tfrac{1}{\lambda}=2$ [min].
+    Por tanto $\lambda=\tfrac{1}{2}$ [coches/min].
+
+    \vfill
+
+
+    \begin{figure}
+     \centering
+     \begin{subfigure}[b]{0.45\textwidth}
+         \centering
+         \resizebox{\textwidth}{!}{%
+             \input{figs/gasolinera-2min}%
+         }
+         \caption{$\mathbb{P}(\blue{t=2})=\tfrac{1}{2}\ e^{\frac{1}{2}\cdot \blue{2}}=0.18$}
+         \label{fig:y equals x}
+     \end{subfigure}
+     \hfill
+     \begin{subfigure}[b]{0.45\textwidth}
+         \centering
+         \resizebox{\textwidth}{!}{%
+             \input{figs/gasolinera-4min}%
+         }
+         \caption{$\mathbb{P}(\blue{t=4})=\tfrac{1}{2}\ e^{-\frac{1}{2}\cdot \blue{4}}=0.07$}
+         \label{fig:three sin x}
+     \end{subfigure}
+    \end{figure}
+
+
+\end{frame}
+
+
+
+
 \section{Procesos de llegada de Poisson}
 
 
@@ -248,7 +347,6 @@ Grado en Ingeniería de Tecnologías y Servicios de Telecomunicación}
 
 
 
-\section{Distribución Exponencial}
 \section{Sistema M/M/1}
 
 
