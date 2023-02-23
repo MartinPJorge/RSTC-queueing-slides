@@ -486,22 +486,35 @@ Si ya han pasado {\color{DodgerBlue1}$s$ [sec]}, ¿cuál es
 \section{Procesos de llegada de Poisson}
 
 
+\subsection{Conteo}
 
-\begin{frame}{\secname}
+\begin{frame}{\secname: \subsecname}
+    Buscamos una distribución que diga
+    cómo de probable es que lleguen
+    3 coches en 2 segundos:
+
+    \begin{figure}
+        \input{figs/arrivals}
+    \end{figure}
+\end{frame}
+
+
+
+\begin{frame}{\secname: \subsecname}
+    Si el tiempo entre llegadas es exponencial,
+    sabemos la probabilidad de que lleguen
+    ${\color{HotPink4}k=0}$
+    coches en ${\color{Firebrick1}t}$ [min].
+
+
     \begin{figure}
         \input{figs/arrivals}
     \end{figure}
 
-    Queremos saber la probabilidad de que
-    lleguen 3 usuarios en 2 segundos.
 
-    Esa probabilidad nos la da la distribución
-    de Poisson si:
-    \begin{itemize}
-        \item llegadas \textbf{equiprobables}; y
-        \item llegadas \textbf{independientes}.
-    \end{itemize}
 \end{frame}
+
+
 
 
 \begin{frame}{\secname}

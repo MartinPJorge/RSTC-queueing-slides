@@ -1,6 +1,6 @@
 \begin{tikzpicture}
     % Time axis
-    \draw[|->] (0,0) -- (5,0) node[anchor=west] {time [sec]};
+    \draw[|->] (0,0) -- (5,0) node[anchor=west] {time [min]};
 
     % ticks
     \draw (1,.05) -- (1,-.05);
@@ -9,9 +9,9 @@
 
     
     % arrivals
-    \draw[->,color=red,thick] (0.2,1) node[anchor=west,rotate=70] {usuario 1} --(0.2,0);
-    \draw[->,color=red,thick] (0.8,1) node[anchor=west,rotate=70] {usuario 2} --(0.8,0);
-    \draw[->,color=red,thick] (1.5,1)node[anchor=west,rotate=70] {usuario 3} --(1.5,0);
+    \draw[->,color=red,thick] (0.2,1) node[anchor=west,rotate=70] {coche 1} --(0.2,0);
+    \draw[->,color=red,thick] (0.8,1) node[anchor=west,rotate=70] {coche 2} --(0.8,0);
+    \draw[->,color=red,thick] (2.5,1)node[anchor=west,rotate=70] {coche 3} --(2.5,0);
 
-    \draw[<->,color=blue,thick] (0,-.35) -- node[anchor=north,pos=0.5]{$t=2$ [sec]} (2,-.35);
+    \draw[<->,color=blue,thick] (0,-.35) -- node[anchor=north,pos=0.5]{$t=3$ [min]} (3,-.35);
 \end{tikzpicture}
