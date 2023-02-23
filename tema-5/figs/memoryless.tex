@@ -1,0 +1,25 @@
+\begin{tikzpicture}
+
+    % Already passed
+    \draw[draw=none,fill=DodgerBlue1!20] (0.2,0) rectangle ++(1,1.4);
+
+    % Time axis
+    \draw[|->] (0,0) -- (5,0) node[anchor=west] {time [sec]};
+
+    % ticks
+    \draw (1,.05) -- (1,-.05) node[below] {1};
+    \draw (2,.05) -- (2,-.05) node[below] {2};
+    \draw (3,.05) -- (3,-.05) node[below] {3};
+    \draw (4,.05) -- (4,-.05) node[below] {4};
+    
+    % arrivals
+    \draw[->,color=red,thick] (0.2,2) node[anchor=west,rotate=70] {coche 1} --(0.2,0) node[below,anchor=north] {\tiny 0.2};
+    \draw[-,color=DodgerBlue1,dashed] (1.2,1.4) --(1.2,0) node[below,anchor=north] {\tiny 1.2};
+    \draw[-,color=DodgerBlue4,dashed] (4.2,1.4) --(4.2,0) node[below,anchor=north] {\tiny 4.2};
+
+    \draw[->,color=red,thick,visible on=<2>] (4.5,2.2)node[anchor=west,rotate=70] {coche 2} --(4.5,0.2) ;
+
+    \draw[<->,color=DodgerBlue1,thick] (0.2,.4) -- node[above,pos=0.48,anchor=south]{$s=1$} (1.2,.4);
+    \draw[<->,color=DodgerBlue4,thick] (1.2,.4) -- node[above,pos=0.5,anchor=south]{$\tau=3$ [sec]} (4.2,.4);
+    \draw[<->,color=red,thick, visible on=<2>] (0.2,1.7) -- node[above,pos=0.5,anchor=south]{$t$} (4.5,1.7);
+\end{tikzpicture}

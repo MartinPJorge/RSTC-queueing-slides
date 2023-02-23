@@ -1,0 +1,19 @@
+\begin{tikzpicture}
+    % Time axis
+    \draw[|->] (0,0) -- (5,0) node[anchor=west] {time [min]};
+
+    % ticks
+    \draw (1,.05) -- (1,-.05);
+    \draw (2,.05) -- (2,-.05);
+    \draw (3,.05) -- (3,-.05);
+
+    
+    % arrivals
+    \draw[->,color=Firebrick1,thick] (1.2,1) node[anchor=west,rotate=30] {compacto} --(1.2,0);
+    \draw[->,color=Firebrick4,thick] (2,1) node[anchor=west,rotate=30] {todoterreno} --(2,0);
+
+    % times
+    \draw[<->,color=Firebrick1,thick] (0,0.35) -- node[above] {$t_1$} (1.2,0.35);
+    \draw[<->,color=Firebrick4,thick] (0,-0.35) -- node[below] {$t_1$} (2,-0.35);
+
+\end{tikzpicture}

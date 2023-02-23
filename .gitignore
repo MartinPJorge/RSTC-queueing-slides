@@ -65,3 +65,6 @@ tikzgen/*
 *.sublime-project
 *.zip
 
+
+# PDFs de los temas
+!tema-5/tema5.pdf

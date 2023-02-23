@@ -27,6 +27,7 @@
 % Definición
 %\theoremstyle{definition}
 \newtheorem{definicion}{Definición}[section]
+\newtheorem{lema}{Lema}[section]
 
 
 
@@ -53,6 +54,10 @@
 %% TIKZ %%
 %%%%%%%%%%
 \usepackage{tikz}
+\usepackage{animate}
+\usetikzlibrary{positioning}
+\usetikzlibrary{shapes,arrows, positioning, calc}
+\usetikzlibrary{overlay-beamer-styles}
 \usetikzlibrary{chains,shapes.multipart}
 
 
@@ -227,7 +232,6 @@ Grado en Ingeniería de Tecnologías y Servicios de Telecomunicación}
              \input{figs/gasolinera-2min}%
          }
          \caption{$\mathbb{P}(\blue{t=2})=\tfrac{1}{2}\ e^{\frac{1}{2}\cdot \blue{2}}=0.18$}
-         \label{fig:y equals x}
      \end{subfigure}
      \hfill
      \begin{subfigure}[b]{0.45\textwidth}
@@ -236,12 +240,245 @@ Grado en Ingeniería de Tecnologías y Servicios de Telecomunicación}
              \input{figs/gasolinera-4min}%
          }
          \caption{$\mathbb{P}(\blue{t=4})=\tfrac{1}{2}\ e^{-\frac{1}{2}\cdot \blue{4}}=0.07$}
-         \label{fig:three sin x}
      \end{subfigure}
     \end{figure}
 
+\end{frame}
+
+
+
+
+
+\subsection{Propiedad sin memoria}
+
+
+\begin{frame}{\secname: \subsecname}
+Si ya han pasado {\color{DodgerBlue1}$s$ [sec]}, ¿cuál es
+    la probabilidad de que tarde {\color{DodgerBlue4}$\tau$
+    [sec]} más?:
+    \begin{equation}
+        \mathbb{P}(\red{t}>{\color{DodgerBlue1}s}+{\color{DodgerBlue4}\tau}|\ \red{t}>{\color{DodgerBlue1}s})
+    \end{equation}
+
+    \vfill
+
+    \begin{figure}
+        \input{figs/memoryless}
+    \end{figure}
+\end{frame}
+
+
+
+\begin{frame}{\secname: \subsecname}
+    Por la propiedad sin memoria de una
+    exponencial tenemos que:
+    \begin{equation}
+        \mathbb{P}(\red{t}>{\color{DodgerBlue1}s}+{\color{DodgerBlue4}\tau}|\ \red{t}>{\color{DodgerBlue1}s}) = \mathbb{P}(\red{t}>{\color{DodgerBlue4}\tau})
+    \end{equation}
+
+    \vfill
+
+
+    \begin{figure}
+     \centering
+     \begin{subfigure}[b]{0.45\textwidth}
+         \centering
+         \resizebox{\textwidth}{!}{%
+             \input{figs/memoryless-no-animate}%
+         }
+         \caption{$\mathbb{P}(\red{t}>{\color{DodgerBlue1}s}+{\color{DodgerBlue4}\tau}|\ \red{t}>{\color{DodgerBlue1}s})$}
+     \end{subfigure}
+     \hfill
+     \begin{subfigure}[b]{0.45\textwidth}
+         \centering
+         \resizebox{\textwidth}{!}{%
+             \input{figs/memoryless-result}%
+         }
+         \caption{$\mathbb{P}(\red{t}>{\color{DodgerBlue4}\tau})$}
+     \end{subfigure}
+    \end{figure}
+\end{frame}
+
+
+\begin{frame}{\secname: \subsecname}
+    \textit{Ejemplo}: en media el surtidor
+    de una gasolinera está ocupado 5 [min].
+    Si el surtidor lleva
+    {\color{DodgerBlue1}$s=1$ [min]} ocupado,
+    ¿cuál es la probabildad de que esté ocupado
+    {\color{DodgerBlue4}$\tau=3$ [min]} más?
+
+    \vfill
+
+    Por la propiedad sin memoria tenemos:
+    \begin{equation*}
+        \mathbb{P}(\red{t}>{\color{DodgerBlue1}s}+{\color{DodgerBlue4}\tau}|\ \red{t}>{\color{DodgerBlue1}s}) = \mathbb{P}(\red{t}>{\color{DodgerBlue4}\tau}) = \mathbb{P}(\red{t}>{\color{DodgerBlue4}3}) = \frac{1}{5}e^{-\frac{1}{5}\cdot3} = 0.11
+    \end{equation*}
 
 \end{frame}
+
+
+
+
+\subsection{Mínimo de variables exponenciales}
+
+\begin{frame}{\secname: \subsecname}
+    \textit{Ejemplo}: los compactos llegan
+    a gasolinera con tasa
+    {\color{Firebrick1}$\lambda_1=\tfrac{1}{4}$
+    [coches/min]}, y los todoterreno con tasa
+    {\color{Firebrick4}$\lambda_2=\tfrac{1}{8}$ [coches/min]}.
+
+    \vfill
+
+    ¿Con qué probabilidad llegua
+    un coche cualquiera en 3 [min]?
+\end{frame}
+
+
+
+\begin{frame}{\secname: \subsecname}
+    \begin{lema}[Mínimo de v.a. exponenciales]
+        Sean las v.a.\footnote{v.a. significa variable aleatoria} exponenciales
+        {\color{Firebrick1}$t_1$} y
+        {\color{Firebrick4}$t_2$}, con
+        tasas
+        {\color{Firebrick1}$\lambda_1$} y
+        {\color{Firebrick4}$\lambda_2$}; la v.a.
+        $t=\min\{{\color{Firebrick1}t_1},{\color{Firebrick4}t_2}\}$
+        se distribuye como una v.a. exponencial
+        de tasa
+        {$\lambda=\color{Firebrick1}\lambda_1+ \color{Firebrick4}\lambda_2$}.
+    \end{lema}
+
+    \vfill
+
+    \textit{Demostración}:
+    \begin{multline*}
+        \mathbb{P}(t>\tau) =
+        \mathbb{P}({\color{Firebrick1}t_1}>\tau)\mathbb{P}({\color{Firebrick4}t_2}>\tau)
+        = \left(\int_\tau^\infty {\color{Firebrick1}\lambda_1}e^{-{\color{Firebrick1}\lambda_1} t}\ dt \right)
+        \left(\int_\tau^\infty {\color{Firebrick4}\lambda_2}e^{-{\color{Firebrick4}\lambda_2} t}\ dt \right)\\
+        = e^{-{\color{Firebrick1}\lambda_1} \tau} e^{-{\color{Firebrick4}\lambda_2} \tau} = e^{-({\color{Firebrick1}\lambda_1}+{\color{Firebrick4}\lambda_2})\tau}
+        = e^{-\lambda \tau}
+    \end{multline*}
+\end{frame}
+
+
+
+
+\begin{frame}{\secname: \subsecname}
+    \textit{Ejemplo}: los compactos llegan
+    a gasolinera con tasa
+    {\color{Firebrick1}$\lambda_1=\tfrac{1}{4}$
+    [coches/min]}, y los todoterreno con tasa
+    {\color{Firebrick4}$\lambda_2=\tfrac{1}{8}$ [coches/min]}.
+
+    \vfill
+
+    ¿Con qué probabilidad llega
+    un coche cualquiera en 3 [min]?
+
+    \begin{align*}
+        1-\mathbb{P}(t>1)&=1-
+        ({\color{Firebrick1}\lambda_1}+
+        {\color{Firebrick4}\lambda_2})
+        e^{-({\color{Firebrick1}\lambda_1}+
+        {\color{Firebrick4}\lambda_2})\cdot 3}\\
+        & =
+        1 - \left({\color{Firebrick1}\frac{1}{4}}+
+        {\color{Firebrick4}\frac{1}{8}}\right)
+        e^{-({\color{Firebrick1}\frac{1}{4}}+
+        {\color{Firebrick4}\frac{1}{8}})\cdot 3}
+        = 0.12
+    \end{align*}
+\end{frame}
+
+
+
+
+
+
+
+\subsection{Comparación de exponenciales}
+
+
+\begin{frame}{\secname: \subsecname}
+    \textit{Ejemplo}: los compactos llegan
+    a gasolinera con tasa
+    {\color{Firebrick1}$\lambda_1=\tfrac{1}{4}$
+    [coches/min]}, y los todoterreno con tasa
+    {\color{Firebrick4}$\lambda_2=\tfrac{1}{8}$ [coches/min]}.
+
+    \vfill
+
+    ¿Cuál es la probabilidad de que llegue
+    antes un compacto, es decir,
+    (${\color{Firebrick1}t_1}<
+    {\color{Firebrick4}t_2}$)?
+
+    \begin{figure}
+        \input{figs/arrival-before}
+    \end{figure}
+
+\end{frame}
+
+
+
+\begin{frame}{\secname: \subsecname}
+    \begin{lema}[Comparación de v.a. exponenciales]
+        Sean las v.a. exponenciales
+        {\color{Firebrick1}$t_1$} y
+        {\color{Firebrick4}$t_2$}, con
+        tasas
+        {\color{Firebrick1}$\lambda_1$} y
+        {\color{Firebrick4}$\lambda_2$}; se
+        tiene que:
+        \begin{equation}
+            \mathbb{P}({\color{Firebrick1}t_1}<{\color{Firebrick4}t_2}) = \frac{{\color{Firebrick1}\lambda_1}}{{\color{Firebrick1}\lambda_1}+{\color{Firebrick4}\lambda_2}}
+        \end{equation}
+    \end{lema}
+
+    \vfill
+
+    \textit{Demostración}:
+    \begin{equation*}
+        \mathbb{P}({\color{Firebrick1}t_1}<{\color{Firebrick4}t_2})=
+        \int_0^\infty \mathbb{P}({\color{Firebrick1}t_1}=t)\mathbb{P}({\color{Firebrick4}t_2}>t)\ dt = \int_0^\infty {\color{Firebrick1}\lambda_1} e^{-{\color{Firebrick1}\lambda_1} t} e^{-{\color{Firebrick4}\lambda_2} t}\ dt = \frac{{\color{Firebrick1}\lambda_1}}{{\color{Firebrick1}\lambda_1}+{\color{Firebrick4}\lambda_2}}
+    \end{equation*}
+\end{frame}
+
+
+
+
+
+\begin{frame}{\secname: \subsecname}
+    \textit{Ejemplo}: los compactos llegan
+    a gasolinera con tasa
+    {\color{Firebrick1}$\lambda_1=\tfrac{1}{4}$
+    [coches/min]}, y los todoterreno con tasa
+    {\color{Firebrick4}$\lambda_2=\tfrac{1}{8}$ [coches/min]}.
+
+    \vfill
+
+    ¿Cuál es la probabilidad de que llegue
+    antes un compacto, es decir,
+    (${\color{Firebrick1}t_1}<
+    {\color{Firebrick4}t_2}$)?
+
+    \begin{figure}
+        \input{figs/arrival-before}
+    \end{figure}
+
+    \begin{equation}
+        \mathbb{P}({\color{Firebrick1}t_1}<{\color{Firebrick4}t_2}) = \frac{{\color{Firebrick1}\lambda_1}}{{\color{Firebrick1}\lambda_1}+{\color{Firebrick4}\lambda_2}} = 
+        \frac{{\color{Firebrick1}\frac{1}{4}}}{{\color{Firebrick1}\frac{1}{4}}+{\color{Firebrick4}\frac{1}{8}}} = 0.67
+    \end{equation}
+
+\end{frame}
+
+
+
 
 
 
