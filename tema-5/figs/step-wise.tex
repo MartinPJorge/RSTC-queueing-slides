@@ -1,0 +1,34 @@
+\begin{tikzpicture}
+    \begin{axis}[
+  mark=none,
+  axis x line*=bottom,
+  axis y line*=left,
+  enlargelimits=upper,
+        width=7cm,height=4cm,ylabel=$X(t)$,xlabel=$t$,ymin=0,ymax=4,xmin=0,xmax=6]
+        \addlegendimage{ultra thick,blue}
+        \addplot[ultra thick,blue,samples at={0,2}] {2};
+        \addplot[ultra thick,blue,samples at={2,4}] {1};
+        \addplot[ultra thick,blue,samples at={4,6}] {3};
+
+        \addplot +[dashed,gray,mark=none] coordinates {(2, 0) (2, 2)};
+        \addplot +[dashed,gray,mark=none] coordinates {(4, 0) (4, 3)};
+        \addplot +[dashed,gray,mark=none] coordinates {(6, 0) (6, 3)};
+
+        % Arrival 1
+        \addplot +[<-,Firebrick1,thick,solid,mark=none] coordinates {(1, 0) (1, .75)};
+        \addplot[Firebrick1, mark=*, only marks] coordinates {(1,2)};
+
+        % Arrival 2
+        \addplot +[<-,Firebrick1,thick,solid,mark=none] coordinates {(1.6, 0) (1.6, .75)};
+        \addplot[Firebrick1, mark=*, only marks] coordinates {(1.6,2)};
+
+        % Arrival 2
+        \addplot +[<-,Firebrick1,thick,solid,mark=none] coordinates {(3.7, 0) (3.7, .75)};
+        \addplot[Firebrick1, mark=*, only marks] coordinates {(3.7,1)};
+
+        % Arrival 3
+        \addplot +[<-,Firebrick1,thick,solid,mark=none] coordinates {(4.4, 0) (4.4, .75)};
+        \addplot[Firebrick1, mark=*, only marks] coordinates {(4.4, 3)};
+
+    \end{axis}
+\end{tikzpicture}

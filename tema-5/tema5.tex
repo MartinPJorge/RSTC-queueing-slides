@@ -486,12 +486,14 @@ Si ya han pasado {\color{DodgerBlue1}$s$ [sec]}, ¿cuál es
 \section{Procesos de llegada de Poisson}
 
 
-\subsection{Conteo}
+\subsection{Tiempos entre llegadas}
 
 \begin{frame}{\secname: \subsecname}
     Buscamos una distribución que diga
     cómo de probable es que lleguen
-    3 coches en 2 segundos:
+    2 coches en 3 segundos:
+
+    \vfill
 
     \begin{figure}
         \input{figs/arrivals}
@@ -504,47 +506,111 @@ Si ya han pasado {\color{DodgerBlue1}$s$ [sec]}, ¿cuál es
     Si el tiempo entre llegadas es exponencial,
     sabemos la probabilidad de que lleguen
     ${\color{HotPink4}k=0}$
-    coches en ${\color{Firebrick1}t}$ [min].
-
-
-    \begin{figure}
-        \input{figs/arrivals}
-    \end{figure}
-
-
-\end{frame}
-
-
-
-
-\begin{frame}{\secname}
-    Un proceso de llegadas de Poisson nos
-    dice la probabilidad de que lleguen
-    $k$ usuarios en $t$ segundos:
-    \begin{equation}
-        \mathbb{P}(\red{k}\ \text{usuarios en}\ \blue{t})=\frac{(\lambda \blue{t})^\red{k} e^{-\lambda \blue{t} }}{\red{k}!}
-        \label{eq:poisson}
-    \end{equation}
-    donde $\lambda$ es la \textbf{tasa}
-    de llegadas [usuarios/sec].
+    coches en \red{$t=0.8$ [min]}.
 
     \vfill
 
-    \textit{Ejemplo}: si la tasa
-    de llegada es $\lambda=5$ [usuarios/sec],
-    la probabilidad de
-    que lleguen $\red{k=3}$ usuarios en $\blue{t=2}$~sec es
-    $\tfrac{(5\cdot2)^3 e^{-5\cdot2}}{3!}=0.0075$.
+
+    \begin{figure}
+        \input{figs/arrivals-first-time}
+    \end{figure}
+
+    \vfill
+
+    \begin{equation*}
+        \mathbb{P}({\color{HotPink4}0\ \text{coches}}\ \text{en}\ \red{0.8 \text{ min}})=1-\mathbb{P}(\red{t>0.8})=1 - \lambda \red{0.8} e^{-\lambda \red{0.8}}
+    \end{equation*}
+
+\end{frame}
+
+
+
+\subsection{Conteo}
+
+
+\begin{frame}{\secname: \subsecname}
+    Pero lo que queremos es contar
+    el número de coches
+    ${\color{HotPink4}N}(\blue{t})={\color{HotPink4}2}$
+    que llegan en \blue{$t=3$ [min]},
+    y saber qué probabilidad tiene
+    $\mathbb{P}({\color{HotPink4}N}(\blue{t})={\color{HotPink4}2})$
+    \begin{figure}
+        \input{figs/arrivals-count}
+    \end{figure}
+
 \end{frame}
 
 
 
 
-\begin{frame}{\secname}
+
+
+\begin{frame}{\secname: \subsecname}
+    \begin{definicion}[Distribución de Poisson]
+        Un proceso de llegadas
+        ${\color{HotPink4}N}(\blue{t})$ con
+        tasa \red{$\lambda$} es
+        de Poisson si el tiempo entre
+        llegadas se distribuye como una
+        v.a. exponencial de media
+        $\tfrac{1}{\red{\lambda}}$; y
+        su función de densidad es
+
+        \begin{equation}
+            \mathbb{P}({\color{HotPink4}N}(\blue{t})={\color{HotPink4}k}) = \frac{(\red{\lambda}\blue{t})^{\color{HotPink4}k}\ e^{-\red{\lambda}\blue{t}}}{{\color{HotPink4}k}!}
+        \end{equation}
+    \end{definicion}
+
+    \vfill
+
+
+
+    \begin{figure}
+        \centering
+        \resizebox{.4\textwidth}{!}{%
+            \input{figs/arrivals-count}%
+        }
+    \end{figure}
+
+    \textit{Ejemplo}:
+    $\mathbb{P}({\color{HotPink4}N}(\blue{3})={\color{HotPink4}2}) = \frac{(\red{\lambda}\blue{3})^{\color{HotPink4}2}\ e^{-\red{\lambda}\blue{3}}}{{\color{HotPink4}2}!}\underbrace{=}_{\red{\lambda=2/3}}0.27$
+
+\end{frame}
+
+
+
+
+
+
+%% \begin{frame}{\secname}
+%%     Un proceso de llegadas de Poisson nos
+%%     dice la probabilidad de que lleguen
+%%     $k$ usuarios en $t$ segundos:
+%%     \begin{equation}
+%%         \mathbb{P}(\red{k}\ \text{usuarios en}\ \blue{t})=\frac{(\lambda \blue{t})^\red{k} e^{-\lambda \blue{t} }}{\red{k}!}
+%%         \label{eq:poisson}
+%%     \end{equation}
+%%     donde $\lambda$ es la \textbf{tasa}
+%%     de llegadas [usuarios/sec].
+%% 
+%%     \vfill
+%% 
+%%     \textit{Ejemplo}: si la tasa
+%%     de llegada es $\lambda=5$ [usuarios/sec],
+%%     la probabilidad de
+%%     que lleguen $\red{k=3}$ usuarios en $\blue{t=2}$~sec es
+%%     $\tfrac{(5\cdot2)^3 e^{-5\cdot2}}{3!}=0.0075$.
+%% \end{frame}
+
+
+
+
+\begin{frame}{\secname: \subsecname}
     Propiedades de la distribución de Poisson:
     \begin{itemize}
-        \item \textbf{media}: $\mathbb{E}[\text{\#usuarios en}\ t\ \text{sec}]=\lambda t$ usuarios
-        \item \textbf{varianza}: $\Var[\text{\#usuarios en}\ t\ \text{sec}]=\lambda t$ usuarios\textsuperscript{2}
+        \item \textbf{media}: $\mathbb{E}[N(t)]=\lambda t$ usuarios
+        \item \textbf{varianza}: $\Var[N(t)]=\lambda t$ usuarios\textsuperscript{2}
     \end{itemize}
 
     \begin{figure}
@@ -553,7 +619,10 @@ Si ya han pasado {\color{DodgerBlue1}$s$ [sec]}, ¿cuál es
 \end{frame}
 
 
-\begin{frame}{\secname}
+
+
+\subsection{Agregado}
+\begin{frame}{\secname: \subsecname}
     ¿Cómo se distribuyen las llegadas
     de \textbf{\color{Firebrick1}A} y
     \textbf{\color{Firebrick4}B} juntos?
@@ -564,41 +633,202 @@ Si ya han pasado {\color{DodgerBlue1}$s$ [sec]}, ¿cuál es
 
     Vemos que:
     \begin{itemize}
-        \item {\color{Firebrick1}$\lambda_A=\tfrac{3}{4}$} [usuarios/sec], ya que {\color{Firebrick1}$N_A(t=4sec)=3$} [usuarios]
-        \item {\color{Firebrick4}$\lambda_B=\tfrac{2}{4}$} [usuarios/sec], ya que {\color{Firebrick4}$N_B(t=4sec)=2$} [usuarios]
+        \item {\color{Firebrick1}$\lambda_A=\tfrac{3}{4}$} [coches/min], ya que {\color{HotPink1}$N_A(\blue{t=4\text{min}})=3$} [coches]
+        \item {\color{Firebrick4}$\lambda_B=\tfrac{2}{4}$} [coches/min], ya que {\color{HotPink4}$N_B(\blue{t=4\text{min}})=2$} [coches]
     \end{itemize}
 
 \end{frame}
 
 
 
-\begin{frame}{\secname}
-    \begin{thm}[Palm-Khintchine{\color{red}Put Pablos' ref}]
-        Sea $\{N_i(t)\}_i$ un conjunto de $n$
+
+
+
+
+
+
+\begin{frame}{\secname: \subsecname}
+
+    \begin{lema}[Agregado procesos de Poisson]
+        Sean
+        \textbf{\color{Firebrick1}A} y
+        \textbf{\color{Firebrick4}B} dos
+        procesos de Poisson independientes
+        con tasas 
+        $\color{Firebrick1}\lambda_1$ y
+        $\color{Firebrick4}\lambda_2$;
+        el agregado es un proceso de Poisson
+        de tasa
+        ${\color{Firebrick3}\lambda}={\color{Firebrick1}\lambda_1}+{\color{Firebrick1}\lambda_2}$.
+    \end{lema}
+
+
+    \begin{figure}
+        \resizebox{.3\textwidth}{!}{%
+            \input{figs/palm-khintchine.tex}%
+        }
+    \end{figure}
+
+    \textit{Demostración} (caso general $n$ procesos):
+    \begin{equation}
+        \mathbb{P}({\color{HotPink4}N}(\blue{t})=0)=\prod_i^n \mathbb{P}({\color{HotPink2}N_i}(\blue{t})=0)=\prod_i^n e^{-{\color{Firebrick1}\lambda_i} \blue{t}} = e^{-\sum_i^n {\color{Firebrick1}\lambda_i} \blue{t}} = e^{-{\color{Firebrick3}\lambda} \blue{t}}
+    \end{equation}
+
+\end{frame}
+
+
+
+
+
+
+
+\begin{frame}{\secname: \subsecname}
+    \begin{thm}[Palm-Khintchine \cite{amable}]
+        Sea $\{{\color{HotPink2}N_i}(\blue{t})\}_i^n$ un conjunto de $n$
         procesos de llegada independientes
         con sendas tasas
-        $\lambda_i$.
+        {\color{Firebrick1}$\lambda_i$}.
         La superposición de procesos
         \begin{equation}
-            N(t)=\sum_i^n N_i(t), t\geq0
+            {\color{HotPink4}N}(\blue{t})=\sum_i^n {\color{HotPink2}N_i}(\blue{t}), \blue{t}\geq0
         \end{equation}
         tiende a un \textbf{proceso de Poisson}
-        de tasa $\lambda=\sum_i \lambda_i$
+        de tasa ${\color{Firebrick3}\lambda}=\sum_i {\color{Firebrick1}\lambda_i}$
         cuando $n\to\infty$, siempre y cuando
         se cumpla:
         \begin{enumerate}
-            \item carga finita $\lambda<\infty$; y
+            \item carga finita ${\color{Firebrick3}\lambda}<\infty$; y
             \item ningún proceso domine al
-                agregado $\lambda_i<<\lambda$
+                agregado ${\color{Firebrick1}\lambda_i}<<{\color{Firebrick3}\lambda}$
         \end{enumerate}
+
     \end{thm}
     
 \end{frame}
 
 
 
+
+
+\begin{frame}{\secname: \subsecname}
+    \textit{Ejemplo (tma. Palm-Khintchine)}:
+    los tiempos de llegada de coches dependen
+    del color, y son independientes del de
+    otros colores. Además:
+    \begin{itemize}
+        \item tiempo entre coches rojos
+            ${\color{Firebrick1}\sim U(0,10\text{ [min]})}$
+        \item tiempo entre coches granates
+            ${\color{Firebrick2}\sim N(\mu=20\text{ [min]}, \sigma=1 \text{ [min]})}$
+        \item $\ldots$
+        \item tiempo entre coches fucsia ${\color{Firebrick4}\sim Geo(p=0.2)}$
+    \end{itemize}
+
+    \vfill
+
+
+    \begin{figure}
+        \resizebox{.6\textwidth}{!}{%
+          \input{figs/palm-khintchine-example.tex}%
+        }
+    \end{figure}
+
+    \vfill
+
+
+    El agregado será un proceso Poisson de
+    tasa ${\color{Firebrick3}\lambda}=
+    \sum_i {\color{Firebrick1}\lambda_i}=
+    {\color{Firebrick1}\frac{1}{5}} + {\color{Firebrick2}\frac{1}{20}} + \ldots + p$
+\end{frame}
+
+
+
+
+
+
+
+\subsection{PASTA}
+\begin{frame}{\secname: \subsecname}
+    ``Poisson Arrivals See Time Averages'' (PASTA)\footnote{Ejemplo de \cite[Figura 3.17]{amable}}
+
+    \vfill
+
+    \begin{figure}
+        \input{figs/step-wise}
+    \end{figure}
+
+    En media, los \blue{valores} vistos por
+    {\color{Firebrick1}llegadas} de Poisson
+    es la media temporal $\overline{X}(t)$.
+
+\end{frame}
+
+
+
+\begin{frame}{\secname: \subsecname}
+    \begin{lema}[PASTA]
+        Sea \blue{$X(t)$} un proceso aleatorio,
+        y \red{$Y$} la v.a. definida como el
+        valor que toman las llegadas de Poisson
+        al muestrear \blue{X(t)}, se tiene que:
+        \begin{equation}
+            \blue{\overline{X}(t)} = \red{\overline{Y}}
+        \end{equation}
+    \end{lema}
+\end{frame}
+
+
+
+
+\begin{frame}{\secname: \subsecname - ejemplo}
+
+    Media temporal: 
+    \begin{equation*}
+        \blue{\overline{X}(t)}=\frac{1}{6}\int_0^6 X(t)\ dt =\frac{1}{6} (2\cdot2 + 1\cdot2 + 3\cdot2) = \blue{\frac{8}{6}}
+    \end{equation*}
+
+    Llegadas de Poisson:
+    \begin{equation*}
+        \red{\overline{Y}} = 2\cdot\mathbb{P}([0,2]) + 1 \cdot\mathbb{P}([2,4]) + 3\cdot \mathbb{P}([4,6])=2\cdot\frac{2}{6} + 1 \cdot\frac{2}{6}+ 3\cdot\frac{2}{6}=\red{\frac{8}{6}}
+    \end{equation*}
+
+    \vfill
+
+    \begin{figure}
+        \resizebox{.4\textwidth}{!}{%
+            \input{figs/step-wise}%
+        }
+    \end{figure}
+
+    \vfill
+
+    con
+    \begin{equation*}%
+        \scriptstyle
+        \mathbb{P}([0,2])=\frac{\mathbb{P}(N(0,2)=1)\mathbb{P}(N(2,4)=0)\mathbb{P}(N(4,6)=0)}{\mathbb{P}(N([0,6])=1)}
+                          =\frac{\frac{(2\lambda)^1e^{-2\lambda}}{1!} \frac{(2\lambda)^0e^{-2\lambda}}{0!} \frac{(2\lambda)^0e^{-2\lambda}}{0!} }{\frac{(6\lambda)^1e^{-6\lambda}}{1!}}=\frac{2}{6}%
+    \end{equation*}%
+\end{frame}
+
+
+
+
+
+
 \section{Sistema M/M/1}
 
+
+
+
+
+
+
+\begin{frame}[allowframebreaks]
+        \frametitle{Referencias}
+        \bibliographystyle{amsalpha}
+        \bibliography{refs.bib}
+\end{frame}
 
 
 \end{document}

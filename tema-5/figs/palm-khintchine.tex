@@ -1,6 +1,6 @@
 \begin{tikzpicture}
     % Time axis
-    \draw[|->] (0,0) -- (5,0) node[anchor=west] {time [sec]};
+    \draw[|->] (0,0) -- (5,0) node[anchor=west] {time [min]};
 
     % ticks
     \draw (1,.05) -- (1,-.05) node[pos=1,anchor=north] {1};
@@ -15,5 +15,7 @@
     \draw[->,color=red,thick] (1.5,1)node[anchor=west,rotate=70] {usuario A.2} --(1.5,0);
     \draw[->,color=red,thick] (3,1)node[anchor=west,rotate=70] {usuario A.3} --(3,0);
     \draw[->,color=Firebrick4,thick] (3.8,1) node[anchor=west,rotate=70] {usuario B.2} --(3.8,0);
+
+    \draw[<->,color=blue,thick] (0,-.65)  -- node[anchor=north,pos=0.5] {$t=4$ [min]} (4,-.65);
 
 \end{tikzpicture}

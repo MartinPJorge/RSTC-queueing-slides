@@ -1,0 +1,24 @@
+\begin{tikzpicture}
+    % Time axis
+    \draw[|->] (0,0) -- (10,0) node[anchor=west] {time [min]};
+
+    % ticks
+    % \draw (1,.05) -- (1,-.05) node[pos=1,anchor=north] {1};
+    % \draw (2,.05) -- (2,-.05) node[pos=1,anchor=north] {2};
+    % \draw (3,.05) -- (3,-.05) node[pos=1,anchor=north] {3};
+    % \draw (4,.05) -- (4,-.05) node[pos=1,anchor=north] {4};
+
+    
+    % arrivals Uniform
+    \draw[->,color=Firebrick1,thick] (5,1) node[anchor=south] {U1} --(5,0) node[anchor=north] {\tiny 5};
+    \draw[->,color=Firebrick1,thick] (7,1) node[anchor=south] {U2} --(7,0)node[anchor=north] {\tiny 7};
+
+
+    % arrivals Norm
+    \draw[->,color=Firebrick2,thick] (9,1) node[anchor=south] {N1} --(9,0)node[anchor=north] {\tiny 9};
+
+    % arrivals Geom
+    \draw[->,color=Firebrick4,thick] (3,1) node[anchor=south] {G1} --(3,0) node[anchor=north] {\tiny 3};
+    \draw[->,color=Firebrick4,thick] (8,1) node[anchor=south] {G2} --(8,0) node[anchor=north] {\tiny 8};
+
+\end{tikzpicture}
