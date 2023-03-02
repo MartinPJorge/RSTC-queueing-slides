@@ -59,6 +59,9 @@
 \usetikzlibrary{shapes,arrows, positioning, calc}
 \usetikzlibrary{overlay-beamer-styles}
 \usetikzlibrary{chains,shapes.multipart}
+\usetikzlibrary{automata}
+\usetikzlibrary{positioning}  %                 ...positioning nodes
+\usetikzlibrary{arrows}       %                 ...customizing arrows
 
 
 
@@ -818,7 +821,134 @@ Si ya han pasado {\color{DodgerBlue1}$s$ [sec]}, ¿cuál es
 
 \section{Sistema M/M/1}
 
+\begin{frame}{\secname}
+    La notación de Kendall define cómo es 
+    una cola
+    \begin{center}
+        A/S/c/K/N/D 
+    \end{center}
+    donde:
+    \begin{itemize}
+        \item \textbf{A} es la v.a. del tiempo
+            entre llegadas;
+        \item \textbf{S} es la v.a. del tiempo
+            de servicio;
+        \item \textbf{c} es el número de
+            servidores que atienden la cola;
+        \item \textbf{K} es en tamaño de la cola;
+        \item \textbf{N} es la cantidad de
+            llegadas; y
+        \item \textbf{D} es la política de
+            encolado.
+    \end{itemize}
+\end{frame}
 
+
+
+
+\begin{frame}{\secname}
+    Un M/M/1 es una cola\footnote{en notación
+    Kendall M/M/1/$\infty$/$\infty$/FIFO}
+    como la de la figura.
+
+    \begin{figure}
+        \input{figs/mm1.tex}
+    \end{figure}
+
+    donde:
+    \begin{itemize}
+        \item el tiempo entre llegadas es
+            exponencial (M);
+        \item el tiempo de servicio es
+            exponencial (M);
+        \item hay un servidor atendiento (1); y
+        \item la cola es infinita ($\infty$).
+    \end{itemize}
+
+\end{frame}
+
+
+
+
+\begin{frame}{\secname}
+    Queremos responder a preguntas cómo:
+    \begin{itemize}
+        \item ¿cuál es la probabilidad
+            de esperar en cola?
+        \item ¿cuánto esperaré en la cola? o
+        \item ¿cuánto tardaré en ser servido?
+    \end{itemize}
+
+    \vfill
+
+    Para ello modelamos la cola con una
+    cadena de Markov.
+\end{frame}
+
+
+
+\subsection{Cadena de Markov contínua}
+
+\begin{frame}{\secname: \subsecname}
+    \begin{figure}
+        \input{figs/cadena-markov.tex}
+    \end{figure}
+
+    \begin{figure}
+        \input{figs/mm1-three.tex}
+    \end{figure}
+
+
+    \vfill
+
+    \begin{itemize}
+        \item estados = \#usuarios en
+            cola y servidor
+        \item transiciones =
+            tasa de llegada $\lambda$ /
+            tasa de servicio $\mu$
+    \end{itemize}
+\end{frame}
+
+
+
+\begin{frame}{\secname: \subsecname}
+    \begin{definicion}[Cadena de Markov en tiempo continuo\cite{amable}]
+        Un proceso estocástico $\{N(t),\ t>0\}$
+        es una cadena de Markov en tiempo
+        contínuo si se cumple la propiedad
+        de Markov:
+        \begin{align}
+            & \mathbb{P}\left(N(t)=i_t|\ N(t-1)=i_{t-1}, N(t-2)=i_{t-2}, \ldots, N(0)=i_0\right)\nonumber\\
+            & = \mathbb{P}\left(N(t)=i_t|\ N(t-1)=i_{t-1}\right)
+        \end{align}
+        con $t>t-1>\ldots>0$ y
+        $\{i_t,i_{t-1},\ldots,i_0\}$ una secuencia
+        de estados cualquiera.
+    \end{definicion}
+\end{frame}
+
+
+
+
+
+\begin{frame}{\secname: \subsecname}
+    \begin{figure}
+        \input{figs/markovian-process.tex}
+    \end{figure}
+\end{frame}
+
+
+
+
+\begin{frame}{\secname: \subsecname}
+    ¿Cumple la cadena de un M/M/1 la condición
+    de Markov? 
+
+    \begin{equation*}
+        \mathbb{P}(N(t) )
+    \end{equation*}
+\end{frame}
 
 
 

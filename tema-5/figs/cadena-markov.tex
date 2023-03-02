@@ -1,0 +1,37 @@
+%%% \tikzset{node distance=1cm, % Minimum distance between two nodes. Change if necessary.
+%%%          every state/.style={ % Sets the properties for each state
+%%%            semithick,draw=HotPink3!50,
+%%%            fill=HotPink3!20},
+%%%          initial text={},     % No label on start arrow
+%%%          double distance=4pt, % Adjust appearance of accept states
+%%%          every edge/.style={  % Sets the properties for each transition
+%%%          draw, ->,>=stealth',     % Makes edges directed with bold arrowheads
+%%%            auto, thick},
+%%% }
+\begin{tikzpicture}
+   
+% Estados
+\node[state] (1) {$0$};
+\node[state] (2) [right=of 1] {$1$};
+\node[state] (3) [right=of 2] {$2$};
+\node[state,fill=HotPink3!20] (4) [right=of 3] {$3$};
+\node[] (5) [right=of 4] {$\cdots$};
+
+
+% Transiciones
+\draw [->,thick] (1.north east) to [bend left=55]  node[above] {$\lambda$}  (2.north west);
+\draw [->,thick] (2.south west) to [bend left=55]  node[below] {$\mu$}  (1.south east);
+
+\draw [->,thick] (2.north east) to [bend left=55]  node[above] {$\lambda$}  (3.north west);
+\draw [->,thick] (3.south west) to [bend left=55]  node[below] {$\mu$}  (2.south east);
+
+\draw [->,thick] (3.north east) to [bend left=55]  node[above] {$\lambda$}  (4.north west);
+\draw [->,thick] (4.south west) to [bend left=55]  node[below] {$\mu$}  (3.south east);
+
+\draw [->,thick] (4.north east) to [bend left=55]  node[above] {$\lambda$}  (5.north west);
+\draw [->,thick] (5.south west) to [bend left=55]  node[below] {$\mu$}  (4.south east);
+
+
+
+    
+\end{tikzpicture}

@@ -1,0 +1,38 @@
+\tikzset{
+queue/.style={
+  rectangle split,
+  minimum height=1cm,
+  rectangle split horizontal,
+  rectangle split parts=8, 
+  draw, 
+  anchor=center,
+  on chain,
+  text height=1cm,
+  text depth=0.5cm,
+  inner ysep=0pt
+  },
+}
+
+
+\begin{tikzpicture}[start chain=going right,>=latex,node distance=0pt]
+% the rectangular shape with vertical lines
+
+%\node[rectangle split, rectangle split parts=6,
+%draw, rectangle split horizontal,text height=1cm,text depth=0.5cm,on chain,inner ysep=0pt] (wa) {};
+
+\node[
+  queue,
+  rectangle split part fill={white,white,white,white,white,white,HotPink3!20}
+  ]  (wa) {};
+
+\fill[white] ([xshift=-\pgflinewidth,yshift=-\pgflinewidth]wa.north west) rectangle ([xshift=-15pt,yshift=\pgflinewidth]wa.south);
+
+% the circle
+\node[draw,fill=HotPink3!20,circle,on chain,minimum size=1.5cm] (se) {$\mu$};
+
+% the arrows and labels
+\draw[->] (se.east) -- +(20pt,0);
+\draw[<-] (wa.west) -- +(-20pt,0) node[left] {$\lambda$};
+\node[align=center,below] at (wa.south) {Waiting \\ Area};
+\node[align=center,below] at (se.south) {Service \\ Node};
+\end{tikzpicture}
