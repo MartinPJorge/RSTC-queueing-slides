@@ -1,0 +1,32 @@
+\begin{tikzpicture}
+\pgfplotsset{compat=1.10}
+
+\begin{axis}[every axis plot post/.append style={
+  mark=none,samples=20},
+  axis x line*=bottom,
+  axis y line*=left,
+  xlabel={$\tau$ [sec]},
+  ylabel={$\mathbb{P}(t_s\leq \tau)$},
+  enlargelimits=upper,
+  width=4in,
+  height=2in]
+
+  \addplot+[domain=0:4,color=DodgerBlue4,ultra thick] {x/4} node[pos=0.5,anchor=north west] {$U(0,4)$};
+
+  \addplot[ultra thick,smooth,color=DodgerBlue1,domain=0:6] {exponentialcdf(0.5)} node [pos=0.4,anchor=south east] {$Exp(\lambda=\tfrac{1}{2})$};
+
+  % Phantom to highlight area
+  \addplot[name path=E,ultra thick,smooth,color=DodgerBlue1,domain=3.1:6] {exponentialcdf(0.5)} ;
+
+  \addplot+[name path=U,domain=4:6,color=DodgerBlue4,ultra thick] {1};
+
+  \addplot[Firebrick3!20,domain=4:6] fill between[of=U and E];
+  
+  \draw[->,Firebrick3,thick] (axis cs:4.5,0.7) -- (axis cs:4.5,0.95) node[pos=0,anchor=north] {\small $\mathbb{P}_E(t_s\leq\tau)<\mathbb{P}_U(t_s\leq\tau)$} ;
+
+\end{axis}
+
+
+
+\end{tikzpicture}
+

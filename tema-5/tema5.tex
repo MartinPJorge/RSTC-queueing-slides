@@ -38,10 +38,19 @@
 \pgfmathdeclarefunction{exponential}{1}{%
   \pgfmathparse{(#1)*exp(-#1*x)}%
 }
+\pgfmathdeclarefunction{exponentialcdf}{1}{%
+  \pgfmathparse{1-exp(-#1*x)}%
+}
 
 %% Poisson distribution
 \pgfmathdeclarefunction{poiss}{1}{%
   \pgfmathparse{(#1^x)*exp(-#1)/(x!)}%
+}
+
+%% Normal distribution (#1=mu, #2=sigma)
+% John D. Cook approx. https://tex.stackexchange.com/a/124629
+\pgfmathdeclarefunction{normalcdf}{2}{%
+  \pgfmathparse{1/(1 + exp(-0.07056*((x-#1)/#2)^3 - 1.5976*(x-#1)/#2))}%
 }
 
 
@@ -62,8 +71,13 @@
 \usetikzlibrary{automata}
 \usetikzlibrary{positioning}  %                 ...positioning nodes
 \usetikzlibrary{arrows}       %                 ...customizing arrows
+\usetikzlibrary{intersections}
 
 
+%%%%%%%%%
+%% PGF %%
+%%%%%%%%%
+\usepgfplotslibrary{fillbetween}
 
 
 %%% Insert section name before the section %%%
@@ -705,6 +719,7 @@ Si ya han pasado {\color{DodgerBlue1}$s$ [sec]}, ¿cuál es
                 agregado ${\color{Firebrick1}\lambda_i}<<{\color{Firebrick3}\lambda}$
         \end{enumerate}
 
+        \label{th:palm}
     \end{thm}
     
 \end{frame}
@@ -887,7 +902,7 @@ Si ya han pasado {\color{DodgerBlue1}$s$ [sec]}, ¿cuál es
 
 
 
-\subsection{Cadena de Markov contínua}
+\subsection{Cadena de Markov en tiempo continuo}
 
 \begin{frame}{\secname: \subsecname}
     \begin{figure}
@@ -912,30 +927,54 @@ Si ya han pasado {\color{DodgerBlue1}$s$ [sec]}, ¿cuál es
 
 
 
+%%%%%%%%%%%%%%%%%%%%%%%
+%% Primera definición
+%%%%%%%%%%%%%%%%%%%%%%%
+%% \begin{frame}{\secname: \subsecname}
+%%     \begin{definicion}[Cadena de Markov en tiempo continuo\cite{amable}]
+%%         Un proceso estocástico $\{N(t),\ t>0\}$
+%%         es una cadena de Markov en tiempo
+%%         contínuo si se cumple la propiedad
+%%         de Markov:
+%%         \begin{align}
+%%             & \mathbb{P}\left(N(t)=i_t|\ N(t-1)=i_{t-1}, N(t-2)=i_{t-2}, \ldots, N(0)=i_0\right)\nonumber\\
+%%             & = \mathbb{P}\left(N(t)=i_t|\ N(t-1)=i_{t-1}\right)
+%%         \end{align}
+%%         con $t>t-1>\ldots>0$ y
+%%         $\{i_t,i_{t-1},\ldots,i_0\}$ una secuencia
+%%         de estados cualquiera.
+%%     \end{definicion}
+%% \end{frame}
+
+
+
+
+
+% Proceso sin memoria ilustración
+%% \begin{frame}{\secname: \subsecname}
+%%     \begin{figure}
+%%         \input{figs/markovian-process.tex}
+%%     \end{figure}
+%% \end{frame}
+
+
 \begin{frame}{\secname: \subsecname}
     \begin{definicion}[Cadena de Markov en tiempo continuo\cite{amable}]
-        Un proceso estocástico $\{N(t),\ t>0\}$
-        es una cadena de Markov en tiempo
-        contínuo si se cumple la propiedad
-        de Markov:
-        \begin{align}
-            & \mathbb{P}\left(N(t)=i_t|\ N(t-1)=i_{t-1}, N(t-2)=i_{t-2}, \ldots, N(0)=i_0\right)\nonumber\\
-            & = \mathbb{P}\left(N(t)=i_t|\ N(t-1)=i_{t-1}\right)
-        \end{align}
-        con $t>t-1>\ldots>0$ y
-        $\{i_t,i_{t-1},\ldots,i_0\}$ una secuencia
-        de estados cualquiera.
+        Un proceso estocástico
+        $\{N(t),\ t>0\}$ es una cadena de Markov
+        si cumple:
+        \begin{enumerate}
+            \item el tiempo de estancia
+                en el estado $i$ sigue
+                una v.a. exponencial
+                independiente de tasa $\nu_i$; y
+            \item el proceso pasa del estado
+                $i$ al $j$ con una
+                probabilidad $\pi_{ij}$
+                que cumple
+                $\sum_j \pi_{ij} = 1,\ \forall i$
+        \end{enumerate}
     \end{definicion}
-\end{frame}
-
-
-
-
-
-\begin{frame}{\secname: \subsecname}
-    \begin{figure}
-        \input{figs/markovian-process.tex}
-    \end{figure}
 \end{frame}
 
 
@@ -943,11 +982,189 @@ Si ya han pasado {\color{DodgerBlue1}$s$ [sec]}, ¿cuál es
 
 \begin{frame}{\secname: \subsecname}
     ¿Cumple la cadena de un M/M/1 la condición
-    de Markov? 
+    de Markov? \pause \textbf{Sí}.
 
+    \vfill
+
+    \begin{enumerate}
+        \item el tiempo de estancia $T$ en un
+            estado se distribuye como una
+            exponencial de tasa
+            $\nu=\lambda_l+\lambda_s$:
+            \begin{equation*}
+                \mathbb{P}(T>\tau)=\mathbb{P}(\min\{t_l,t_s\}>\tau)=e^{-(\lambda_l+\lambda_s)\tau}
+            \end{equation*}
+            con $t_l,t_s$ las v.a.
+            exponenciales del tiempo de
+            llegada y servicio.
+
+        \item la suma de probabilidades
+            de transición es uno
+            \begin{multline*}
+                \mathbb{P}(N(t+1)=k+1|\ N(t)=k)
+                + \mathbb{P}(N(t+1)=k-1|\ N(t)=k)\\
+                = \mathbb{P}(t_l<t_s)
+                + \mathbb{P}(t_s<t_l)
+                = \frac{\lambda_l}{\lambda_l+\lambda_s}
+                + \frac{\lambda_s}{\lambda_l+\lambda_s} = 1
+            \end{multline*}
+    \end{enumerate}
+
+\end{frame}
+
+
+
+
+
+
+\begin{frame}{\secname: \subsecname}
+    ¿Es realista asumir tiempos exponenciales?
+    \begin{itemize}
+        \item \textbf{tiempos de llegada}: sí por
+            el teorema de
+            Palm-Khintchine~\ref{th:palm}.\pause
+        \item \textbf{tiempos de servicio}:
+            no, pero da expresiones cerradas
+            y es una cota pesimista para altas
+            fiabilidades
+    \end{itemize}
+
+    \vfill
+
+    
+    \begin{figure}
+        \input{figs/compare-exp-norm-unif}
+    \end{figure}
+\end{frame}
+
+
+
+
+
+
+
+
+\subsection{Probabilidades de estado}
+
+
+
+
+\begin{frame}{\secname: \subsecname}
+    La cadena de Markov va pasando
+    por estados\footnote{\url{https://setosa.io/blog/2014/07/26/markov-chains/index.html}}.
+
+    En el instante $t$ estaremos la
+    probabilidad de estar en cada estado es,
+    e.g.:
     \begin{equation*}
-        \mathbb{P}(N(t) )
+        \pmb{\pi}(t) = (\pi_0(t), \pi_1(t), \pi_2(t), \pi_3(t), \ldots) = (0.02, 0.12, 0.3, 0.07, \ldots)
     \end{equation*}
+
+    \begin{figure}
+        \input{figs/cadena-markov-probs.tex}
+    \end{figure}
+
+
+\end{frame}
+
+
+
+
+
+\begin{frame}{\secname: \subsecname}
+
+    ¿Cómo varía la probabilidad de estar
+    en el estado $i$ tras $\varepsilon$ [sec]?
+
+    \begin{multline}
+        \frac{d}{dt} {\color{HotPink4}\pi_i(t)}=-{\color{HotPink4}\pi_i(t)}{\color{Firebrick3}\nu_i}
+        + \sum_{j\neq i} \pi_j(t) \cdot \nu_j\pi_{j i}\\
+        =-{\color{HotPink4}\pi_i(t)}{\color{Firebrick3}(\lambda+\mu)} 
+        + {\color{DodgerBlue1}\pi_{i-1}(t) \cdot (\lambda+\mu)
+    \frac{\lambda}{\lambda+\mu}}
+    + {\color{DodgerBlue4}\pi_{i+1}(t) \cdot \overbrace{(\lambda+\mu)}^{\nu_{i+1}}
+        \overbrace{\frac{\mu}{\lambda+\mu}}^{\pi_{i,i+1}(t)} }\\
+        =-{\color{HotPink4}\pi_i(t)} {\color{Firebrick3}(\lambda+\mu)} 
+        + {\color{DodgerBlue1}\pi_{i-1}(t) \lambda }
+        + {\color{DodgerBlue4}\pi_{i+1}(t) \mu}
+        \label{eq:derivative}
+    \end{multline}
+
+
+    \begin{figure}
+        \input{figs/derivada-transicion.tex}
+    \end{figure}
+
+\end{frame}
+
+
+
+
+
+\begin{frame}{\secname: \subsecname}
+    Si $t\to\infty$, la cadena alcanza
+    \cite{amable}
+    una distribución estacionaria donde las
+    probabilidades no varían:
+    
+    \begin{equation*}
+        \lim_{t\to\infty} \frac{d}{dt}\pi_i(t) = 0,\quad \forall i
+        \label{eq:null-derivative}
+    \end{equation*}
+
+
+    \vfill
+
+    Nos referimos a la \textbf{distribución
+    estacionaria} como
+    $\pmb{\pi}=\lim_{t\to\infty} \pmb{\pi}(t)$.
+
+    \textit{Ejemplo}:
+    \begin{equation*}
+        \pmb{\pi} = (\pi_0, \pi_1, \pi_2, {\color{HotPink4}\pi_3}, \ldots) = (0.12, 0.04, 0.17, {\color{HotPink4}0.06}, \ldots)
+    \end{equation*}
+
+\end{frame}
+
+
+
+
+\subsection{Ecuaciones de equilibrio}
+
+\begin{frame}{\secname: \subsecname}
+    Usando \eqref{eq:derivative}
+    y \eqref{eq:null-derivative} podemos
+    definir la \textbf{ecuación de equilibrio}
+    para encontrar la distribución estacionaria
+    $\pmb{\pi}$:
+
+    \begin{equation}
+        0 = \pmb{\pi}Q = 
+        (\pi_0, \pi_1, \ldots)
+        \begin{pmatrix}
+            -\lambda & \lambda & 0 & 0 & \ldots \\
+            \mu & -(\lambda+\mu) & \lambda & 0 & \ldots \\
+            0  & \mu & -(\lambda+\mu) & \lambda &  \ldots \\
+            \vdots  & \vdots & \vdots & \vdots &  \ddots \\
+        \end{pmatrix}
+        \label{eq:equilibrio}
+    \end{equation}
+    con $q_{ij}=\nu_i \pi_{i j}$ es la entrada
+    $(i,j)$ de la matriz de transición $Q$.
+
+\end{frame}
+
+
+
+
+
+
+\begin{frame}{\secname: \subsecname}
+    De \eqref{eq:equilibrio} sacamos
+    el sistema de ecuaciones:
+    \begin{align}
+        \pi_1 &= \pi_0 \frac{\lambda}{\mu}\\
+    \end{align}
 \end{frame}
 
 

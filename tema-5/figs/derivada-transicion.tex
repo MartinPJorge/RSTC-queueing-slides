@@ -1,0 +1,35 @@
+%%% \tikzset{node distance=1cm, % Minimum distance between two nodes. Change if necessary.
+%%%          every state/.style={ % Sets the properties for each state
+%%%            semithick,draw=HotPink3!50,
+%%%            fill=HotPink3!20},
+%%%          initial text={},     % No label on start arrow
+%%%          double distance=4pt, % Adjust appearance of accept states
+%%%          every edge/.style={  % Sets the properties for each transition
+%%%          draw, ->,>=stealth',     % Makes edges directed with bold arrowheads
+%%%            auto, thick},
+%%% }
+\begin{tikzpicture}
+   
+% Estados
+\node[state,fill=DodgerBlue1!20] (2) [right=of 1] {$i-1$};
+\node[state,fill=HotPink3!20] (3) [right=of 2] {$i$};
+\node[state,fill=DodgerBlue4!20] (4) [right=of 3] {$i+1$};
+
+% Probabilidades
+\node[anchor=north,DodgerBlue1] at (2.south) {$\pi_{i-1}(t)$};
+\node[anchor=north,HotPink4] at (3.south) {$\pi_i(t)$};
+\node[anchor=north,DodgerBlue4] at (4.south) {\textbf{$\pi_{i+1}(t)$}};
+
+
+% Transiciones
+\draw [->,thick,DodgerBlue1] (2.north east) to [bend left=55]  node[above] {$\lambda$}  (3.north west);
+\draw [->,thick,Firebrick3] (3.south west) to [bend left=55]  node[below] {$\mu$}  (2.south east);
+
+\draw [->,thick,Firebrick3] (3.north east) to [bend left=55]  node[above] {$\lambda$}  (4.north west);
+\draw [->,thick,DodgerBlue4] (4.south west) to [bend left=55]  node[below] {$\mu$}  (3.south east);
+
+
+
+
+    
+\end{tikzpicture}
