@@ -1,0 +1,35 @@
+\begin{tikzpicture}
+
+\begin{axis}[every axis plot post/.append style={
+  mark=none,samples=20},
+  axis x line*=bottom,
+  axis y line*=left,
+  xlabel={$\lambda$ [coches/min]},
+  ylabel={$\mathbb{E}[T(t)]$ [min]},
+  ymin=0,
+  enlargelimits=upper,
+  width=4in,
+  height=2in]
+
+  \addplot +[domain=0:4/5,color=HotPink3, name path=up] {1/(1-x)};
+  \addplot[domain=0:.9,ultra thick,smooth,color=HotPink3] {1/(1-x)} node [pos=0.1,anchor=south east] {$\frac{1}{\mu-\lambda}$};
+
+
+  \addplot +[black,domain=0:4/5,name path=down] {0};
+
+
+  \addplot +[mark=none] coordinates {(4/5, 0) (4/5, 10)} node[pos=0.8,rotate=90,anchor=south] {$\lambda=\tfrac{4}{5}$};
+
+
+  \addplot[domain=0:.9,dashed, black] {5}
+      node[pos=0.95,anchor=north] {5};
+
+  \addplot[domain=0:4/5,Firebrick3!20] fill between[of=down and up];
+
+
+
+\end{axis}
+
+
+\end{tikzpicture}
+

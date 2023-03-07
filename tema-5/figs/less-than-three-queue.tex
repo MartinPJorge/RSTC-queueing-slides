@@ -1,0 +1,37 @@
+\begin{tikzpicture}
+
+\begin{axis}[every axis plot post/.append style={
+  mark=none,samples=100},
+  axis x line*=bottom,
+  axis y line*=left,
+  xlabel={$\mu$ [coches/min]},
+  ylabel={$\mathbb{E}[Q(t)]$},
+  ymin=0,
+  ymax=4,
+  xmin=0.5,
+  enlargelimits=upper,
+  width=4in,
+  height=2in]
+
+  \addplot +[smooth,color=HotPink3,domain=(1+sqrt(3))/2:3, name path=up] {1/(x^2-x)};
+  \addplot +[color=black,domain=(1+sqrt(3))/2:3, name path=down] {0};
+
+  \addplot[ultra thick,smooth,color=HotPink3,domain=1.1:3] {1/(x^2-x)} node [pos=0.6,anchor=south west] {$\frac{1}{\mu^2-\mu}$};
+
+  \addplot +[dotted,black,mark=none] coordinates {(1,0) (1,10)};
+
+  \addplot +[black,mark=none] coordinates
+      {((1+sqrt(3))/2,0) ((1+sqrt(3))/2,2.5)}
+      node[pos=.4,rotate=90,anchor=south] {\tiny $\mu=\tfrac{1+\sqrt{3}}{2}$};
+
+
+  \addplot[domain=1.1:3,dashed, thick, black] {2} node[pos=0.9,anchor=south] {2};
+
+
+  \addplot[domain=0:1,Firebrick3!20] fill between[of=down and up];
+
+\end{axis}
+
+
+\end{tikzpicture}
+

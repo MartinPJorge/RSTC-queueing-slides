@@ -1161,13 +1161,223 @@ Si ya han pasado {\color{DodgerBlue1}$s$ [sec]}, ¿cuál es
 
 \begin{frame}{\secname: \subsecname}
     De \eqref{eq:equilibrio} sacamos
-    el sistema de ecuaciones:
-    \begin{align}
-        \pi_1 &= \pi_0 \frac{\lambda}{\mu}\\
-    \end{align}
+    el sistema de ecuaciones de equilibrio:
+    \begin{equation}
+        \pi_i = \pi_{i-1} \frac{\lambda}{\mu},
+        \quad \forall i>0
+        \label{eq:equilibrio}
+    \end{equation}
+    que equivale a:
+    \begin{equation}
+        \pi_i = \pi_0 \rho^i, \quad \forall i>0
+        \label{eq:equilibrio-potencia}
+    \end{equation}
+    donde $\rho=\tfrac{\lambda}{\mu}$
+    es la \textbf{carga del sistema}.
 \end{frame}
 
 
+\begin{frame}{\secname: \subsecname}
+    De~\eqref{eq:equilibrio-potencia}
+    sacamos la
+    probabilidad de que el sistema
+    M/M/1 esté vacío:
+    \begin{align}
+        \pi_0 &= 1 - \sum_{i=1}^\infty \pi_i\label{eq:prob-cero}\\
+              &= 1 - \sum_{i=1}^\infty \pi_0\rho^i\nonumber\\
+              &= 1 - \pi_0\frac{1-\rho}{1-\rho}
+        \left(\rho+\rho^2+\rho^3+\ldots  \right)\nonumber\\
+        &= 1 - \pi_0\frac{1}{1-\rho}
+        \lim_{\iota\to\infty}\left( \rho - \rho^2 + \rho^2 - \rho^3 + \rho^3 - \ldots - \rho^\iota \right)\nonumber\\
+        &= 1 - \pi_0 \frac{\rho}{1-\rho}\nonumber
+    \end{align}
+    siempre y cuando $\rho<1$.
+\end{frame}
+
+
+
+
+
+\begin{frame}{\secname: \subsecname}
+    Despejando en \eqref{eq:prob-cero}
+    y \eqref{eq:equilibrio-potencia}
+    obtenemos que
+
+    \begin{lema}[Probabilidades estado M/M/1]
+        En un sistema M/M/1 la probabilidad
+        de estar en el estado $i$ es:
+        \begin{equation}
+            \pi_i =
+            \begin{cases}
+                1-\rho, & i=0\\
+                (1-\rho)\rho^i, & i>0
+            \end{cases}
+        \end{equation}
+        donde $\rho=\tfrac{\lambda}{\mu}$
+        es la carga del sistema.
+    \end{lema}
+\end{frame}
+
+
+
+
+\begin{frame}{\secname: \subsecname}
+    \textit{Ejemplo}: en una gasolinera llegan
+    $\lambda$ [coches/min] a un surtidor
+    que sirve a tasa $\mu=1$ [coches/min].
+
+    ¿Cómo varia la probabilidad
+    de tener $i=3$ coches en función de
+    $\lambda$?
+
+    \vfill
+
+    \begin{figure}
+        \input{figs/prob-zero}
+    \end{figure}
+\end{frame}
+
+
+
+\begin{frame}{\secname: \subsecname}
+    \textit{Ejemplo (cont.)}: ¿cuántos coches
+    aguanta el surtidor para que el 90\%
+    de las veces tenga menos de 5 coches?
+
+    \begin{equation*}
+        \lambda: \sum_{i=0}^4 \pi_i = \sum_{i=0}^4 (1-\rho)\rho^i = 1-\rho^5  \geq 0.9
+        \implies\lambda\leq \sqrt[5]{0.1} \text{ [coches/min]}
+    \end{equation*}
+
+    \begin{figure}
+        \input{figs/prob-less-than-five}
+    \end{figure}
+\end{frame}
+
+
+
+
+\subsection{Métricas famosas}
+
+\begin{frame}{\secname: \subsecname}
+    \begin{lemma}[Número medio de usuarios
+        en un M/M/1]
+        El número medio de usuarios en
+        un sistema M/M/1 es
+        \begin{equation}
+            \mathbb{E}[N(t)]=\frac{\rho}{1-\rho}
+        \end{equation}
+    \end{lemma}
+
+    \vfill
+
+    \textit{Demostración}:
+    \begin{equation*}
+        \mathbb{E}[N(t)]=
+        \sum_{i=0}^\infty i \pi_i
+        =(1-\rho)\rho \sum_{i=1}^\infty i\rho^{i-1}
+        = (1-\rho)\rho \frac{d}{dt}\sum_{i=1}^\infty \rho^i = \ldots = \frac{\rho}{1-\rho}
+    \end{equation*}
+\end{frame}
+
+
+
+\begin{frame}{\secname: \subsecname}
+    \begin{lemma}[Número medio de usuarios
+        encolados en un M/M/1]
+        El número medio de usuarios encolados
+        en un sistema M/M/1 es
+        \begin{equation}
+            \mathbb{E}[Q(t)]=\frac{\rho^2}{1-\rho}
+        \end{equation}
+
+    \end{lemma}
+
+    \vfill
+    \textit{Demostración}:
+    \begin{multline*}
+        \mathbb{E}[Q(t)]=
+        \sum_{i=1}^\infty (i-1) \pi_i
+        = \sum_{i=1}^\infty i\pi_i -
+        \sum_{i=1}^\infty \pi_i\\
+        = \mathbb{E}[N(t)] - (1-\pi_0)
+        = \frac{\rho}{1-\rho} - \rho
+        = \frac{\rho^2}{1-\rho}
+    \end{multline*}
+\end{frame}
+
+
+
+
+\begin{frame}{\secname: \subsecname}
+    \textit{Ejemplo (cont.)}:
+    si llegan $\lambda=1$ [coches/min],
+    ¿cómo de rápido debe ser el surtidor
+    para que, en media,
+    haya menos de 3 coches esperando?
+
+    \begin{equation}
+        \mu: \mathbb{E}[Q(t)] = \frac{1}{\mu^2-\mu}\leq 2 \implies \mu\geq \frac{1+\sqrt{3}}{2}\text{ [coches/min]}
+    \end{equation}
+
+
+    \begin{figure}
+        \input{figs/less-than-three-queue}
+    \end{figure}
+\end{frame}
+
+
+
+
+
+
+\begin{frame}{\secname: \subsecname}
+    ¿Y si queremos sacar el tiempo 
+    de espera en cola on en ser servido?
+    \pause
+
+    \begin{thm}[Teorema de Little]
+        En un sistema de colas,
+        la relación entre tiempo medio
+        de servicio $\mathbb{E}[T(t)]$
+        y número medio de usuarios es
+        \begin{equation}
+            \mathbb{E}[N(t)] =
+            \mathbb{E}[T(t)]\cdot \lambda
+        \end{equation}
+        Del mismo modo, la relación
+        entre tiempo medio de espera
+        en cola $\mathbb{E}[W(t)]$ y
+        número medio de usuario en colas es
+        \begin{equation}
+            \mathbb{E}[Q(t)] =
+            \mathbb{E}[W(t)]\cdot \lambda
+        \end{equation}
+    \end{thm}
+\end{frame}
+
+
+
+
+\begin{frame}{\secname: \subsecname}
+    \textit{Ejemplo}: ¿cuál es la
+    cantidad máxima de coches
+    que agunta la gasolinera
+    para que, en media, un coche tarde
+    menos de 5 [min] en repostar?
+
+    \begin{equation}
+        \lambda: \mathbb{E}[T(t)] =
+        \frac{1}{\mu-\lambda} \leq 5
+        \implies \lambda \leq \frac{4}{5}
+        \text{ [coches/min]}
+    \end{equation}
+
+    \begin{figure}
+        \input{figs/less-than-five-min-avg.tex}
+    \end{figure}
+
+\end{frame}
 
 
 

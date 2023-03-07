@@ -1,0 +1,30 @@
+\begin{tikzpicture}
+
+\begin{axis}[every axis plot post/.append style={
+  mark=none,samples=20},
+  axis x line*=bottom,
+  axis y line*=left,
+  xlabel={$\lambda$ [coches/min]},
+  ylabel={$\sum_{i=0}^4\pi_i$},
+  enlargelimits=upper,
+  width=4in,
+  height=2in]
+
+  \addplot+[smooth,color=HotPink3,domain=0:0.1^(1/5),name path=up] {1-x^5};
+  \addplot[domain=0:1,ultra thick,smooth,color=HotPink3] {1-x^5} node [pos=0.6,anchor=south west] {$1-\rho^5$};
+
+
+  \addplot[domain=0:0.1^(1/5),dashed, thick, black,name path=down] {0.9} node[pos=0.2,anchor=north] {0.9};
+
+
+  \addplot +[mark=none] coordinates {(0.1^(1/5), 0) (0.1^(1/5), 1)} node[pos=0.5,rotate=90,anchor=south] {$\lambda=\sqrt[5]{0.1}$};
+
+
+
+  \addplot[domain=0:1,Firebrick3!20] fill between[of=down and up];
+
+\end{axis}
+
+
+\end{tikzpicture}
+
