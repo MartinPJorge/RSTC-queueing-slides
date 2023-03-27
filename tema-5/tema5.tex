@@ -77,6 +77,7 @@
 \usetikzlibrary{shapes,arrows, positioning, calc}
 \usetikzlibrary{overlay-beamer-styles}
 \usetikzlibrary{chains,shapes.multipart}
+\usetikzlibrary{scopes}
 \usetikzlibrary{automata}
 \usetikzlibrary{positioning}  %                 ...positioning nodes
 \usetikzlibrary{arrows}       %                 ...customizing arrows
@@ -257,7 +258,7 @@ Grado en Ingeniería de Tecnologías y Servicios de Telecomunicación}
          \resizebox{\textwidth}{!}{%
              \input{figs/gasolinera-2min}%
          }
-         \caption{$\mathbb{P}(\blue{t=2})=\tfrac{1}{2}\ e^{\frac{1}{2}\cdot \blue{2}}=0.18$}
+         \caption{$\mathbb{P}(\blue{t=2})=\tfrac{1}{2}\ e^{-\frac{1}{2}\cdot \blue{2}}=0.18$}
      \end{subfigure}
      \hfill
      \begin{subfigure}[b]{0.45\textwidth}
@@ -357,7 +358,7 @@ Si ya han pasado {\color{DodgerBlue1}$s$ [sec]}, ¿cuál es
 
     \vfill
 
-    ¿Con qué probabilidad llegua
+    ¿Con qué probabilidad llega
     un coche cualquiera en 3 [min]?
 \end{frame}
 
@@ -406,7 +407,7 @@ Si ya han pasado {\color{DodgerBlue1}$s$ [sec]}, ¿cuál es
     un coche cualquiera en 3 [min]?
 
     \begin{align*}
-        1-\mathbb{P}(t>1)&=1-
+        1-\mathbb{P}(t>3)&=1-
         ({\color{Firebrick1}\lambda_1}+
         {\color{Firebrick4}\lambda_2})
         e^{-({\color{Firebrick1}\lambda_1}+
@@ -840,6 +841,77 @@ Si ya han pasado {\color{DodgerBlue1}$s$ [sec]}, ¿cuál es
 
 
 
+\section{Teoría de Colas}
+
+
+
+\begin{frame}{\secname}
+    Estudia las prestaciones de sistemas
+    de colas como la ilustrada abajo
+
+    \begin{figure}
+        \input{figs/mm1-plain}
+    \end{figure}
+
+    \begin{itemize}
+        \item $\lambda$: tasa de llegadas
+            [vehículos/min]
+        \item $\mu$: tasa de servicio
+            [vehículos/min]
+    \end{itemize}
+\end{frame}
+
+
+
+
+
+
+\begin{frame}{\secname}
+    Si llegan muchos usuarios (coches)
+    a la cola, hay que dimensionar:
+
+
+    \begin{figure}
+     \centering
+     \begin{subfigure}[b]{0.3\textwidth}
+         \centering
+         \resizebox{\textwidth}{!}{%
+             \input{figs/mm1-big-mu}%
+         }
+         \caption{Surtidor potente}
+     \end{subfigure}
+     \hfill
+     \begin{subfigure}[b]{0.3\textwidth}
+         \centering
+         \resizebox{\textwidth}{!}{%
+             \input{figs/mm2}%
+         }
+         \caption{Dos surtidores}
+     \end{subfigure}
+     \hfill
+     \begin{subfigure}[b]{0.3\textwidth}
+         \centering
+         \resizebox{\textwidth}{!}{%
+             \input{figs/parallel-mm1}%
+         }
+         \caption{Dos colas+surtidor}
+     \end{subfigure}
+    \end{figure}
+
+\end{frame}
+
+
+
+\begin{frame}{\secname}
+    Hay que dimensionar para \textbf{hora pico}
+    $\lambda^{\max}$.
+
+    \vfill
+
+    \begin{figure}
+        \input{figs/peak-hour}
+    \end{figure}
+\end{frame}
 
 
 
@@ -1060,9 +1132,10 @@ Si ya han pasado {\color{DodgerBlue1}$s$ [sec]}, ¿cuál es
 
 \begin{frame}{\secname: \subsecname}
     La cadena de Markov va pasando
-    por estados\footnote{\url{https://setosa.io/blog/2014/07/26/markov-chains/index.html}}.
+    por estados.
+    %\footnote{\url{https://setosa.io/blog/2014/07/26/markov-chains/index.html}}.
 
-    En el instante $t$ estaremos la
+    En el instante $t$ la
     probabilidad de estar en cada estado es,
     e.g.:
     \begin{equation*}
@@ -1116,10 +1189,10 @@ Si ya han pasado {\color{DodgerBlue1}$s$ [sec]}, ¿cuál es
     una distribución estacionaria donde las
     probabilidades no varían:
     
-    \begin{equation*}
+    \begin{equation}
         \lim_{t\to\infty} \frac{d}{dt}\pi_i(t) = 0,\quad \forall i
         \label{eq:null-derivative}
-    \end{equation*}
+    \end{equation}
 
 
     \vfill
@@ -1363,6 +1436,20 @@ Si ya han pasado {\color{DodgerBlue1}$s$ [sec]}, ¿cuál es
             \mathbb{E}[W(t)]\cdot \lambda
         \end{equation}
     \end{thm}
+\end{frame}
+
+
+
+\begin{frame}{\secname: \subsecname}
+    Si $\rho\to1$, el tiempo medio de servicio
+    $\mathbb{E}[T(t)]\to\infty$.
+
+    \vfill
+
+    \begin{figure}
+        \input{figs/rho-to-one}
+    \end{figure}
+
 \end{frame}
 
 
