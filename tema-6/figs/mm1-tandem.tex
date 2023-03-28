@@ -1,0 +1,35 @@
+\begin{tikzpicture}[color=Firebrick2,thick]
+
+
+% the rectangular shape with vertical lines
+\node[rectangle split, rectangle split parts=6,
+draw, rectangle split horizontal,text height=1cm,text depth=0.5cm,inner ysep=0pt] (wa) {};
+\fill[white] ([xshift=-\pgflinewidth,yshift=-\pgflinewidth]wa.north west) rectangle ([xshift=-15pt,yshift=\pgflinewidth]wa.south);
+
+% the circle
+\node[draw,circle,minimum size=1.5cm,anchor=west] (se) at (wa.east) {$\mu$};
+
+% the arrows and labels
+\draw[->] (se.east) -- +(20pt,0) node (seEnd) {};
+\draw[<-] (wa.west) -- +(-20pt,0) node[left] {$\lambda$};
+
+
+
+
+%%%%%%%%%%%%%%%%%%%
+%%% Second queue
+%%%%%%%%%%%%%%%%%%%
+
+% the rectangular shape with vertical lines
+\node[rectangle split, rectangle split parts=6,
+    draw, rectangle split horizontal,text height=1cm,text depth=0.5cm,inner ysep=0pt,anchor=west] (wa2) at (seEnd.east) {};
+\fill[white] ([xshift=-\pgflinewidth,yshift=-\pgflinewidth]wa2.north west) rectangle ([xshift=-15pt,yshift=\pgflinewidth]wa2.south);
+
+% the circle
+\node[draw,circle,minimum size=1.5cm,anchor=west] (se2) at (wa2.east) {$\mu$};
+
+% the arrows and labels
+\draw[->] (se2.east) -- +(20pt,0) node (seEnd2) {};
+
+
+\end{tikzpicture}

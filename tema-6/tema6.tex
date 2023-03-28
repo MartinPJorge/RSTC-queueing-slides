@@ -1,0 +1,255 @@
+\documentclass[xcolor={x11names}]{beamer}
+\usetheme{Madrid}
+
+\usepackage{amssymb}
+\usepackage{ulem}
+\usepackage[utf8]{inputenc}
+\usepackage{mathtools}
+\usepackage{multicol}
+%\usepackage[x11names]{xcolor}
+\usefonttheme{professionalfonts}
+
+
+% Subfigures
+\usepackage{caption}
+\usepackage{subcaption}
+
+
+
+
+% Change base colour beamer@blendedblue (originally RGB: 0.2,0.2,0.7)
+\colorlet{beamer@blendedblue}{DarkSeaGreen4}
+
+
+
+
+
+
+
+%% MATH commands
+\DeclareMathOperator{\Var}{Var}
+
+
+%% THEOREMS
+%\newtheorem{theorem}{Theorem}
+\newtheorem{thm}{Teorema}[section] % the main one
+% Definición
+%\theoremstyle{definition}
+\newtheorem{definicion}{Definición}[section]
+\newtheorem{lema}{Lema}[section]
+
+
+
+%% PFGplots %%
+\usepackage{pgfplots}
+
+%% Exponential distribution
+\pgfmathdeclarefunction{exponential}{1}{%
+  \pgfmathparse{(#1)*exp(-#1*x)}%
+}
+\pgfmathdeclarefunction{exponentialcdf}{1}{%
+  \pgfmathparse{1-exp(-#1*x)}%
+}
+
+%% Poisson distribution
+\pgfmathdeclarefunction{poiss}{1}{%
+  \pgfmathparse{(#1^x)*exp(-#1)/(x!)}%
+}
+
+%% Normal distribution (#1=mu, #2=sigma)
+% John D. Cook approx. https://tex.stackexchange.com/a/124629
+\pgfmathdeclarefunction{normalcdf}{2}{%
+  \pgfmathparse{1/(1 + exp(-0.07056*((x-#1)/#2)^3 - 1.5976*(x-#1)/#2))}%
+}
+
+
+
+
+\newcommand{\red}[1]{{\color{red}#1}}
+\newcommand{\blue}[1]{{\color{blue}#1}}
+
+%%%%%%%%%%
+%% TIKZ %%
+%%%%%%%%%%
+\usepackage{tikz}
+\usepackage{animate}
+\usetikzlibrary{positioning}
+\usetikzlibrary{shapes,arrows, positioning, calc}
+\usetikzlibrary{overlay-beamer-styles}
+\usetikzlibrary{chains,shapes.multipart}
+\usetikzlibrary{scopes}
+\usetikzlibrary{automata}
+\usetikzlibrary{positioning}  %                 ...positioning nodes
+\usetikzlibrary{arrows}       %                 ...customizing arrows
+\usetikzlibrary{intersections}
+
+
+%%%%%%%%%
+%% PGF %%
+%%%%%%%%%
+\usepgfplotslibrary{fillbetween}
+
+
+%%% Insert section name before the section %%%
+\AtBeginSection[]{
+  \begin{frame}
+  \vfill
+  \centering
+  \begin{beamercolorbox}[sep=8pt,center,shadow=true,rounded=true]{title}
+    \usebeamerfont{title}\insertsectionhead\par%
+  \end{beamercolorbox}
+  \vfill
+  \end{frame}
+}
+
+
+
+\title[Tema 6]{Tema 6: Teletráfico en redes de datos}
+%\author{M. Saiful Bari\inst{1} \and Mr X\inst{2}}
+
+\author{Jorge Martín Pérez\inst{1}}
+\institute{
+    \inst{1}
+    Departamento de Ingeniería Telemática, Universidad Politécnica de Madrid
+}
+
+\date{\today}
+
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%
+%%% SLIDES START %%%
+%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+
+
+%%% TITLE %%%
+\frame{\titlepage}
+
+
+\begin{frame}{Contenido}
+    \tableofcontents
+\end{frame}
+
+
+
+
+\section{Introducción}
+\begin{frame}{\secname}
+    Hemos visto colas M/M/1
+    \begin{figure}
+        \input{../tema-5/figs/mm1.tex}
+    \end{figure}
+    con tiempos:
+    \begin{itemize}
+        \item de llegada exponenciales
+            $t_l\sim Exp(\lambda)$
+        \item de servicio exponenciales
+            $t_s\sim Exp(\mu)$
+    \end{itemize}
+
+    \pause
+    \vfill
+
+    {\color{blue}
+    Pero, ¿y si el tiempo de servicio $t_s$
+    sigue otra distribución?
+    }
+     
+    \pause
+    \begin{itemize}
+        {\color{red}
+        \item sistema M/G/1
+        }
+    \end{itemize}
+\end{frame}
+
+
+
+\begin{frame}{\secname}
+    Hemos estudiado una sola cola
+    \begin{figure}
+        \input{../tema-5/figs/mm1.tex}
+    \end{figure}
+
+    \vfill
+    {\color{blue}
+    Pero, ¿y si hay más colas?
+    }
+    \pause
+    \begin{itemize}
+        {\color{red}
+        \item redes de Jackson
+        }
+    \end{itemize}
+    \begin{figure}
+        \input{figs/mm1-tandem.tex}
+    \end{figure}
+\end{frame}
+
+
+\begin{frame}{Contenido}
+    \tableofcontents
+\end{frame}
+
+
+\section{Sistema M/G/1}
+\subsection{No Markoviano}
+\begin{frame}{\secname: \subsecname}
+    Tiempo de servicio sigue una distribución
+    general\footnote{Por ejemplo,
+    $G(\mu)=U(\tfrac{1}{2\mu}, \tfrac{2}{3\mu})$}
+    $t_s\sim G(\mu)$.
+
+    \begin{figure}
+        \input{../tema-5/figs/mm1.tex}
+    \end{figure}
+
+    \vfill
+    Para modelar como cadena de Markov
+    es necesario que
+    \begin{itemize}
+        \item tiempo estancia en estado
+            $t_i\sim Exp(\nu_i)$.
+    \end{itemize}
+\end{frame}
+
+
+
+\begin{frame}{\secname: \subsecname}
+    \begin{figure}
+        \input{figs/residence-time.tex}
+    \end{figure}
+
+    \vfill
+    Veamos si se cumple que $t_i\sim Exp(\nu_i)$:
+    \begin{multline}
+        \mathbb{P}(t_i>\tau) =
+        \mathbb{P}(\min\{t_l,t_s\}>\tau)=
+        \mathbb{P}(t_l>\tau)
+        \mathbb{P}(t_s>\tau)\\
+        =
+        \left(1 - \frac{\tau}{\mu} \right)
+        e^{-\mu\tau} \neq e^{-\nu_i \tau}
+    \end{multline}
+    con $t_s\sim G(\mu)=U\left(\tfrac{1}{2\mu},
+    \tfrac{2}{3\mu}\right),\
+    \tau\in\left[\tfrac{1}{2\mu},
+    \tfrac{2}{3\mu}\right]$.
+\end{frame}
+
+
+
+
+
+\section{Redes de Jackson}
+
+
+
+
+
+\end{document}
