@@ -1,0 +1,25 @@
+\begin{tikzpicture}
+
+\begin{axis}[every axis plot post/.append style={
+  mark=none,samples=30},
+  axis x line*=bottom,
+  axis y line*=left,
+  xlabel={$\rho$},
+  ylabel={$\mathbb{E}[T(t)]$ [min]},
+  ymin=0,
+  enlargelimits=upper,
+  width=4in,
+  height=2in]
+
+  \addplot[domain=0:.95,ultra thick,smooth,color=HotPink3] {x/(1-x)} node [pos=0.1,anchor=south east] {$\frac{\rho}{1-\rho}$};
+
+
+  \addplot+[thick,dashed,black,mark=none] coordinates {(1, 0) (1, 20)};
+
+
+
+\end{axis}
+
+
+\end{tikzpicture}
+

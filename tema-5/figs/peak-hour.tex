@@ -1,0 +1,24 @@
+\begin{tikzpicture}
+
+\begin{axis}[every axis plot post/.append style={
+  mark=none,domain=0:22.5,samples=20},
+  axis x line*=bottom,
+  axis y line*=left,
+  xlabel={$t$ [hora]},
+  ylabel={$\lambda(t)$ [vehículos/min]},
+  enlargelimits=upper,
+  width=4in,
+  height=2in]
+  \addplot[ultra thick,smooth,color=DodgerBlue1] {10*sin(deg(x*pi/24))} node [pos=0.3,anchor=south west] {};
+
+  \node[anchor=north,circle,inner sep=1pt,mark=*] at (axis cs:12,10) {$\lambda^{\max}$};
+
+  \addplot [DodgerBlue4, mark=*, only marks]
+coordinates {
+(12,10)
+};
+\end{axis}
+
+
+\end{tikzpicture}
+

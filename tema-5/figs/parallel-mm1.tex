@@ -1,0 +1,47 @@
+\begin{tikzpicture}[start chain=going right,>=latex,node distance=0pt]
+
+
+
+% Phantom nodes
+\node [on chain,opacity=0] (begin) {A};
+\node [on chain,opacity=0] {A};
+% Phantom node for server alignment
+\node [on chain,opacity=0] {A};
+{ [start branch=numbers going above]
+  % the queue above
+  %%%
+  % the rectangular shape with vertical lines
+  \node[rectangle split, rectangle split parts=6,
+  draw, rectangle split horizontal,text height=1cm,text depth=0.5cm,on chain,inner ysep=0pt] (wau) {};
+  \fill[white] ([xshift=-\pgflinewidth,yshift=-\pgflinewidth]wau.north west) rectangle ([xshift=-15pt,yshift=\pgflinewidth]wau.south);
+}
+{ [start branch=numbers going below]
+  % the queue below 
+  %%%
+  % the rectangular shape with vertical lines
+  \node[rectangle split, rectangle split parts=6,
+  draw, rectangle split horizontal,text height=1cm,text depth=0.5cm,on chain,inner ysep=0pt] (wad) {};
+  \fill[white] ([xshift=-\pgflinewidth,yshift=-\pgflinewidth]wad.north west) rectangle ([xshift=-15pt,yshift=\pgflinewidth]wad.south);
+}
+
+% Server up
+\node[draw,circle,minimum size=1.5cm,anchor=west] at (wau.east) (seu) {$\mu$};
+% Server down
+\node[draw,circle,minimum size=1.5cm,anchor=west] at (wad.east) (sed) {$\mu$};
+
+
+
+% the arrows and labels
+\node (user) at (-2,0) {$\lambda$};
+\draw[->] (user.east) -- (wau.west);
+\draw[->] (user.east) -- (wad.west);
+
+
+
+\node[anchor=north] at (sed.south) {surtidor};
+\node[anchor=north] at (wad.south) {cola};
+\node[anchor=north] at (user.south) {coche};
+\draw[->] (seu.east) -- +(20pt,0);
+\draw[->] (sed.east) -- +(20pt,0);
+
+\end{tikzpicture}
