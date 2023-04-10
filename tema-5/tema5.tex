@@ -15,6 +15,15 @@
 \usepackage{subcaption}
 
 
+% License
+\usepackage[
+    type={CC},
+    modifier={by-nc-sa},
+    version={3.0},
+    imagewidth=4pt
+]{doclicense}
+
+
 
 
 % Change base colour beamer@blendedblue (originally RGB: 0.2,0.2,0.7)
@@ -104,10 +113,16 @@
 
 
 
-\title[Tema 5]{Tema 5: Introducción al Teletráfico\\y a la Teoría de Colas}
-\subtitle{Redes y Servicios de Telecomunicaciones (RSTC)\\
-Grado en Ingeniería de Tecnologías y Servicios de Telecomunicación}
+\title[Tema 5]{Tema 5: Introducción al Teletráfico y Teoría de Colas}
+%% \subtitle{Redes y Servicios de Telecomunicaciones (RSTC)\\
+%% Grado en Ingeniería de Tecnologías y Servicios de Telecomunicación}
 %\author{M. Saiful Bari\inst{1} \and Mr X\inst{2}}
+
+\titlegraphic{%
+\includegraphics[height=1.5cm]{figs/RSTC-grande.png}\\%
+\doclicenseIcon {\tiny \hspace{1em}\doclicenseText}}
+
+
 
 %\author{Jorge Martín Pérez\inst{1}}
 \institute{
@@ -130,7 +145,7 @@ Grado en Ingeniería de Tecnologías y Servicios de Telecomunicación}
 
 
 %%% TITLE %%%
-\frame{\titlepage}
+\frame{\titlepage }
 
 
 \begin{frame}{Contenido}
@@ -217,10 +232,15 @@ Grado en Ingeniería de Tecnologías y Servicios de Telecomunicación}
         distribución exponencial si su
         función de densidad es:
         \begin{equation}
-            f_t(\tau) = \mathbb{P}(t=\tau) = \lambda e^{-\lambda \tau}
+            f_t(\tau) = \lambda e^{-\lambda \tau}
         \end{equation}
         donde $\lambda>0$ es el parámetro
-        que caracteriza la distribución.
+        que caracteriza la distribución;
+        y su función de distribución
+        acumulada es
+        \begin{equation}
+            F_t(\tau) = \mathbb{P}(t\leq\tau) = 1- e^{-\lambda \tau}
+        \end{equation}
     \end{definicion}
 \end{frame}
 
@@ -258,7 +278,7 @@ Grado en Ingeniería de Tecnologías y Servicios de Telecomunicación}
          \resizebox{\textwidth}{!}{%
              \input{figs/gasolinera-2min}%
          }
-         \caption{$\mathbb{P}(\blue{t=2})=\tfrac{1}{2}\ e^{-\frac{1}{2}\cdot \blue{2}}=0.18$}
+         \caption{$\mathbb{P}(\blue{t\leq2})=1- e^{-\frac{1}{2}\cdot \blue{2}}=0.63$}
      \end{subfigure}
      \hfill
      \begin{subfigure}[b]{0.45\textwidth}
@@ -266,7 +286,7 @@ Grado en Ingeniería de Tecnologías y Servicios de Telecomunicación}
          \resizebox{\textwidth}{!}{%
              \input{figs/gasolinera-4min}%
          }
-         \caption{$\mathbb{P}(\blue{t=4})=\tfrac{1}{2}\ e^{-\frac{1}{2}\cdot \blue{4}}=0.07$}
+         \caption{$\mathbb{P}(\blue{t\leq4})= 1- e^{-\frac{1}{2}\cdot \blue{4}}=0.86$}
      \end{subfigure}
     \end{figure}
 
@@ -471,7 +491,7 @@ Si ya han pasado {\color{DodgerBlue1}$s$ [sec]}, ¿cuál es
     \textit{Demostración}:
     \begin{equation*}
         \mathbb{P}({\color{Firebrick1}t_1}<{\color{Firebrick4}t_2})=
-        \int_0^\infty \mathbb{P}({\color{Firebrick1}t_1}=t)\mathbb{P}({\color{Firebrick4}t_2}>t)\ dt = \int_0^\infty {\color{Firebrick1}\lambda_1} e^{-{\color{Firebrick1}\lambda_1} t} e^{-{\color{Firebrick4}\lambda_2} t}\ dt = \frac{{\color{Firebrick1}\lambda_1}}{{\color{Firebrick1}\lambda_1}+{\color{Firebrick4}\lambda_2}}
+        \int_0^\infty f_{\color{Firebrick1}t_1}(t)\mathbb{P}({\color{Firebrick4}t_2}>t)\ dt = \int_0^\infty {\color{Firebrick1}\lambda_1} e^{-{\color{Firebrick1}\lambda_1} t} e^{-{\color{Firebrick4}\lambda_2} t}\ dt = \frac{{\color{Firebrick1}\lambda_1}}{{\color{Firebrick1}\lambda_1}+{\color{Firebrick4}\lambda_2}}
     \end{equation*}
 \end{frame}
 
@@ -860,6 +880,33 @@ Si ya han pasado {\color{DodgerBlue1}$s$ [sec]}, ¿cuál es
             [vehículos/min]
     \end{itemize}
 \end{frame}
+
+
+
+
+\begin{frame}{\secname}
+    
+
+    \begin{figure}
+        \input{figs/mm1-plain}
+    \end{figure}
+    A lo largo del tiempo $t$ queremos saber:
+
+    \begin{itemize}
+        \item $N(t)$: el número de usuarios
+            en el sistema [vehículos]
+        \item $T(t)$: el tiempo total en
+            el sistema
+            [min]
+        \item $Q(t)$: el número de usuarios
+            encolados [vehículos]
+        \item $W(t)$: el tiempo de espera
+            en cola [min]
+    \end{itemize}
+\end{frame}
+
+
+
 
 
 
