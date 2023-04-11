@@ -359,7 +359,7 @@ Si ya han pasado {\color{DodgerBlue1}$s$ [sec]}, ¿cuál es
 
     Por la propiedad sin memoria tenemos:
     \begin{equation*}
-        \mathbb{P}(\red{t}>{\color{DodgerBlue1}s}+{\color{DodgerBlue4}\tau}|\ \red{t}>{\color{DodgerBlue1}s}) = \mathbb{P}(\red{t}>{\color{DodgerBlue4}\tau}) = \mathbb{P}(\red{t}>{\color{DodgerBlue4}3}) = \frac{1}{5}e^{-\frac{1}{5}\cdot3} = 0.11
+        \mathbb{P}(\red{t}>{\color{DodgerBlue1}s}+{\color{DodgerBlue4}\tau}|\ \red{t}>{\color{DodgerBlue1}s}) = \mathbb{P}(\red{t}>{\color{DodgerBlue4}\tau}) = \mathbb{P}(\red{t}>{\color{DodgerBlue4}3}) = e^{-\frac{1}{5}\cdot3} = 0.55
     \end{equation*}
 
 \end{frame}
@@ -428,16 +428,13 @@ Si ya han pasado {\color{DodgerBlue1}$s$ [sec]}, ¿cuál es
 
     \begin{align*}
         1-\mathbb{P}(t>3)&=1-
-        ({\color{Firebrick1}\lambda_1}+
-        {\color{Firebrick4}\lambda_2})
         e^{-({\color{Firebrick1}\lambda_1}+
         {\color{Firebrick4}\lambda_2})\cdot 3}\\
         & =
-        1 - \left({\color{Firebrick1}\frac{1}{4}}+
-        {\color{Firebrick4}\frac{1}{8}}\right)
+        1 - 
         e^{-({\color{Firebrick1}\frac{1}{4}}+
         {\color{Firebrick4}\frac{1}{8}})\cdot 3}
-        = 0.12
+        = 0.67
     \end{align*}
 \end{frame}
 
