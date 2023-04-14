@@ -1,0 +1,179 @@
+\documentclass[xcolor={x11names}]{beamer}
+\usetheme{Madrid}
+
+\usepackage{amssymb}
+\usepackage{ulem}
+\usepackage[utf8]{inputenc}
+\usepackage{mathtools}
+\usepackage{multicol}
+%\usepackage[x11names]{xcolor}
+\usefonttheme{professionalfonts}
+\usepackage{amsthm}
+
+
+% Subfigures
+\usepackage{caption}
+\usepackage{subcaption}
+
+
+% License
+\usepackage[
+    type={CC},
+    modifier={by-nc-sa},
+    version={3.0},
+    imagewidth=4pt
+]{doclicense}
+
+
+
+
+% Change base colour beamer@blendedblue (originally RGB: 0.2,0.2,0.7)
+\colorlet{beamer@blendedblue}{DarkSeaGreen4}
+
+
+
+
+
+
+
+%% MATH commands
+\DeclareMathOperator{\Var}{Var}
+
+
+%% THEOREMS
+%\newtheorem{theorem}{Theorem}
+\newtheorem{thm}{Teorema}[section] % the main one
+% Definición
+%\theoremstyle{definition}
+\newtheorem{definicion}{Definición}[section]
+\newtheorem{lema}{Lema}[section]
+\newtheorem{solucion}{Solución}
+
+
+%% PFGplots %%
+\usepackage{pgfplots}
+
+%% Exponential distribution
+\pgfmathdeclarefunction{exponential}{1}{%
+  \pgfmathparse{(#1)*exp(-#1*x)}%
+}
+\pgfmathdeclarefunction{exponentialcdf}{1}{%
+  \pgfmathparse{1-exp(-#1*x)}%
+}
+
+%% Poisson distribution
+\pgfmathdeclarefunction{poiss}{1}{%
+  \pgfmathparse{(#1^x)*exp(-#1)/(x!)}%
+}
+
+%% Normal distribution (#1=mu, #2=sigma)
+% John D. Cook approx. https://tex.stackexchange.com/a/124629
+\pgfmathdeclarefunction{normalcdf}{2}{%
+  \pgfmathparse{1/(1 + exp(-0.07056*((x-#1)/#2)^3 - 1.5976*(x-#1)/#2))}%
+}
+
+
+
+
+\newcommand{\red}[1]{{\color{red}#1}}
+\newcommand{\blue}[1]{{\color{blue}#1}}
+
+%%%%%%%%%%
+%% TIKZ %%
+%%%%%%%%%%
+\usepackage{tikz}
+\usepackage{animate}
+\usetikzlibrary{positioning}
+\usetikzlibrary{shapes,arrows, positioning, calc}
+\usetikzlibrary{overlay-beamer-styles}
+\usetikzlibrary{chains,shapes.multipart}
+\usetikzlibrary{scopes}
+\usetikzlibrary{automata}
+\usetikzlibrary{positioning}  %                 ...positioning nodes
+\usetikzlibrary{arrows}       %                 ...customizing arrows
+\usetikzlibrary{intersections}
+
+
+%%%%%%%%%
+%% PGF %%
+%%%%%%%%%
+\usepgfplotslibrary{fillbetween}
+
+
+%%% Insert section name before the section %%%
+\AtBeginSection[]{
+  \begin{frame}
+  \vfill
+  \centering
+  \begin{beamercolorbox}[sep=8pt,center,shadow=true,rounded=true]{title}
+    \usebeamerfont{title}\insertsectionhead\par%
+  \end{beamercolorbox}
+  \vfill
+  \end{frame}
+}
+
+
+
+\title[Ejercicios Tema 5]{Ejercicios Tema 5: Introducción al Teletráfico y Teoría de Colas}
+%% \subtitle{Redes y Servicios de Telecomunicaciones (RSTC)\\
+%% Grado en Ingeniería de Tecnologías y Servicios de Telecomunicación}
+%\author{M. Saiful Bari\inst{1} \and Mr X\inst{2}}
+
+\titlegraphic{%
+\includegraphics[height=2.5cm]{figs/RSTC-grande.png}\\%
+\doclicenseIcon {\tiny \hspace{1em}\doclicenseText}}
+
+
+\author{\textcolor{white}{RSTC curso 2022-2023}}
+%\author{Jorge Martín Pérez\inst{1}}
+%\institute{
+%    \inst{1}
+%    Departamento de Ingeniería Telemática, Universidad Politécnica de Madrid
+%}
+
+\date{\today}
+
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%
+%%% SLIDES START %%%
+%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+
+
+%%% TITLE %%%
+\frame{\titlepage }
+
+
+
+\begin{frame}{Ejercicios}
+    \tableofcontents
+\end{frame}
+
+
+
+\section{Ejercicios distribución Exponencial}
+\begin{frame}{Ejercicio 1}
+    El retardo de una red de datos en un centro hospitalario se distribuye según una variable aleatoria exponencial de media 12 ms, esto es, $ R \sim exp[E[r]=12] ms $.
+
+    En este contexto, los retardos superiores a 50ms son críticos para la monitorización de ciertos pacientes. Con esta información se pide:
+    \begin{itemize}
+        \item[A] Determinar si es posible garantizar un 1\% de probabilidad de obtener retardos superiores a 50ms.
+        \item[B] ¿Es posible garantizar el caso anterior con un retardo medio E[r]=10ms?
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Ejercicio 1}
+    \begin{solucion}[1.A]
+        Del enunciado deducimos que $\red{\lambda = 1/12}$ y por tanto, $ \mathbb{P}(\blue{r>50})= e^{\red{-\frac{1}{12}}\cdot \blue{50}}=0.015 $ concluyendo que no es posible aplicar dicha red al contexto crítico del enunciado.
+    \end{solucion}
+    \begin{solucion}[1.B]
+        Del enunciado deducimos que $\red{\lambda = 1/10}$ y por tanto, $ \mathbb{P}(\blue{r>50})= e^{\red{-\frac{1}{10}}\cdot \blue{50}}=0.00673 $ concluyendo que si es posible aplicar dicha red al contexto crítico del enunciado.
+    \end{solucion}
+\end{frame}
+
+\end{document}
