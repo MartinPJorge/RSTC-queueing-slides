@@ -1126,7 +1126,8 @@ Si ya han pasado {\color{DodgerBlue1}$s$ [sec]}, ¿cuál es
         \item la suma de probabilidades
             de transición es uno
             \begin{multline*}
-                \mathbb{P}(N(t+1)=k+1|\ N(t)=k)
+                \pi_{k,k+1}+\pi_{k,k-1}\\
+                =\mathbb{P}(N(t+1)=k+1|\ N(t)=k)
                 + \mathbb{P}(N(t+1)=k-1|\ N(t)=k)\\
                 = \mathbb{P}(t_l<t_s)
                 + \mathbb{P}(t_s<t_l)
@@ -1275,7 +1276,15 @@ Si ya han pasado {\color{DodgerBlue1}$s$ [sec]}, ¿cuál es
         \end{pmatrix}
         \label{eq:equilibrio}
     \end{equation}
-    con $q_{ij}=\nu_i \pi_{i j}$ es la entrada
+    con
+    \begin{equation}
+        q_{ij}=
+        \begin{cases}
+            \nu_i \pi_{i j}, & i\neq j\\
+            -\nu_i, & i=j
+        \end{cases}
+    \end{equation}
+    la entrada
     $(i,j)$ de la matriz de transición $Q$.
 
 \end{frame}
@@ -1474,7 +1483,7 @@ Si ya han pasado {\color{DodgerBlue1}$s$ [sec]}, ¿cuál es
         Del mismo modo, la relación
         entre tiempo medio de espera
         en cola $\mathbb{E}[W(t)]$ y
-        número medio de usuario en colas es
+        número medio de usuario en cola es
         \begin{equation}
             \mathbb{E}[Q(t)] =
             \mathbb{E}[W(t)]\cdot \lambda
