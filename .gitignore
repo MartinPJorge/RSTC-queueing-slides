@@ -71,5 +71,4 @@ tikzgen/*
 !tema-6/tema6.pdf
 
 # Ignorar soluciones
-tema-*/*solucion*
-tema-5/solucion-fake.tex
+*solucion*tex
