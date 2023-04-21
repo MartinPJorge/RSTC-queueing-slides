@@ -1,12 +1,30 @@
-\documentclass{assignment}
+\documentclass{upmassignment}
 \usepackage[spanish]{babel}
+\usepackage{ifthen}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+
+
+
+% Para mostrar/ocultar soluciones
+\newboolean{show}
+%\setboolean{show}{true}
+\setboolean{show}{false}
+\usepackage{environ}
+\NewEnviron{solucion}{
+  \ifshow
+      \begin{answer}\BODY\end{answer}
+  \fi}
+
+
+
 
 
 
 \coursetitle{Creating assignments}
 \courselabel{RSTC}
 \exercisesheet{Ejericio de Alumno}{Tema 5}
-\student{Mario Vega \& Jorge Martín Pérez}
+\student{\ }%
 \semester{Segundo Semestre}
 \date{\today}
 \university{Universidad Politécnica de Madrid}
@@ -23,24 +41,7 @@
 
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%% Put Solución rather than answer %%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\renewenvironment{answer}%
-{%
-\vspace{0.1 in}
-\begin{boldmath}
-\begin{emph}
-{%
-}
-}%
-{%
-\end{emph}
-\end{boldmath}
-\begin{flushright}
-\bfseries{$\longrightarrow \mathcal{S}$\sf{olución}}
-\end{flushright}
-}
+
 
 
 
@@ -52,45 +53,55 @@
 
 \begin{document}
 
-Se pretende diseñar un sistema para procesar el tráfico generado por los servicios telemáticos desplegados en un hospital de grandes dimensiones. Dicho hospital está dividido en 100 áreas, cada una de ellas con unas características determinadas desde el punto de vista del tráfico generado.
+Se pretende comprar un router de cola infinita
+para conmutar el tráfico generado por los servicios telemáticos desplegados en un hospital de grandes dimensiones.
+El router tarda un tiempo exponencial de tasa
+$\mu$ en conmutar paquetes.
+
+El hospital donde opera el router está dividido en 100 áreas, cada una de ellas con unas características determinadas desde el punto de vista del tráfico generado.
 
 En primer lugar, tenemos la sala UCI, donde los sistemas de monitorización de constantes vitales generan 7 [paquetes/ms]. La información generada desde la zona de oncología se puede modelar según una variable aleatoria uniformemente distribuida entre 0 y 4000 [paquetes/sec]. Por su parte, tanto la zona de hematología como pediatría oncológica generan paquetes de información según una variable aleatoria de distribución normal de media 5 [paquetes/ms] y desviación típica~1~[paquete/ms]. El tráfico desde las salas de Urgencias y de espera puede modelarse mediante distribuciones de poisson de parámetro $\lambda=4$ [paquetes/ms]. El resto de las áreas siguen una distribución uniforme de media 2 [paquetes/ms]. 
 
-Si se dispone de un
-supercomputador con una tasa de servicio de
-$\mu=300$~[paquetes/ms]:
+El router que se va a comprar tendría una
+carga $\rho=\tfrac{43}{60}$ si recibe todo
+el tráfico del hospital. Se pregunta:
 
 \begin{problemlist}
-    \pbitem Calcule el tiempo medio de estancia en el sistema, tiempo medio de espera en cola y probabilidad de pérdida de tráfico.
+    \pbitem ¿Cuál es la tasa de servicio $\mu$
+    del router que se va a comprar?
 
-    % Descomenta para poner tu solución
-    % \begin{answer}
-    %     La respuesta es
-    %     \begin{equation}
-    %         e=mc^2
-    %     \end{equation}
-    % \end{answer}
+    \begin{solucion}
+        \input{solucion-problema-1.tex}
+    \end{solucion}
+
+    \pbitem Calcule el tiempo que tarda
+    un paquete en atravesar el router comprado.
+    Calcule también tiempo medio de espera
+    en la cola del router
+    y probabilidad de que el router pierda
+    tráfico.
+
+
+    \begin{solucion}
+        \input{solucion-problema-2.tex}
+    \end{solucion}
 
     \pbitem Suponiendo que los retardos asociados a la cola de procesamiento/espera del servidor cuando alberga más de 100 peticiones suponen un colapso del sistema de información del hospital, ¿qué probabilidad de colapso ofrece el sistema implementado?
 
-    % Descomenta para poner tu solución
-    % \begin{answer}
-    %     La respuesta es
-    %     \begin{equation}
-    %         e=mc^2
-    %     \end{equation}
-    % \end{answer}
+    \begin{solucion}
+        \input{solucion-problema-3.tex}
+    \end{solucion}
 
 
-    \pbitem La salida de paquetes en la cola M/M/1 sigue un proceso de Poisson de tasa $\mu-\lambda$. Por tanto, el tiempo que pasa un paquete en el sistema es una v.a. exponencial de tasa $\mu-\lambda$. Con esta información, ¿qué capacidad de procesamiento $\mu$ deberíamos disponer en el servidor para que haya una probabilidad del 99.999\% de que un paquete se sirva en menos de 1 [ms]?
+    \pbitem La salida de paquetes en una cola
+    M/M/1 sigue un proceso de Poisson de tasa
+    $\mu-\lambda$. Por tanto, el tiempo que
+    pasa un paquete en el router es una v.a. exponencial de tasa $\mu-\lambda$. Con esta información, ¿qué capacidad de tasa de conmutación
+    $\mu$ debe tener el router para que haya una probabilidad del 99.999\% de que un paquete se sirva en menos de 1 [ms]?
 
-    % Descomenta para poner tu solución
-    % \begin{answer}
-    %     La respuesta es
-    %     \begin{equation}
-    %         e=mc^2
-    %     \end{equation}
-    % \end{answer}
+    \begin{solucion}
+        \input{solucion-problema-4.tex}
+    \end{solucion}
 \end{problemlist}
 
 \end{document}
