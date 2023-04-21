@@ -72,5 +72,3 @@ tikzgen/*
 
 # Ignorar soluciones
 *solucion*tex
-carpeta-ignorar/*
-*.sol
