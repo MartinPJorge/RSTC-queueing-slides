@@ -425,6 +425,30 @@
 
 
 
+\begin{frame}{\secname: \subsecname}
+    Otra manera de ver el momento de
+    segundo orden es sabiendo que
+    \begin{equation*}
+        \mathbb{E}[t_s^2]=\Var[t_s]+
+        \mathbb{E}^2[t_s]
+    \end{equation*}
+    \vfill
+    \textit{Ejemplo}:
+    \begin{itemize}
+        \item $t_s\sim Exp(\mu)\implies
+            \mathbb{E}[t_s^2]=\frac{1}{\mu^2}+
+            \frac{1}{\mu^2}$;
+        \item $t_s\sim U\left(0,\tfrac{2}{\mu}
+            \right)
+            \implies
+            \mathbb{E}[t_s^2]=\frac{1}{12}
+            \left(\frac{2}{\mu}-0\right)^2+
+            \frac{1}{\mu^2}
+            =\frac{4}{3\mu^2}$.
+    \end{itemize}
+    que coincide con las expresiones anteriores.
+\end{frame}
+
 
 \subsection{M/M/1 como caso peor}
 \begin{frame}{\secname: \subsecname}
