@@ -317,7 +317,7 @@
         \int_0^t
         R(\tau)\ d\tau\\
         =& \lim_{t\to\infty} \frac{1}{t}
-        \sum_{i=1}^{N(t)} \frac{t_i^2}{2}
+        \sum_{i=1}^{N(t)} \frac{t_{s,i}^2}{2}
     \end{align*}
 \end{frame}
 
@@ -330,17 +330,19 @@
     \begin{align*}
         \mathbb{E}[R(t)]
         =& \lim_{t\to\infty}\frac{1}{t}
-        \sum_{i=1}^{N(t)} \frac{t_i^2}{2}\\
+        \sum_{i=1}^{N(t)} \frac{t_{s,i}^2}{2}\\
         =& \frac{1}{2}
         \left( \lim_{t\to\infty} \frac{N(t)}{t}
         \right)
         \left( \lim_{t\to\infty} \frac{1}{N(t)}
-        \sum_{i=1}^{N(t)} t_i^2
+        \sum_{i=1}^{N(t)} t_{s,i}^2
         \right)\\
         =& \frac{1}{2} \cdot \lambda\cdot
         \mathbb{E}[t_s^2]
     \end{align*}
-    con $t_s$ la v.a. del tiempo de servicio.
+    con $t_{s,i}$ la realización
+    de la v.a. del tiempo de servicio
+    para el usuario $i$.
 \end{frame}
 
 
