@@ -1,0 +1,50 @@
+\begin{tikzpicture}
+    \draw (0,0) -- (7,0)
+        node[anchor=west] {$\ldots$};
+    \draw[->] (7.75,0) -- (9.5,0)
+        node[anchor=west] {$t$};
+    \draw[->] (0,0) -- (0,2.5)
+        node[anchor=south] {$R(t)$};
+
+    % yticks
+    \draw (-.1,1) node[anchor=east]
+        {1} -- (.1,1);
+    \draw (-.1,2) node[anchor=east]
+        {2} -- (.1,2);
+
+    % xticks
+    \foreach \i in {1,...,6} {
+        \draw (\i,-.1) node[anchor=north]
+            {\i} -- (\i,.1);
+    }
+    
+    % Areas residuales
+    \path [fill=Firebrick1!20,draw=black]
+        (3,0) -- (3,1) -- (4,0);
+    \path[fill=DodgerBlue1!20,draw=black]
+        (1,0) -- (1,2) -- (3,0);
+    \path[fill=Gold1!20,draw=black]
+        (4.5,0) -- (4.5,.5) -- (5,0);
+    \path[fill=SpringGreen4!20,draw=black]
+        (5,0) -- (5,1.5) -- (6.5,0);
+    \path[fill=Orchid1!20,draw=black]
+        (8,0) -- (8,.75) -- (8.75,0);
+    \node[align=center] at (2,.3) {$u_1$};
+    \node[align=center] at (3.3,.3) {$u_2$};
+    \node[align=center] at (4.7,.125)
+        {\tiny $u_3$};
+    \node[align=center] at (5.5,.3) {$u_4$};
+    \node[align=center] at (8.3,.2)
+        {$u_\infty$};
+
+
+    \node[circle,minimum size=3,inner sep=0,
+        fill=DodgerBlue1,draw=black] (timeU1)
+        at (1,2) {};
+    \node[anchor=west] at (timeU1.east)
+        {$t_1=2$};
+
+
+
+\end{tikzpicture}
+

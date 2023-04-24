@@ -262,10 +262,10 @@
 
 
 
-\subsection{Tiempo medio de servicio}
+\subsection{Tiempo medio de espera en cola}
 \begin{frame}{\secname: \subsecname}
     Podemos obtener el tiempo medio
-    de servicio $\mathbb{E}[T(t)]$ de
+    de espera en cola $\mathbb{E}[W(t)]$ de
     un M/G/1.
     \begin{figure}
         \input{../tema-5/figs/mm1.tex}
@@ -275,26 +275,184 @@
     \begin{enumerate}
         \item $\mathbb{E}[Q(t)]\tfrac{1}{\mu}$
             en cola ; y
-        \item el tiempo residual $R$ del que
+        \item la media del tiempo residual
+            $R$ del que
             se está sirviendo.
     \end{enumerate}
     \begin{align*}
         \mathbb{E}[W(t)]&=
         \mathbb{E}[Q(t)]\tfrac{1}{\mu}
-        + R\\
+        + \mathbb{E}[R(t)]\\
         &\implies \mathbb{E}[(W(t))]=
-        \frac{R}{1-\rho}
+        \frac{\mathbb{E}[R(t)]}{1-\rho}
     \end{align*}
 \end{frame}
 
 
+
+
 \begin{frame}{\secname: \subsecname}
     Interpretación gráfica de tiempo
-    residual $R$:
+    residual en cada instante $R(t)$:
     \begin{figure}
         \input{figs/residual-easy.tex}
     \end{figure}
 \end{frame}
+
+
+
+\begin{frame}{\secname: \subsecname}
+    \footnote{
+    Ilustración y demostración basadas
+    en~\cite[Figura 8.3]{amable}.}
+    La media del tiempo residual corresponde
+    con el promedio de áreas.
+    \begin{figure}
+        \input{figs/residual.tex}
+    \end{figure}
+    \begin{align*}
+        \mathbb{E}[R(t)]=&\lim_{t\to\infty}
+        \int_0^t
+        R(\tau)\ d\tau\\
+        =& \lim_{t\to\infty} \frac{1}{t}
+        \sum_{i=1}^{N(t)} \frac{t_i^2}{2}
+    \end{align*}
+\end{frame}
+
+
+
+
+\begin{frame}{\secname: \subsecname}
+    Multiplicando y dividiendo por
+    $N(t)$:
+    \begin{align*}
+        \mathbb{E}[R(t)]
+        =& \lim_{t\to\infty}\frac{1}{t}
+        \sum_{i=1}^{N(t)} \frac{t_i^2}{2}\\
+        =& \frac{1}{2}
+        \left( \lim_{t\to\infty} \frac{N(t)}{t}
+        \right)
+        \left( \lim_{t\to\infty} \frac{1}{N(t)}
+        \sum_{i=1}^{N(t)} t_i^2
+        \right)\\
+        =& \frac{1}{2} \cdot \lambda\cdot
+        \mathbb{E}[t_s^2]
+    \end{align*}
+    con $t_s$ la v.a. del tiempo de servicio.
+\end{frame}
+
+
+
+\begin{frame}{\secname: \subsecname}
+    \begin{lema}[Fórmula de Pollaczek-Khintchine]
+        El tiempo medio de espera en cola
+        de en un sistema M/G/1 es
+        \begin{equation}
+            \mathbb{E}[W(t)]=
+            \frac{\lambda\mathbb{E}[t_s^2]}{2(1-\rho)}
+        \end{equation}
+        con $t_s$ la v.a. del tiempo de
+        servicio que sigue una distribución
+        $G$.
+    \end{lema}
+    \textit{Demostración}:
+    \begin{equation*}
+        \mathbb{E}[W(t)]
+        =\frac{\mathbb{E}[R(t)]}{1-\rho}
+        =\frac{\tfrac{1}{2}\lambda\mathbb{E}[t_s^2]}{1-\rho}
+        =\frac{\lambda\mathbb{E}[t_s^2]}{2(1-\rho)}
+    \end{equation*}
+
+\end{frame}
+
+
+
+
+\subsection{Ejemplos distribuciones servicio}
+\begin{frame}{\secname: \subsecname}
+    \textit{Ejemplo}: supongamos un tiempo
+    de servicio $t_s\sim Exp(\mu)$.
+    \begin{align*}
+        \mathbb{E}[t_s^2]
+        =& \int_0^\infty
+        \tau^2 \mu e^{-\mu\tau}
+        \ d\tau\\
+        \underbrace{=}_{partes}&
+        \left[-\tau^2e^{-\mu\tau} \right]_{\tau=0}^\infty
+        -\int_0^\infty -e^{-\mu\tau}2\tau\ 
+        d\tau\\
+        =&\int_0^\infty
+        2\tau e^{-\mu\tau}\ d\tau\\
+        \underbrace{=}_{partes}&
+        \frac{2}{\mu^2}
+    \end{align*}
+    Usando Pollaczek-Khintchine tenemos
+    \begin{equation*}
+        \mathbb{E}[W(t)]=
+        \frac{\lambda\mathbb{E}[t_s^2]}{2(1-\rho)}
+        =\frac{\rho}{\mu(1-\rho)}
+    \end{equation*}
+    la expresión que vimos para M/M/1.
+\end{frame}
+
+
+
+
+
+
+\begin{frame}{\secname: \subsecname}
+    \textit{Ejemplo}: supongamos un tiempo
+    de servicio $t_s\sim U(0,\frac{2}{\mu})$.
+    \begin{align*}
+        \mathbb{E}[t_s^2]
+        =& \int_0^{\tfrac{2}{\mu}}
+        \tau^2 \frac{1}{2/\mu}
+        \ d\tau\\
+        =& \frac{\mu}{2}\left[
+            \frac{\tau^3}{3}
+        \right]_{\tau=0}^{\tfrac{2}{\mu}}\\
+        =& \frac{4}{3\mu^2}
+    \end{align*}
+    Usando Pollaczek-Khintchine tenemos
+    \begin{equation*}
+        \mathbb{E}[W(t)]=
+        \frac{\lambda\mathbb{E}[t_s^2]}{2(1-\rho)}
+        =\frac{2}{3}\frac{\rho}{\mu(1-\rho)}
+    \end{equation*}
+\end{frame}
+
+
+
+
+\subsection{M/M/1 como caso peor}
+\begin{frame}{\secname: \subsecname}
+    El tiempo medio de servicio
+    $\mathbb{E}[T(t)]$
+    es pesimista en un M/M/1.
+
+    \vfill
+
+
+    \begin{figure}
+        \input{figs/pesimistic.tex}
+    \end{figure}
+    \textit{Ejemplo (arriba)}: el tiempo medio
+    total es menor\footnote{
+        Tomamos $\mu=1$
+    [usuario/sec].} en una
+    uniforme.
+
+
+    % \begin{align*}
+    %     \mathbb{E}[W_U(t)]+\tfrac{1}{\mu}<&
+    %     \mathbb{E}[W_{Exp}(t)]+\tfrac{1}\mu\\
+    %     \frac{2}{3}\frac{\rho}{\mu(1-\rho)}<&
+    %     \frac{\rho}{\mu(1-\rho)}\\
+    %     \frac{2}{3}<&1
+    % \end{align*}
+    % vemos que es
+\end{frame}
+
 
 
 
@@ -321,6 +479,12 @@
 
 
 
+
+\begin{frame}[allowframebreaks]
+        \frametitle{Referencias}
+        \bibliographystyle{amsalpha}
+        \bibliography{refs.bib}
+\end{frame}
 
 
 \end{document}
