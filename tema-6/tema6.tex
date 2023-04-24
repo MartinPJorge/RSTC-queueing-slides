@@ -261,6 +261,60 @@
 
 
 
+\subsection{Tiempo medio de servicio}
+\begin{frame}{\secname: \subsecname}
+    Podemos obtener el tiempo medio
+    de servicio $\mathbb{E}[T(t)]$ de
+    un M/G/1.
+    \begin{figure}
+        \input{../tema-5/figs/mm1.tex}
+    \end{figure}
+    Veamos lo que espera un usuario
+    \emph{nuevo}:
+    \begin{enumerate}
+        \item $\mathbb{E}[Q(t)]\tfrac{1}{\mu}$
+            en cola ; y
+        \item el tiempo residual $R$ del que
+            se está sirviendo.
+    \end{enumerate}
+    \begin{align*}
+        \mathbb{E}[W(t)]&=
+        \mathbb{E}[Q(t)]\tfrac{1}{\mu}
+        + R\\
+        &\implies \mathbb{E}[(W(t))]=
+        \frac{R}{1-\rho}
+    \end{align*}
+\end{frame}
+
+
+\begin{frame}{\secname: \subsecname}
+    Interpretación gráfica de tiempo
+    residual $R$:
+    \begin{figure}
+        \input{figs/residual-easy.tex}
+    \end{figure}
+\end{frame}
+
+
+
+
+
+%   Sabiendo que:
+%   \begin{itemize}
+%       \item hay $Q(t)$ usuarios en
+%           cola; y
+%       \item tiempo medio de servicio
+%           $\mathbb{E}[t_s]=\tfrac{1}{\mu}$
+%   \end{itemize}
+
+%   Un usuario nuevo tarda en ser servido
+%   $Q(t)\cdot \tfrac{1}{\mu} + 
+
+
+
+
+
+
 
 \section{Redes de Jackson}
 
