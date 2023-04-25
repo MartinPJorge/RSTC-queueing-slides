@@ -29,6 +29,10 @@
 
 \LoadClass[10pt,a4paper]{article}
 
+\RequirePackage[x11names]{xcolor}
+\RequirePackage{tikz}
+\usetikzlibrary{calc}
+\RequirePackage{atbegshi}
 \RequirePackage{ifthen}
 \RequirePackage{graphics}
 \setlength{\textwidth}{6.0in}
@@ -119,9 +123,30 @@
 \end{flushright}
 }
 
+
+%%% DEFINE THE GREEN HEADER
+\newcommand{\pageframe}{%
+  \begin{tikzpicture}[remember picture, overlay]
+      % page frame
+      \fill [color=DarkSeaGreen4] (current page.north west)
+          rectangle
+          ($(current page.north east)
+          -(0,.5)$);
+  \end{tikzpicture}
+}
+
+%%% REPEAT GREEN HEADER ON EVERY PAGE
+\AtBeginShipout
+{
+    \pageframe
+}
+
+
+
 \let\ifshowanswers=\iffalse
 
 \AtBeginDocument{%
+\pageframe
 \begin{flushright}
 \hfill\resizebox{4em}{!}{%
 \includegraphics{figs/RSTC-grande.png}%
