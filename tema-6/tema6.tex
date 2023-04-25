@@ -503,7 +503,100 @@
 
 
 
-\section{Redes de Jackson}
+\section{Redes de Colas}
+\begin{frame}{\secname}
+    Podemos estudiar cómo modelar una red
+    de colas (e.g., routers).
+    \vfill
+    \begin{figure}
+        \input{figs/mm1-cyclic.tex}
+    \end{figure}
+    con $p_{2,3}$ la probabilidad de ir
+    de la cola 2 a la 3.
+\end{frame}
+
+
+\begin{frame}{\secname}
+    Las llegadas $\lambda_i$ a la cola
+    $i$ se averiguan usando probabilidades
+    $p_{i,j}$.
+
+    \vfill
+
+    \textit{Ejemplo}:
+    \begin{equation*}
+        {\color{HotPink4}\lambda_3} = p_{1,3}\lambda_{1,o}
+        + p_{2,3}\lambda_{2,o}
+    \end{equation*}
+    con $\lambda_{i,o}$ la tasa de salidas
+    de la cola $i$.
+    \begin{figure}
+        \resizebox{.7\textwidth}{!}{%
+            \input{figs/mm1-cyclic-arrival-highlight.tex}%
+        }
+    \end{figure}
+    
+\end{frame}
+
+
+\subsection{Distribución salida M/M/1}
+\begin{frame}{\secname: \subsecname}
+    \begin{lema}[Tiempo entre salidas]
+        En un sistema M/M/1 el tiempo entre
+        salidas y llegadas siguen la misma
+        distribución. Es decir,
+        se cumple:
+        \begin{align*}
+            t_e\sim&  Exp(\lambda)\\
+            t_l\sim&  Exp(\lambda)
+        \end{align*}
+    \end{lema}
+    \textit{Demostración}:
+    \begin{multline*}
+        F_{t_e}(\tau)=
+        \pi_0 \mathbb{P}(t_l+t_s\leq\tau)+
+        (1-\pi_0) \mathbb{P}(t_s\leq\tau)\\
+        =(1-\rho) \int_0^\tau
+        f_{t_l+t_s}(t)\ dt
+        + \rho e^{-\mu\tau}
+        = (1-\rho)\int_0^\tau
+        f_{t_l}\ast f_{t_s}(t)\ dt
+        + \rho e^{-\mu\tau}\\
+        = (1-\rho)\int_0^\tau \int_0^t
+        f_{t_l}(t-\theta) f_{t_s}(\theta)
+        \ d\theta \ dt
+        + \rho e^{-\mu\tau}\\
+        = (1-\rho)\int_0^\tau \int_0^t
+        e^{-\lambda(t-\theta)} e^{-\mu\theta}
+        \ d\theta \ dt
+        + \rho e^{-\mu\tau}
+        = \ldots
+        = 1-e^{-\lambda\tau}
+    \end{multline*}
+\end{frame}
+
+
+
+\begin{frame}{\secname: \subsecname}
+    \textit{Ejemplo (cont.)}: sabiendo
+    que $\lambda_{i,o}=\lambda_i$
+    en la red de colas de abajo tendríamos que
+    \begin{align*}
+        {\color{HotPink4}\lambda_3}=&
+        p_{1,3}\lambda_1+p_{2,3}\lambda_2\\
+        =&p_{1,3}\lambda_1+p_{2,3}
+        (1-p_{1,3})\lambda_1
+    \end{align*}
+
+    \begin{figure}
+        \resizebox{.7\textwidth}{!}{%
+            \input{figs/mm1-cyclic-arrival-highlight.tex}%
+        }
+    \end{figure}
+\end{frame}
+
+
+\subsection{Redes de Jackson}
 
 
 
@@ -513,6 +606,9 @@
         \bibliographystyle{amsalpha}
         \bibliography{refs.bib}
 \end{frame}
+
+
+
 
 
 \end{document}
