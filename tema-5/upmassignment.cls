@@ -136,11 +136,7 @@
 }
 
 %%% REPEAT GREEN HEADER ON EVERY PAGE
-\AtBeginShipout
-{
-    \pageframe
-}
-
+\AtBeginShipout{\AtBeginShipoutAddToBox{\pageframe}}
 
 
 \let\ifshowanswers=\iffalse
