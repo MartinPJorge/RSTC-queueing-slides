@@ -14,6 +14,11 @@
 \usepackage{caption}
 \usepackage{subcaption}
 
+% Check/cross mark
+\usepackage{pifont}% http://ctan.org/pkg/pifont
+\newcommand{\cmark}{\ding{51}}%
+\newcommand{\xmark}{\ding{55}}%
+
 
 % License
 \usepackage[
@@ -596,7 +601,129 @@
 \end{frame}
 
 
+
+\subsection{Vector de Probabilidades}
+\begin{frame}{\secname: \subsecname}
+    Quiero saber la probabilidad de tener
+    $\mathbf{K}=(3,1,4)$ usuarios en
+    equilibrio:
+    \begin{equation*}
+        \mathbb{P}(\mathbf{K})=
+        \left(\mathbb{P}(N_1=3),
+        \mathbb{P}(N_2=1),
+        \mathbb{P}(N_3=4)\right)
+    \end{equation*}
+    con $N_i$ el número de usuarios en la
+    cola $i$ al alcanzar equilibrio.
+
+    \vfill
+
+    \begin{figure}
+        \resizebox{.7\textwidth}{!}{%
+            \input{figs/mm1-cyclic-probs-vector}
+        }
+    \end{figure}
+\end{frame}
+
+
+
+
 \subsection{Redes de Jackson}
+\begin{frame}{\secname: \subsecname}
+    Para que exista $\mathbb{P}(\mathbf{K})$
+    necesitamos que sea una red de Jackson:
+
+    \vfill
+
+    \begin{definicion}[Red de Jackson]
+        Las colas interconectadas forman una
+        red de Jackson si:
+        \begin{enumerate}
+            \item la red es abierta, y las
+                llegadas en cola
+                siguen un proceso de Poisson;
+            \item los tiempos de servicio son
+                exponenciales y las colas
+                son FIFO;
+            \item un usuario pasa de la
+                cola $i$ a $j$ con probabilidad
+                $p_{i,j}$, o sale con
+                probabilidad
+                $1-\sum_{j}p_{i,j}$; y
+            \item la carga de las colas está
+                por debajo de 1, i.e.
+                $\rho_i<1,\ \forall i$
+        \end{enumerate}
+    \end{definicion}
+\end{frame}
+
+
+
+
+\begin{frame}{\secname: \subsecname}
+    \textit{Ejemplo}: ¿tenemos una red
+    de Jackson en esta diapositiva?
+
+    \begin{figure}
+        \resizebox{.7\textwidth}{!}{%
+            \input{figs/mm1-cyclic}
+        }
+    \end{figure}
+
+    Comprobemos las propiedades:
+    \begin{enumerate}
+        \item red abierta y
+            ¿llegadas de Poisson?
+
+            \begin{itemize}
+                \item \cmark
+                    cola $i=1$ con llegadas
+                    $Poiss(\lambda_1)$;
+                \item \textbf{?}
+                    cola $i=2$ recibe
+                    $(1-p_{1,3})$ de salidas
+                    de cola $i=1$; y
+                \item \textbf{?}
+                    cola $i=3$ recibe
+                    $p_{1,3}$ de salidas
+                    de cola $i=1$, y el
+                    $p_{2,3}$ de salidas de
+                    cola $i=2$;
+            \end{itemize}
+    \end{enumerate}
+\end{frame}
+
+
+
+
+\begin{frame}{\secname: \subsecname}
+    \begin{lema}[Descomposición proceso
+        de Poisson]
+        Si $\{N(t), t>0\}$ es un proceso
+        estocástico que sigue una distribución
+        $Poiss(\lambda)$,
+        y cada llegada se asigna a
+        \begin{itemize}
+            \item $N_1(t)$ con probabilidad $p$,
+                y
+            \item $N_2(t)$ con probabilidad
+                $1-p$;
+        \end{itemize}
+        entonces:
+        \begin{itemize}
+            \item $N_1(t)\sim Poiss(p\lambda)$
+            \item $N_2(t)\sim Poiss\left((1-p)\lambda\right)$
+        \end{itemize}
+    \end{lema}
+
+    \footnote{
+        Figura basada en
+        \cite[Figura 3.7]{amable}} 
+    \begin{figure}    
+        \input{figs/decomposition}
+    \end{figure}
+\end{frame}
+
 
 
 

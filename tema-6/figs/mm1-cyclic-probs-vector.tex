@@ -1,0 +1,81 @@
+\usetikzlibrary{calc}
+\begin{tikzpicture}
+
+
+% the rectangular shape with vertical lines
+\node[rectangle split, rectangle split parts=6,
+draw, rectangle split horizontal,
+rectangle split part fill={white,white,white,white,HotPink3!20,HotPink3!20},
+text height=1cm,text depth=0.5cm,inner ysep=0pt] (wa) {};
+\fill[white] ([xshift=-\pgflinewidth,yshift=-\pgflinewidth]wa.north west) rectangle ([xshift=-15pt,yshift=\pgflinewidth]wa.south);
+
+% the circle
+\node[draw,circle,minimum size=1.5cm,anchor=west,fill=HotPink3!20] (se) at (wa.east) {$\mu_1$};
+
+% the arrows and labels
+\draw[->] (se.east) -- +(20pt,0) node (seEnd) {};
+\draw[<-] (wa.west) -- +(-20pt,0) node[left] {$\lambda_1$};
+
+
+
+
+%%%%%%%%%%%%%%%%%%%
+%%% Second queue
+%%%%%%%%%%%%%%%%%%%
+
+% the rectangular shape with vertical lines
+\node[rectangle split, rectangle split parts=6,
+    draw, rectangle split horizontal,text height=1cm,text depth=0.5cm,inner ysep=0pt,anchor=west] (wa2) at (seEnd.east) {};
+\fill[white] ([xshift=-\pgflinewidth,yshift=-\pgflinewidth]wa2.north west) rectangle ([xshift=-15pt,yshift=\pgflinewidth]wa2.south);
+
+% the circle
+\node[draw,circle,minimum size=1.5cm,anchor=west,fill=HotPink3!20] (se2) at (wa2.east) {$\mu_2$};
+
+% the arrows and labels
+\draw[->] (se2.east) -- +(40pt,0) node (seEnd2) {};
+
+
+
+%%%%%%%%%%%%%%%%%%%
+%%% Third queue
+%%%%%%%%%%%%%%%%%%%
+
+% the rectangular shape with vertical lines
+\node[rectangle split, rectangle split parts=6,
+    draw, rectangle split horizontal,
+    rectangle split part fill={HotPink3!20,
+    HotPink3!20,HotPink3!20,white},
+    text height=1cm,text depth=0.5cm,inner ysep=0pt,anchor=west] (wa3) at ($(wa2.south)-(2.5,1.5)$) {};
+\fill[white]
+    ([xshift=+\pgflinewidth,yshift=-\pgflinewidth]wa3.north east)
+    rectangle ([xshift=-1pt,yshift=\pgflinewidth]wa3.south);
+% the circle
+\node[draw,circle,minimum size=1.5cm,anchor=east,fill=HotPink3!20] (se3) at (wa3.west) {$\mu_3$};
+
+
+
+%%%%%%%%%%%%%%%%%
+%%% DRAW JOINS
+%%%%%%%%%%%%%%%%%
+\node[circle,inner sep=0pt,minimum size=3pt,draw=black,fill=black] (joinOut) at ($(se2.east)+(10pt,0)$) {};
+\node[circle,inner sep=0pt,minimum size=3pt,draw=black,fill=black] (joinIn) at ($(wa.west)-(10pt,0)$) {};
+\node[circle,inner sep=0pt,minimum size=3pt,draw=black,fill=black] (joinMid) at ($(wa2.west)-(15pt,0)$) {};
+\node[circle,inner sep=0pt,minimum size=3pt,draw=black,fill=black] (joinMidDown) at ($(wa3.east)+(20pt,0)$) {};
+
+
+% the exit
+\draw[->] (joinOut) |- node[pos=0.3,anchor=west]
+    {$p_{2,3}$} (wa3.east);
+
+% the midfeedback
+\draw[->] (joinMid) --
+    ($(joinMid) - (0,1.1)$) -|
+    node[pos=0.8,anchor=west] {$p_{1,3}$}
+    (joinMidDown.north);
+
+% the out feedback
+\draw[->] (se3.west) -| (joinIn.south);
+
+
+
+\end{tikzpicture}
