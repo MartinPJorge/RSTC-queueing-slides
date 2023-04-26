@@ -726,7 +726,21 @@
 
 
 \begin{frame}{\secname: \subsecname}
-    \textit{Demostración}: TBD
+    \textit{Demostración}~\cite{amable}:
+    \begin{multline*}
+        \mathbb{P}(N_1(t)=n,N_2(t)=m)\\
+        =\mathbb{P}(N_1(t)=n,N_2(t)=m|\ N(t)=n+m)\cdot \mathbb{P}(N(t)=n+m)\\
+        =\mathbb{P}(N_1(t)=n|\ N(t)=n+m)\cdot \mathbb{P}(N(t)=n+m)\\
+        ={n+m\choose n}p^n(1-p)^m\cdot 
+        \frac{(\lambda t)^{n+m}e^{-\lambda t}}{(n+m)!}\\
+        =\frac{(n+m)!}{n!\ m!}p^n(1-p)^m\cdot 
+        \frac{(\lambda t)^{n+m}e^{-\lambda t}}{(n+m)!}\\
+        =\frac{(p\lambda\cdot t)^n e^{-p\lambda\cdot t}}{n!}
+        \frac{[(1-p)\lambda\cdot t]^m e^{-(1-p)\lambda\cdot t}}{m!}\\
+        = \mathbb{P}(N_1(t)=n)\cdot \mathbb{P}(N_2(t)=m)
+    \end{multline*}
+    con $N_1(t)\sim Poiss(p\lambda)$
+    y $N_2(t)\sim Poiss((1-p)\lambda)$
 \end{frame}
 
 
@@ -834,21 +848,86 @@
 
 
 \begin{frame}{\secname: \subsecname}
-    \textit{Ejemplo (cont.)}: TBD con números
+    \textit{Ejemplo (cont.)}: miremos qué
+    carga tiene cada cola.
+
+    \begin{itemize}
+        \item carga cola $i=1$:
+            $\rho_1=\tfrac{\lambda_1}{\mu_1}$;
+        \item carga cola $i=2$:
+            $\rho_2=\tfrac{(1-p_{1,3})\lambda_1}{\mu_2}=(1-p_{1,3})\rho_1$; y
+        \item carga cola $i=3$:
+            $\rho_3=\tfrac{p_{1,3}\lambda_1
+            +p_{2,3}(1-p_{1,3})\lambda_1}{\mu_3}=[p_{1,3}+p_{2,3}(1-p_{1,3})]\rho_1$.
+    \end{itemize}
+
+
+    \begin{figure}
+        \resizebox{.7\textwidth}{!}{%
+            \input{figs/mm1-cyclic-probs-vector}
+        }
+    \end{figure}
 \end{frame}
+
+
+
+\begin{frame}{\secname: \subsecname}
+    \textit{Ejemplo (cont. II)}: tomando
+    $p_{i,j}=\tfrac{1}{2},\ \forall (i,j)$ 
+    tenemos $\rho_2=\tfrac{\rho_1}{2},
+    \rho_3=\tfrac{3\rho_1}{4}$.
+    Por tanto la probabilidad del estado
+    $\mathbf{K}=(3,1,4)$ en la red de Jackson
+    es
+
+    \begin{align*}
+        \mathbb{P}(\mathbf{K})&=
+        (1-\rho_1)\rho_1^3\cdot
+        (1-\rho_2)\rho_2^1 \cdot
+        (1-\rho_3)\rho_3^4\\
+        &= (1-\rho_1)\rho_1^3\cdot
+        \left(1-\frac{\rho_1}{2}\right)\frac{\rho_1}{2}\cdot
+        \left(1-\frac{3\rho_1}{4}\right)\left(
+        \frac{3\rho_1}{4}\right)^4
+    \end{align*}
+
+
+
+    \begin{figure}
+        \resizebox{.7\textwidth}{!}{%
+            \input{figs/mm1-cyclic-probs-vector}
+        }
+    \end{figure}
+\end{frame}
+
+
+
+
+\begin{frame}{\secname: \subsecname}
+    \textit{Ejemplo (cont. III)}: en situación
+    de equilibrio,
+    probabilidad de estar en el estado
+    $\mathbf{K}=(3,1,4)$ depende solo de
+    $\rho_1$
+    \begin{figure}
+        \input{figs/prob-jackson-state}
+    \end{figure}
+\end{frame}
+
 
 
 
 \subsection{Tiempo Medio de tránsito}
 \begin{frame}{\secname: \subsecname}
     Los usuarios pueden seguir varias rutas
-    (paths) $\mathcal{P}_i$, cada una
+    (paths) $\{\mathcal{P}_1,\mathcal{P}_2,
+    \ldots\}$, cada una
     de ellas con una probabilidad
     $\mathbb{P}\left( \mathcal{P}_i \right)$.
+    \vfill
     \begin{figure}
         \input{figs/mm1-cyclic-paths}
     \end{figure}
-    TBD: dibujar las otras rutas.
 \end{frame}
 
 
@@ -869,9 +948,27 @@
 
 
 \begin{frame}{\secname: \subsecname}
-    \textit{Ejemplo}: TBD, calcular tiempo
-    de tránsito por ruta compleja y
-    su probabilidad
+    \textit{Ejemplo}: el tiempo medio de
+    tránsito en la ruta $\mathcal{P}_1$ es
+
+    \begin{equation}
+        \mathbb{E}_{\mathcal{P}_1}[T(t)]=
+        \frac{1}{\mu_1-\lambda_1}+
+        \frac{1}{\mu_2-(1-p_{1,3}\lambda_1)}
+    \end{equation}
+
+    La probabilidad de pasar por la ruta
+    $\mathcal{P}_1$ es
+    \begin{equation}
+        \mathbb{P}(\mathcal{P}_1)=
+        (1-p_{1,3})(1-p_{2,3})
+    \end{equation}
+
+    \begin{figure}
+        \resizebox{.7\textwidth}{!}{%
+            \input{figs/mm1-cyclic-path-top}%
+        }
+    \end{figure}
 \end{frame}
 
 
