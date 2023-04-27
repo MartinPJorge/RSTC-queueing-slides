@@ -1,0 +1,103 @@
+\documentclass{upmassignment}
+\usepackage[spanish]{babel}
+\usepackage{ifthen}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+
+
+
+% Para mostrar/ocultar soluciones
+\newboolean{show}
+\setboolean{show}{true}
+%\setboolean{show}{false}
+\usepackage{environ}
+\NewEnviron{solucion}{
+  \ifshow
+      \begin{answer}\BODY\end{answer}
+  \fi}
+
+
+
+
+
+
+\coursetitle{Creating assignments}
+\courselabel{RSTC}
+\exercisesheet{Ejercicio de Profesor 2}{Tema 5}
+\student{\ }%
+\semester{Segundo Semestre}
+\date{\today}
+\university{Universidad Politécnica de Madrid}
+\school{Departamento de Ingeniería de Sistemas Telemáticos}
+%\usepackage[pdftex]{graphicx}
+%\usepackage{subfigure}
+
+
+\setlength{\textwidth}{5.0in}
+\linespread{1.3}
+\renewcommand{\PB}{{\bfseries Problema}}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{document}
+
+
+\begin{problemlist}
+    \pbitem 
+        Sea un proceso de Poisson de tasa $\lambda=2$,
+calcule el tiempo $t$ que debe transcurrir
+para que haya más de un 95\% de probabilidad
+de que sucedan 4 o más eventos.
+
+    \begin{solucion}
+        \begin{align*}
+            \mathbb{P}(N(t)\geq4)\geq&0.95\\
+            1-\sum_{k=0}^3 \mathbb{P}(N(t)=k)
+            \geq&0.95\\
+            0.05-\underbrace{e^{-2t}\left(1+2t+2t^2+
+            \frac{8}{3!}t^3\right)}_{f(t)}\geq&0
+        \end{align*}
+
+        La función $f(t)$ es precisamente
+        la función gamma regularizada
+        $Q(4,2t)$. Con
+        \begin{equation*}
+            Q(s,x)=\frac{\Gamma(s,x)}{\Gamma(x)}
+        \end{equation*}
+        y
+        \begin{align*}
+            \Gamma(n,x)=&(n-1)!e^{-x}
+            \sum_{k=0}^{n-1}\frac{x^k}{k!}\\
+            \Gamma(n) =& (n-1)!
+        \end{align*}
+        con $n\in\mathbb{N}$.
+
+        Fíjese que tomando $Q(4,2t)$ obtenemos:
+        \begin{multline*}
+            Q(4,2t)=\frac{\Gamma(4,2t)}{\Gamma(4)}
+            = \frac{3!e^{-2t}\sum_{k=0}^{n-1}\frac{(2t)^k}{k!}}{3!}
+            = f(t)
+        \end{multline*}
+
+        Por tanto, basta con escoger
+        $t\geq \tfrac{1}{2}Q^{-1}(4,\tfrac{1}{20})$.
+    \end{solucion}
+
+\end{problemlist}
+
+
+\end{document}
+
+
