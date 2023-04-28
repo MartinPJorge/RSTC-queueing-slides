@@ -1,0 +1,96 @@
+\documentclass{upmassignment}
+\usepackage[spanish]{babel}
+\usepackage{ifthen}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+
+
+
+% Para mostrar/ocultar soluciones
+\newboolean{show}
+\setboolean{show}{true}
+%\setboolean{show}{false}
+\usepackage{environ}
+\NewEnviron{solucion}{
+  \ifshow
+      \begin{answer}\BODY\end{answer}
+  \fi}
+
+
+
+
+
+
+\coursetitle{Creating assignments}
+\courselabel{RSTC}
+\exercisesheet{Probabilidad puntual}{Repaso probabilidad}
+\student{\ }%
+\semester{Segundo Semestre}
+\date{\today}
+\university{Universidad Politécnica de Madrid}
+\school{Departamento de Ingeniería de Sistemas Telemáticos}
+%\usepackage[pdftex]{graphicx}
+%\usepackage{subfigure}
+
+
+\setlength{\textwidth}{5.0in}
+\linespread{1.3}
+\renewcommand{\PB}{{\bfseries Problema}}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{document}
+
+
+\begin{problemlist}
+    \pbitem 
+        Sea $t$ una v.a. que sigue una
+        distribución $Exp(\lambda)$, vamos
+        a estudiar la probabilidad de que
+        la v.a. tome el valor $\tau$,
+        es decir, $\mathbb{P}(t=\tau)$:
+
+    \begin{solucion}
+        Sabemos que
+        \begin{align*}
+            \mathbb{P}(t=\tau)=&
+            \lim_{\varepsilon\to0}
+            \mathbb{P}(t\in[\tau,
+            \tau+\varepsilon])\\
+            =& \lim_{\varepsilon\to0}
+            \int_{\tau}^{\tau+\varepsilon}
+            dF_t(\theta)\\
+            \underbrace{=}_{F_t(\theta)=
+            1-e^{-\lambda\theta}}&
+            \lim_{\varepsilon\to0}
+            \int_{\tau}^{\tau+\varepsilon}
+            \lambda e^{-\lambda\theta}
+            \ d\theta\\
+            =& \lim_{\varepsilon\to0}
+            -e^{-\lambda(\tau+\varepsilon)}
+            +e^{-\lambda\tau}=0
+        \end{align*}
+
+        De esta formulación debemos sacar
+        la conclusión de que la probabilidad
+        puntual de una v.a. contínua es 0.
+    \end{solucion}
+
+\end{problemlist}
+
+
+\end{document}
+
+
