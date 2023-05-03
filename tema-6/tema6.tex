@@ -258,7 +258,7 @@
         \mathbb{P}(t_s>\tau)\\
         =
         \left(1 - \frac{\tau}{\mu} \right)
-        e^{-\mu\tau} \neq e^{-\nu_i \tau}
+        e^{-\lambda\tau} \neq e^{-\nu_i \tau}
     \end{multline}
     con $t_s\sim G(\mu)=U\left(\tfrac{1}{2\mu},
     \tfrac{2}{3\mu}\right),\
@@ -319,7 +319,7 @@
     \end{figure}
     \begin{align*}
         \mathbb{E}[R(t)]=&\lim_{t\to\infty}
-        \int_0^t
+        \frac{1}{t}\int_0^t
         R(\tau)\ d\tau\\
         =& \lim_{t\to\infty} \frac{1}{t}
         \sum_{i=1}^{N(t)} \frac{t_{s,i}^2}{2}
@@ -765,7 +765,7 @@
                     $Poiss(\lambda_1)$;
                 \item \cmark
                     cola $i=2$ con llegadas
-                    $Poiss\left((1-p_{1,3})\lambda\right)$;
+                    $Poiss\left((1-p_{1,3})\lambda_1\right)$;
                 \item \cmark
                     cola $i=3$ con llegadas
                     $Poiss\left(p_{1,3}\lambda_1+p_{2,3}\lambda_2\right)$;

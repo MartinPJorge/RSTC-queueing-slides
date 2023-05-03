@@ -1,0 +1,230 @@
+\documentclass[xcolor={x11names}]{beamer}
+\usetheme{Madrid}
+
+\usepackage{amssymb}
+\usepackage{ulem}
+\usepackage[utf8]{inputenc}
+\usepackage{mathtools}
+\usepackage{multicol}
+%\usepackage[x11names]{xcolor}
+\usefonttheme{professionalfonts}
+
+
+% Subfigures
+\usepackage{caption}
+\usepackage{subcaption}
+
+% Check/cross mark
+\usepackage{pifont}% http://ctan.org/pkg/pifont
+\newcommand{\cmark}{\ding{51}}%
+\newcommand{\xmark}{\ding{55}}%
+
+
+% License
+\usepackage[
+    type={CC},
+    modifier={by-nc-sa},
+    version={4.0},
+    imagewidth=4pt
+]{doclicense}
+
+
+
+
+% Change base colour beamer@blendedblue (originally RGB: 0.2,0.2,0.7)
+\colorlet{beamer@blendedblue}{DarkSeaGreen4}
+
+
+
+
+
+
+
+%% MATH commands
+\DeclareMathOperator{\Var}{Var}
+
+
+%% THEOREMS
+%\newtheorem{theorem}{Theorem}
+\newtheorem{thm}{Teorema}[section] % the main one
+% Definición
+%\theoremstyle{definition}
+\newtheorem{definicion}{Definición}[section]
+\newtheorem{lema}{Lema}[section]
+
+
+
+%% PFGplots %%
+\usepackage{pgfplots}
+
+%% Exponential distribution
+\pgfmathdeclarefunction{exponential}{1}{%
+  \pgfmathparse{(#1)*exp(-#1*x)}%
+}
+\pgfmathdeclarefunction{exponentialcdf}{1}{%
+  \pgfmathparse{1-exp(-#1*x)}%
+}
+
+%% Poisson distribution
+\pgfmathdeclarefunction{poiss}{1}{%
+  \pgfmathparse{(#1^x)*exp(-#1)/(x!)}%
+}
+
+%% Normal distribution (#1=mu, #2=sigma)
+% John D. Cook approx. https://tex.stackexchange.com/a/124629
+\pgfmathdeclarefunction{normalcdf}{2}{%
+  \pgfmathparse{1/(1 + exp(-0.07056*((x-#1)/#2)^3 - 1.5976*(x-#1)/#2))}%
+}
+
+
+
+
+\newcommand{\red}[1]{{\color{red}#1}}
+\newcommand{\blue}[1]{{\color{blue}#1}}
+
+%%%%%%%%%%
+%% TIKZ %%
+%%%%%%%%%%
+\usepackage{tikz}
+\usepackage{animate}
+\usetikzlibrary{positioning}
+\usetikzlibrary{shapes,arrows, positioning, calc}
+\usetikzlibrary{overlay-beamer-styles}
+\usetikzlibrary{chains,shapes.multipart}
+\usetikzlibrary{scopes}
+\usetikzlibrary{automata}
+\usetikzlibrary{positioning}  %                 ...positioning nodes
+\usetikzlibrary{arrows}       %                 ...customizing arrows
+\usetikzlibrary{intersections}
+
+
+%%%%%%%%%
+%% PGF %%
+%%%%%%%%%
+\usepgfplotslibrary{fillbetween}
+
+
+%%% Insert section name before the section %%%
+\AtBeginSection[]{
+  \begin{frame}
+  \vfill
+  \centering
+  \begin{beamercolorbox}[sep=8pt,center,shadow=true,rounded=true]{title}
+    \usebeamerfont{title}\insertsectionhead\par%
+  \end{beamercolorbox}
+  \vfill
+  \end{frame}
+}
+
+
+
+\title[Tema 6]{Tema 6: Teletráfico en redes de telecomunicaciones}
+%% \subtitle{Redes y Servicios de Telecomunicaciones (RSTC)\\
+%% Grado en Ingeniería de Tecnologías y Servicios de Telecomunicación}
+%\author{M. Saiful Bari\inst{1} \and Mr X\inst{2}}
+
+\titlegraphic{%
+\includegraphics[height=2.5cm]{../tema-5/figs/RSTC-grande.png}\\%
+\doclicenseIcon {\tiny \hspace{1em}\doclicenseText}\\%
+\href{https://github.com/MartinPJorge/RSTC-queueing-slides}{\includegraphics[height=1cm]{../tema-5/figs/github-logo.png}}%
+}
+
+
+\author{\textcolor{white}{RSTC curso 2022-2023}}
+%\author{Jorge Martín Pérez\inst{1}}
+%\institute{
+%    \inst{1}
+%    Departamento de Ingeniería Telemática, Universidad Politécnica de Madrid
+%}
+
+\date{\today}
+
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%
+%%% SLIDES START %%%
+%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+
+
+%%% TITLE %%%
+\frame{\titlepage}
+
+
+\begin{frame}{Contenido}
+    \tableofcontents
+\end{frame}
+
+
+\section{Sistema M/M/N}
+\begin{frame}{\secname}
+    Un sistema de cola única
+    con $t_l\sim Exp(\lambda)$
+    y N servidores en paralelo
+    con $t_s\sim Exp(\mu)$.
+    \begin{figure}
+        \input{figs/mmn.tex}
+    \end{figure}
+\end{frame}
+
+
+\subsection{Cadena de Markov}
+\begin{frame}{\secname: \subsecname}
+    Un sistema M/M/N es un proceso
+    estocástico Markoviano\footnote{
+    El tiempo de estancia es
+    exponencial no homogéneo.}.
+    \begin{figure}
+        \resizebox{!}{.2\textwidth}{%
+            \input{figs/cadena-mmn.tex}
+        }
+    \end{figure}
+    Sus tasas de transición no son
+    homogéneas $q_{i,j}=i\mu,\ i\leq N$.
+    \begin{figure}
+        \resizebox{!}{.2\textwidth}{%
+            \input{figs/mmn-highlight.tex}
+        }
+    \end{figure}
+\end{frame}
+
+
+
+\subsection{Ecuaciones de equilibrio}
+\begin{frame}{\secname: \subsecname}
+    \begin{figure}
+        \resizebox{!}{.2\textwidth}{%
+            \input{figs/cadena-mmn.tex}
+        }
+    \end{figure}
+    Con $i<N$ tenemos
+    \begin{equation*}
+        \lambda\pi_{i-1}
+        +(i+1)\mu\pi_{i+1}
+        = \pi_i(\lambda+i\mu)
+    \end{equation*}
+    pero con $i\geq N$ tenemos
+    \begin{equation*}
+        \lambda\pi_{i-1}
+        +N\mu\pi_{i+1}
+        = \pi_i(\lambda+N\mu)
+    \end{equation*}
+\end{frame}
+
+
+
+\begin{frame}[allowframebreaks]
+        \frametitle{Referencias}
+        \bibliographystyle{amsalpha}
+        \bibliography{refs.bib}
+\end{frame}
+
+
+
+
+
+\end{document}

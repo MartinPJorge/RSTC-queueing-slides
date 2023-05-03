@@ -1,0 +1,42 @@
+\begin{tikzpicture}
+   
+% Estados
+\node[state,minimum size=4em] (1) {$0$};
+\node[state,minimum size=4em] (2) [right=of 1] {$1$};
+\node[state,minimum size=4em,fill=HotPink3!20] (3) [right=of 2] {$2$};
+\node[state,minimum size=4em] (4) [right=of 3] {$3$};
+\node[minimum size=3em] (5) [right=of 4] {$\cdots$};
+\node[state,minimum size=4em] (N) [right=of 5] {$N$};
+\node[state,minimum size=4em] (N1) [right=of N] {$N+1$};
+\node[minimum size=3em] (N2) [right=of N1] {$\cdots$};
+
+
+% Transiciones
+\draw [->,thick] (1.north east) to [bend left=55]  node[above] {$\lambda$}  (2.north west);
+\draw [->,thick] (2.south west) to [bend left=55]  node[below] {$\mu$}  (1.south east);
+
+\draw [->,thick] (2.north east) to [bend left=55]  node[above] {$\lambda$}  (3.north west);
+\draw [->,thick] (3.south west) to [bend left=55]  node[below] {$2\mu$}  (2.south east);
+
+\draw [->,thick] (3.north east) to [bend left=55]  node[above] {$\lambda$}  (4.north west);
+\draw [->,thick] (4.south west) to [bend left=55]  node[below] {$3\mu$}  (3.south east);
+
+\draw [->,thick] (4.north east) to [bend left=55]  node[above] {$\lambda$}  (5.north west);
+\draw [->,thick] (5.south west) to [bend left=55]  node[below] {$4\mu$}  (4.south east);
+
+
+\draw [->,thick] (5.north east) to [bend left=55]  node[above] {$\lambda$}  (N.north west);
+\draw [->,thick] (N.south west) to [bend left=55]  node[below] {$N\mu$}  (5.south east);
+
+
+\draw [->,thick] (N.north east) to [bend left=55]  node[above] {$\lambda$}  (N1.north west);
+\draw [->,thick] (N1.south west) to [bend left=55]  node[below] {$N\mu$}  (N.south east);
+
+
+\draw [->,thick] (N1.north east) to [bend left=55]  node[above] {$\lambda$}  (N2.north west);
+\draw [->,thick] (N2.south west) to [bend left=55]  node[below] {$N\mu$}  (N1.south east);
+
+\draw[dashed] (N.north) -- ($(0,1.5)+(N.north)$);
+\draw[dashed] (N.south) -- ($(0,-1.5)+(N.south)$);
+    
+\end{tikzpicture}

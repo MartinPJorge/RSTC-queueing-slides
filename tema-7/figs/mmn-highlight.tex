@@ -1,0 +1,39 @@
+\usetikzlibrary{calc}
+\begin{tikzpicture}
+
+
+% the rectangular shape with vertical lines
+\node[rectangle split, rectangle split parts=6,
+draw, rectangle split horizontal,text height=1cm,text depth=0.5cm,inner ysep=0pt] (wa) {};
+\fill[white] ([xshift=-\pgflinewidth,yshift=-\pgflinewidth]wa.north west) rectangle ([xshift=-15pt,yshift=\pgflinewidth]wa.south);
+
+% the circle
+\node[draw,circle,minimum size=1.5cm,anchor=west,
+      fill=HotPink3!20] (se) at
+    ($(wa.east)+(1,2)$) {$\mu$};
+\node[draw,circle,minimum size=1.5cm,anchor=west,
+      fill=HotPink3!20] (se2) at
+    ($(wa.east)+(1,.3)$) {$\mu$};
+\node (dots) at ($(wa.east)+(1.7,-1)$) {$\vdots$};
+\node[draw,circle,minimum size=1.5cm,anchor=west] (seN) at
+    ($(wa.east)+(1,-2.3)$) {$\mu$};
+
+% server labels
+\node[anchor=west] at (se.east) {Servidor 1};
+\node[anchor=west] at (se2.east) {Servidor 2};
+\node[anchor=west] at (seN.east) {Servidor N};
+
+% the arrows and labels
+\draw[<-] (wa.west) -- +(-20pt,0) node[left] {$\lambda$};
+
+\draw[->] (wa.east) -- (se.west);
+\draw[->] (wa.east) -- (se2.west);
+\draw[->] (wa.east) -- (seN.west);
+
+
+
+
+
+
+
+\end{tikzpicture}
