@@ -79,6 +79,8 @@
 
 
 
+
+
 \newcommand{\red}[1]{{\color{red}#1}}
 \newcommand{\blue}[1]{{\color{blue}#1}}
 
@@ -214,6 +216,342 @@
         = \pi_i(\lambda+N\mu)
     \end{equation*}
 \end{frame}
+
+
+
+
+\begin{frame}{\secname: \subsecname}
+    \begin{lema}[Ecuaciones equilibrio M/M/N]
+        En régimen estacionario de un sistema
+        M/M/N, la probabilidad de estar en el
+        estado $i$ es:
+        \begin{equation}
+            \pi_i=\begin{cases}
+                \frac{I^i}{i!}\pi_0, \quad&
+                i\leq N\\
+                \rho^i \frac{N^N}{N!}\pi_0,
+                \quad& i\geq N
+            \end{cases}
+        \end{equation}
+        con $I=\tfrac{\lambda}{\mu}$,
+        $\rho=\tfrac{\lambda}{N\mu}$; y
+        \begin{equation}
+            \pi_0=\left(
+                \left(\sum_{i=0}^{N-1}
+                \frac{I^i}{i!}
+                \right)
+                + \frac{I^N}{N!}\frac{1}{1-\rho}
+            \right)^{-1}
+        \end{equation}
+    \end{lema}
+\end{frame}
+
+
+
+\begin{frame}{\secname: \subsecname}
+    \textit{Demostración}:
+    \begin{itemize}
+        \item para $i\leq N$ se tiene:
+        \begin{figure}
+            \resizebox{!}{.1\textwidth}{%
+                \input{figs/cadena-mmn-left.tex}
+            }
+        \end{figure}
+        sabiendo que $\pi_0\lambda=\pi_1\mu$
+        se tiene $\pi_1=I\pi_0$.
+        Por tanto tenemos que
+        \begin{align*}
+            \lambda\pi_0+2\mu\pi_2=
+            \pi_1(\lambda+\mu)
+            \Longleftrightarrow&
+            \pi_2=\frac{I^2}{2}\pi_0\\
+            %
+            \lambda\pi_1+3\mu\pi_3=
+            \pi_2(\lambda+2\mu)
+            \Longleftrightarrow&
+            \pi_3=\frac{I^3}{3!}\pi_0\\
+            \ldots\\
+            \lambda\pi_{i-1}+(i+1)\mu\pi_{i+1}=
+            \pi_i(\lambda+i\mu)
+            \Longleftrightarrow&
+            \pi_i=\frac{I^i}{i!}\pi_0\\
+        \end{align*}
+        y deducimos $\pi_i=\tfrac{I}{i}\pi_{i-1}$.
+    \end{itemize}
+\end{frame}
+
+
+
+
+\begin{frame}{\secname: \subsecname}
+    \textit{Demostración}:
+    \begin{itemize}
+        \item para $i\geq N$ se tiene:
+        \begin{figure}
+            \resizebox{!}{.2\textwidth}{%
+                \input{figs/cadena-mmn-right.tex}
+            }
+        \end{figure}
+        \begin{align*}
+            \pi_{N-1}(\lambda+(N-1)\mu)
+            =&\pi_N N\mu + \pi_{N-2}\lambda\\
+            \pi_{N}
+            =& \frac{1}{N\mu}
+            \left(
+                \pi_{N-1}\lambda
+                + \pi_{N-1}\mu(N-1)
+                - \pi_{N-2}\lambda
+            \right)\\
+        \end{align*}
+        sustituyendo $\pi_{N-1}=\tfrac{I}{N-1}
+        \pi_{N-2}$, sacamos la recursión
+        \begin{equation*}
+            \pi_i=\frac{\lambda}{N\mu}\pi_{i-1},
+            \quad i\geq N
+        \end{equation*}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{\secname: \subsecname}
+    \textit{Demostración}:
+    \begin{itemize}
+        \item para $i\geq N$ se tiene:
+        \begin{equation*}
+            \pi_i=\frac{\lambda}{N\mu}\pi_{i-1},
+            \quad i\geq N
+        \end{equation*}
+        y si usamos $\pi_i=\tfrac{I^i}{i!}\pi_0$
+        con $i\leq N$ obtenemos:
+        \begin{align*}
+            \pi_{i}=&\frac{I}{N}\pi_{i-1}
+            =\frac{I^2}{N^2}\pi_{i-2}=
+            \cdots
+            = \left(
+                \frac{I}{N}
+            \right)^{i-N}
+            \pi_N
+            = \left(
+                \frac{I}{N}
+            \right)^{i-N}
+            \frac{I^N}{N!}\pi_0\\
+            =& \rho^i \frac{N^N}{N!}\pi_0
+        \end{align*}
+    \end{itemize}
+\end{frame}
+
+
+
+
+\begin{frame}{\secname: \subsecname}
+    \textit{Demostración}:
+    \begin{itemize}
+        \item para $i=0$ se tiene:
+            \begin{align*}
+                1=&\sum_{i=0}^{N-1}\pi_i
+                 + \sum_{i=N}^\infty \pi_i\\
+                 =& \sum_{i=0}^{N-1}
+                 \frac{I^i}{i!}\pi_0
+                 + \sum_{i=N}^\infty
+                 \rho^i \frac{N^N}{N!}\pi_0\\
+                 =& \pi_0\sum_{i=0}^{N-1}
+                 \frac{I^i}{i!}
+                 + \pi_0 \frac{N^N}{N!}\sum_{i=N}^\infty
+                 \rho^i
+            \end{align*}
+            sabiendo que
+            $\sum_{i=N}^\infty
+            \rho^i=\tfrac{\rho^N}{1-\rho}$,
+            sacamos
+            \begin{equation*}
+            \pi_0=\left(
+                \left(\sum_{i=0}^{N-1}
+                \frac{I^i}{i!}
+                \right)
+                + \frac{I^N}{N!}\frac{1}{1-\rho}
+            \right)^{-1}
+            \end{equation*}
+    \end{itemize}
+\end{frame}
+
+
+
+\subsection{Segunda distribución de Earlang}
+\begin{frame}{\secname: \subsecname}
+    \begin{definicion}[Segunda distribución de
+        Earlang]
+        Popularmente, la probabilidad de que
+        un M/M/N esté vacío
+                \begin{equation*}
+                \pi_0=\left(
+                    \left(\sum_{i=0}^{N-1}
+                    \frac{I^i}{i!}
+                    \right)
+                    + \frac{I^N}{N!}\frac{1}{1-\rho}
+                \right)^{-1}
+                \end{equation*}
+        se conoce como la segunda
+        distribución de Earlang, y a la razón
+        $I$ se le llaman ``Earlangs''.
+    \end{definicion}
+
+    \vfill
+
+    \textit{Ejemplo}: si tenemos tasas
+    $\lambda=10$ y $\mu=2$; los Earlangs
+    $I=\tfrac{\lambda}{\mu}=5$ me dicen que
+    necesito $>5$ servidores; y con $N=7$
+    tenemos
+    \begin{equation*}
+    \pi_0=\left(
+        \left(\sum_{i=0}^{6}
+        \frac{5^i}{i!}
+        \right)
+        + \frac{5^7}{7!}\frac{1}{1-\tfrac{5}{7}}
+    \right)^{-1}
+    \simeq 0.006
+    \end{equation*}
+\end{frame}
+
+
+
+
+\subsection{Distribución de Earlang-C}
+\begin{frame}{\secname: \subsecname}
+    \begin{lema}[Earlang-C]
+        La probabilidad de esperar en un
+        sistema M/M/N viene dada por
+        la distribución Earlang-C:
+        \begin{equation}
+            E_C(N,I)=\mathbb{P}(N(t)\geq N)
+            = \frac{I^N}{N!}\frac{1}{1-\rho}\pi_0
+        \end{equation}
+    \end{lema}
+    \begin{figure}
+        \resizebox{!}{.2\textwidth}{%
+            \input{figs/mmn-bussy.tex}
+        }
+    \end{figure}
+    \vfill
+    \textit{Demostración}:
+        \begin{equation}
+            \mathbb{P}(N(t)\geq N)=
+            \sum_{i=N}^{\infty}\pi_i
+            = \sum_{i=N}^{\infty}
+            \rho^i \frac{N^N}{N!}\pi_0
+            = \frac{N^N}{N!}\frac{\rho^N}{1-\rho}\pi_0
+        \end{equation}
+\end{frame}
+
+
+
+
+\subsection{Métricas famosas}
+\begin{frame}{\secname: \subsecname}
+    \begin{lema}[Número medio en cola M/M/N]
+        En un sistema M/M/N el número medio
+        de usuarios encolados es
+        \begin{equation}
+            \mathbb{E}[Q(t)]=
+            \frac{\rho}{1-\rho}
+            E_C(N,I)
+        \end{equation}
+    \end{lema}
+    \vfill
+    \textit{Demostración}:
+    \begin{multline*}
+        \mathbb{E}[Q(t)]=\sum_{i=N}^\infty
+        (i-N)\pi_N=
+        \sum_{i=N}^\infty \rho^i \frac{N^N}{N!}
+        \pi_0(i-N)=
+        \frac{N^N}{N!}\pi_0
+        \sum_{i=N}^\infty(i-N)\rho^i\\
+        = 
+        \frac{N^N}{N!}\pi_0
+        \left[
+            \sum_{i=N}^\infty
+            i\rho^i - N\sum_{i=N}^\infty
+            \rho^i
+        \right]
+        = 
+        \frac{N^N}{N!}\pi_0
+        \left[
+            \frac{\rho^{N+1}}{(1-\rho)^2}
+        \right]\\
+        = \frac{\rho}{1-\rho}E_C(N,I)
+    \end{multline*}
+\end{frame}
+
+
+
+\begin{frame}{\secname: \subsecname}
+    \textit{Ejemplo}: sea un sistema con una
+    carga de $I=\tfrac{\lambda}{\mu}=3$
+    Earlangs, ¿cuántos servidores $N$ hay
+    que poner para que, en media,
+    haya menos de 10
+    usuarios encolados?
+    \begin{multline*}
+        N:\mathbb{E}[Q(t)]=
+        \frac{\rho}{1-\rho}E_C(N,I)
+        = \frac{\tfrac{3}{N}}{1-\tfrac{3}{N}}
+        \frac{N^N}{N!}\frac{\left(\frac{3}{N}\right)^N}{1-\tfrac{3}{N}}\pi_0\\
+        =\frac{N^N}{N!}\frac{\left(\frac{3}{N}\right)^{N+1}}{\left(1-\tfrac{3}{N}\right)^2}
+                \left(
+                    \left(\sum_{i=0}^{N-1}
+                    \frac{3^i}{i!}
+                    \right)
+                    + \frac{3^N}{N!}\frac{1}{1-\tfrac{3}{N}}
+                \right)^{-1}<10
+    \end{multline*}
+\end{frame}
+
+
+
+
+
+\begin{frame}{\secname: \subsecname}
+    \textit{Ejemplo (cont.)}: vemos que con
+    una intensidad de $I=3$ Earlangs necesitamos
+    $N>3$ para que $\mathbb{E}[Q(t)]\leq 10$.
+    \vfill
+    \begin{figure}
+        \input{figs/avg-queue-mmn.tex}
+    \end{figure}
+\end{frame}
+
+
+
+
+
+\begin{frame}{\secname: \subsecname}
+    \begin{lema}[Número medio usuarios en M/M/N]
+        En un sistema M/M/N el tiempo medio
+        de usuarios en el sistema es
+        \begin{equation}
+            \mathbb{E}[N(t)]=
+            \mathbb{E}[Q(t)]+I
+        \end{equation}
+    \end{lema}
+    \vfill
+    \textit{Demostración}:
+    con Little sabemos
+    $\mathbb{E}[W(t)]=\tfrac{1}{\lambda}
+    \mathbb{E}[Q(t)]$, y también sabemos que
+    \begin{equation*}
+        \mathbb{E}[T(t)]
+        =\mathbb{E}[W(t)]+\mathbb{E}[t_s]
+        = \frac{1}{\lambda}\mathbb{E}[Q(t)]
+        + \frac{1}{\mu}
+    \end{equation*}
+    y usando Little de nuevo
+    ($\mathbb{E}[N(t)]=\mathbb{E}[T(t)]\lambda$)
+    llegamos a
+    \begin{equation*}
+        \mathbb{E}[N(t)]=
+        \mathbb{E}[Q(t)]+I
+    \end{equation*}
+\end{frame}
+
 
 
 

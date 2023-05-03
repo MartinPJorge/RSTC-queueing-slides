@@ -1,0 +1,25 @@
+\begin{tikzpicture}
+   
+\node[state,minimum size=4em] (5) [right=of 4] {$N-2$};
+\node[state,minimum size=4em] (N) [right=of 5] {$N-1$};
+\node[state,minimum size=4em] (N1) [right=of N] {$N$};
+\node[state,minimum size=3em] (N2) [right=of N1] {$N+1$};
+
+
+
+
+\draw [->,thick] (5.north east) to [bend left=55]  node[above] {$\lambda$}  (N.north west);
+\draw [->,thick] (N.south west) to [bend left=55]  node[below] {$(N-1)\mu$}  (5.south east);
+
+
+\draw [->,thick] (N.north east) to [bend left=55]  node[above] {$\lambda$}  (N1.north west);
+\draw [->,thick] (N1.south west) to [bend left=55]  node[below] {$N\mu$}  (N.south east);
+
+
+\draw [->,thick] (N1.north east) to [bend left=55]  node[above] {$\lambda$}  (N2.north west);
+\draw [->,thick] (N2.south west) to [bend left=55]  node[below] {$N\mu$}  (N1.south east);
+
+\draw[dashed] (N1.north) -- ($(0,1.5)+(N1.north)$);
+\draw[dashed] (N1.south) -- ($(0,-1.5)+(N1.south)$);
+    
+\end{tikzpicture}

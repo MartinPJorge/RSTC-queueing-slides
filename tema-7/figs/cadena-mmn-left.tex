@@ -1,0 +1,24 @@
+\begin{tikzpicture}
+   
+% Estados
+\node[state,minimum size=4em] (1) {$0$};
+\node[state,minimum size=4em] (2) [right=of 1] {$1$};
+\node[state,minimum size=4em,fill=HotPink3!20] (3) [right=of 2] {$2$};
+\node[state,minimum size=4em] (4) [right=of 3] {$3$};
+
+
+% Transiciones
+\draw [->,thick] (1.north east) to [bend left=55]  node[above] {$\lambda$}  (2.north west);
+\draw [->,thick] (2.south west) to [bend left=55]  node[below] {$\mu$}  (1.south east);
+
+\draw [->,thick] (2.north east) to [bend left=55]  node[above] {$\lambda$}  (3.north west);
+\draw [->,thick] (3.south west) to [bend left=55]  node[below] {$2\mu$}  (2.south east);
+
+\draw [->,thick] (3.north east) to [bend left=55]  node[above] {$\lambda$}  (4.north west);
+\draw [->,thick] (4.south west) to [bend left=55]  node[below] {$3\mu$}  (3.south east);
+
+\draw [->,thick] (4.north east) to [bend left=55]  node[above] {$\lambda$}  (5.north west);
+\draw [->,thick] (5.south west) to [bend left=55]  node[below] {$4\mu$}  (4.south east);
+
+    
+\end{tikzpicture}
