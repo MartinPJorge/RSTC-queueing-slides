@@ -227,20 +227,20 @@
         estado $i$ es:
         \begin{equation}
             \pi_i=\begin{cases}
-                \frac{I^i}{i!}\pi_0, \quad&
+                \frac{A^i}{i!}\pi_0, \quad&
                 i\leq N\\
                 \rho^i \frac{N^N}{N!}\pi_0,
                 \quad& i\geq N
             \end{cases}
         \end{equation}
-        con $I=\tfrac{\lambda}{\mu}$,
+        con $A=\tfrac{\lambda}{\mu}$,
         $\rho=\tfrac{\lambda}{N\mu}$; y
         \begin{equation}
             \pi_0=\left(
                 \left(\sum_{i=0}^{N-1}
-                \frac{I^i}{i!}
+                \frac{A^i}{i!}
                 \right)
-                + \frac{I^N}{N!}\frac{1}{1-\rho}
+                + \frac{A^N}{N!}\frac{1}{1-\rho}
             \right)^{-1}
         \end{equation}
     \end{lema}
@@ -258,25 +258,25 @@
             }
         \end{figure}
         sabiendo que $\pi_0\lambda=\pi_1\mu$
-        se tiene $\pi_1=I\pi_0$.
+        se tiene $\pi_1=A\pi_0$.
         Por tanto tenemos que
         \begin{align*}
             \lambda\pi_0+2\mu\pi_2=
             \pi_1(\lambda+\mu)
             \Longleftrightarrow&
-            \pi_2=\frac{I^2}{2}\pi_0\\
+            \pi_2=\frac{A^2}{2}\pi_0\\
             %
             \lambda\pi_1+3\mu\pi_3=
             \pi_2(\lambda+2\mu)
             \Longleftrightarrow&
-            \pi_3=\frac{I^3}{3!}\pi_0\\
+            \pi_3=\frac{A^3}{3!}\pi_0\\
             \ldots\\
             \lambda\pi_{i-1}+(i+1)\mu\pi_{i+1}=
             \pi_i(\lambda+i\mu)
             \Longleftrightarrow&
-            \pi_i=\frac{I^i}{i!}\pi_0\\
+            \pi_i=\frac{A^i}{i!}\pi_0\\
         \end{align*}
-        y deducimos $\pi_i=\tfrac{I}{i}\pi_{i-1}$.
+        y deducimos $\pi_i=\tfrac{A}{i}\pi_{i-1}$.
     \end{itemize}
 \end{frame}
 
@@ -303,7 +303,7 @@
                 - \pi_{N-2}\lambda
             \right)\\
         \end{align*}
-        sustituyendo $\pi_{N-1}=\tfrac{I}{N-1}
+        sustituyendo $\pi_{N-1}=\tfrac{A}{N-1}
         \pi_{N-2}$, sacamos la recursión
         \begin{equation*}
             \pi_i=\frac{\lambda}{N\mu}\pi_{i-1},
@@ -320,20 +320,20 @@
             \pi_i=\frac{\lambda}{N\mu}\pi_{i-1},
             \quad i\geq N
         \end{equation*}
-        y si usamos $\pi_i=\tfrac{I^i}{i!}\pi_0$
+        y si usamos $\pi_i=\tfrac{A^i}{i!}\pi_0$
         con $i\leq N$ obtenemos:
         \begin{align*}
-            \pi_{i}=&\frac{I}{N}\pi_{i-1}
-            =\frac{I^2}{N^2}\pi_{i-2}=
+            \pi_{i}=&\frac{A}{N}\pi_{i-1}
+            =\frac{A^2}{N^2}\pi_{i-2}=
             \cdots
             = \left(
-                \frac{I}{N}
+                \frac{A}{N}
             \right)^{i-N}
             \pi_N
             = \left(
-                \frac{I}{N}
+                \frac{A}{N}
             \right)^{i-N}
-            \frac{I^N}{N!}\pi_0\\
+            \frac{A^N}{N!}\pi_0\\
             =& \rho^i \frac{N^N}{N!}\pi_0
         \end{align*}
     \end{itemize}
@@ -350,11 +350,11 @@
                 1=&\sum_{i=0}^{N-1}\pi_i
                  + \sum_{i=N}^\infty \pi_i\\
                  =& \sum_{i=0}^{N-1}
-                 \frac{I^i}{i!}\pi_0
+                 \frac{A^i}{i!}\pi_0
                  + \sum_{i=N}^\infty
                  \rho^i \frac{N^N}{N!}\pi_0\\
                  =& \pi_0\sum_{i=0}^{N-1}
-                 \frac{I^i}{i!}
+                 \frac{A^i}{i!}
                  + \pi_0 \frac{N^N}{N!}\sum_{i=N}^\infty
                  \rho^i
             \end{align*}
@@ -365,9 +365,9 @@
             \begin{equation*}
             \pi_0=\left(
                 \left(\sum_{i=0}^{N-1}
-                \frac{I^i}{i!}
+                \frac{A^i}{i!}
                 \right)
-                + \frac{I^N}{N!}\frac{1}{1-\rho}
+                + \frac{A^N}{N!}\frac{1}{1-\rho}
             \right)^{-1}
             \end{equation*}
     \end{itemize}
@@ -384,21 +384,21 @@
                 \begin{equation*}
                 \pi_0=\left(
                     \left(\sum_{i=0}^{N-1}
-                    \frac{I^i}{i!}
+                    \frac{A^i}{i!}
                     \right)
-                    + \frac{I^N}{N!}\frac{1}{1-\rho}
+                    + \frac{A^N}{N!}\frac{1}{1-\rho}
                 \right)^{-1}
                 \end{equation*}
         se conoce como la segunda
         distribución de Earlang, y a la razón
-        $I$ se le llaman ``Earlangs''.
+        $A$ se le llaman ``Earlangs''.
     \end{definicion}
 
     \vfill
 
     \textit{Ejemplo}: si tenemos tasas
     $\lambda=10$ y $\mu=2$; los Earlangs
-    $I=\tfrac{\lambda}{\mu}=5$ me dicen que
+    $A=\tfrac{\lambda}{\mu}=5$ me dicen que
     necesito $>5$ servidores; y con $N=7$
     tenemos
     \begin{equation*}
@@ -422,8 +422,8 @@
         sistema M/M/N viene dada por
         la distribución Earlang-C:
         \begin{equation}
-            E_C(N,I)=\mathbb{P}(N(t)\geq N)
-            = \frac{I^N}{N!}\frac{1}{1-\rho}\pi_0
+            E_C(N,A)=\mathbb{P}(N(t)\geq N)
+            = \frac{A^N}{N!}\frac{1}{1-\rho}\pi_0
         \end{equation}
     \end{lema}
     \begin{figure}
@@ -453,7 +453,7 @@
         \begin{equation}
             \mathbb{E}[Q(t)]=
             \frac{\rho}{1-\rho}
-            E_C(N,I)
+            E_C(N,A)
         \end{equation}
     \end{lema}
     \vfill
@@ -477,7 +477,7 @@
         \left[
             \frac{\rho^{N+1}}{(1-\rho)^2}
         \right]\\
-        = \frac{\rho}{1-\rho}E_C(N,I)
+        = \frac{\rho}{1-\rho}E_C(N,A)
     \end{multline*}
 \end{frame}
 
@@ -485,14 +485,14 @@
 
 \begin{frame}{\secname: \subsecname}
     \textit{Ejemplo}: sea un sistema con una
-    carga de $I=\tfrac{\lambda}{\mu}=3$
+    carga de $A=\tfrac{\lambda}{\mu}=3$
     Earlangs, ¿cuántos servidores $N$ hay
     que poner para que, en media,
     haya menos de 10
     usuarios encolados?
     \begin{multline*}
         N:\mathbb{E}[Q(t)]=
-        \frac{\rho}{1-\rho}E_C(N,I)
+        \frac{\rho}{1-\rho}E_C(N,A)
         = \frac{\tfrac{3}{N}}{1-\tfrac{3}{N}}
         \frac{N^N}{N!}\frac{\left(\frac{3}{N}\right)^N}{1-\tfrac{3}{N}}\pi_0\\
         =\frac{N^N}{N!}\frac{\left(\frac{3}{N}\right)^{N+1}}{\left(1-\tfrac{3}{N}\right)^2}
@@ -511,7 +511,7 @@
 
 \begin{frame}{\secname: \subsecname}
     \textit{Ejemplo (cont.)}: vemos que con
-    una intensidad de $I=3$ Earlangs necesitamos
+    una intensidad de $A=3$ Earlangs necesitamos
     $N>3$ para que $\mathbb{E}[Q(t)]\leq 10$.
     \vfill
     \begin{figure}
@@ -529,7 +529,7 @@
         de usuarios en el sistema es
         \begin{equation}
             \mathbb{E}[N(t)]=
-            \mathbb{E}[Q(t)]+I
+            \mathbb{E}[Q(t)]+A
         \end{equation}
     \end{lema}
     \vfill
@@ -548,7 +548,7 @@
     llegamos a
     \begin{equation*}
         \mathbb{E}[N(t)]=
-        \mathbb{E}[Q(t)]+I
+        \mathbb{E}[Q(t)]+A
     \end{equation*}
 \end{frame}
 
