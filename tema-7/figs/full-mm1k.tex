@@ -1,0 +1,38 @@
+\usetikzlibrary{calc}
+\begin{tikzpicture}
+
+
+% the rectangular shape with vertical lines
+\node[rectangle split, rectangle split parts=6,
+draw, rectangle split horizontal,
+text height=1cm,text depth=0.5cm,inner ysep=0pt,
+fill=HotPink3!20] (wa) {};
+\draw[<->] ($(wa.north west)+(0,.3)$)
+    -- ($(wa.north east)+(0,.3)$)
+    node[midway,above] {$K-1$};
+%\fill[white] ([xshift=-\pgflinewidth,yshift=-\pgflinewidth]wa.north west) rectangle ([xshift=-15pt,yshift=\pgflinewidth]wa.south);
+
+% the circle
+\node[draw,circle,minimum size=1.5cm,anchor=west,
+    fill=HotPink3!20] (se) at
+    (wa.east) {$\mu$};
+
+% the arrows and labels
+\draw[<-] (wa.west) --
+    +(-35pt,0) node (out) {} --
+    +(-70pt,0) node[left] (arrive) {$\lambda$};
+\draw[->] (se.east) -- ($(se.east)+(.5,0)$);
+
+
+% draw the exiting
+\node[circle,draw=HotPink4,fill=HotPink4,minimum size=2,
+    inner sep=0] (outcirc) at (out) {};
+\draw[-|]
+    (arrive) -- 
+    (outcirc) --
+    +(0,-25pt) node[below,align=center]{};
+
+
+
+
+\end{tikzpicture}

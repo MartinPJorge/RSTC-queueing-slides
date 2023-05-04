@@ -553,6 +553,144 @@
 \end{frame}
 
 
+\section{Sistema M/M/1/K}
+\begin{frame}{\secname}
+    Si tuviéramos un servidor con cola
+    finita de tamaño $K-1$ hay pérdidas.
+    \begin{figure}
+        \input{figs/mm1k.tex}
+    \end{figure}
+\end{frame}
+
+
+
+
+
+\subsection{Cadena de Markov}
+\begin{frame}{\secname: \subsecname}
+    Un sistema M/M/1/K es un proceso
+    estocástico markoviano, por tanto
+    se puede modelar con una cadena
+    de Markov \emph{finita}.
+    \begin{figure}
+        \resizebox{!}{.15\textwidth}{%
+            \input{figs/cadena-mm1k.tex}
+        }
+    \end{figure}
+    La cadena tiene tasas
+    de transición $q_{i,j}$ homogéneas
+    \begin{align*}
+        q_{i+1,i}=q_{j+1,j}=\mu,\quad \forall i,j\\
+        q_{i-1,i}=q_{j-1,j}=\lambda,\quad \forall i,j\\
+    \end{align*}
+    \begin{figure}
+        \resizebox{!}{.15\textwidth}{%
+            \input{figs/full-mm1k.tex}
+        }
+    \end{figure}
+\end{frame}
+
+
+
+
+\subsection{Ecuaciones de equilibrio}
+\begin{frame}{\secname: \subsecname}
+    \begin{lema}{Ecuaciones de equilibrio M/M/1/K}
+        En régimen estacionario, las ecuaciones de
+        equilibrio de un sistema M/M/1/K
+        resultan en
+        \begin{equation}
+            \pi_i =
+            \begin{cases}
+                \frac{1-\rho}{1-\rho^{K+1}}, & i=0\\
+                \rho^i\pi_0, & 0<i\leq K
+            \end{cases}
+            \label{eq:mm1k-equilibrium}
+        \end{equation}
+    \end{lema}
+    \vfill
+    \textit{Demostración}: de la cadena se deduce
+    por inducción que $\pi_i=\rho^i \pi_0$.
+    Sabiendo que $\sum_i^K \pi_i=1$, tenemos
+    \begin{equation*}
+        1=\pi_0\sum_{i=0}^K\rho^i
+        \Longleftrightarrow
+        \pi_0=\frac{1}{\sum_{i=0}^K \rho^i}
+        =\frac{1}{\frac{1}{1-\rho}(1-\rho^{K+1})}
+    \end{equation*}
+\end{frame}
+
+
+\subsection{Probabilidad de bloqueo}
+\begin{frame}{\secname: \subsecname}
+    El sistema M/M/1/K bloquea la
+    entrada de usuarios si
+    la cola está llena
+    \begin{figure}
+        \resizebox{!}{.15\textwidth}{%
+            \input{figs/full-mm1k.tex}
+        }
+    \end{figure}
+    lo cual sucede con probabilidad
+    \begin{equation*}
+        \pi_K=\rho^k\frac{1-\rho}{1-\rho^{K+1}}
+    \end{equation*}
+    según las ecuaciones de
+    equilibrio~\eqref{eq:mm1k-equilibrium}.
+\end{frame}
+
+
+
+
+\subsection{Caudal cursado}
+\begin{frame}{\secname: \subsecname}
+    El caudal cursado será el de los
+    usuarios admitidos $\overline{\lambda}$
+    \begin{figure}
+        \resizebox{!}{.25\textwidth}{%
+            \input{figs/half-mm1k.tex}
+        }
+    \end{figure}
+    el cual es precisamente
+    $\overline{\lambda}=\lambda(1-\pi_K)$.
+\end{frame}
+
+
+\begin{frame}{\secname: \subsecname}
+    \textit{Ejemplo}: sea un servidor con
+    tasa $\mu=1$~[usuarios/sec] y
+    $\lambda=0.8$~[usuarios/sec], calcule
+    el tamaño de cola de modo que el
+    caudal cursado $\overline{\lambda}$
+    quede por encima de 0.7~[usuarios/sec].
+
+    \vfill
+
+    \begin{multline*}
+        k: \overline{\lambda}=
+        \lambda(1-\pi_K)\geq0.7
+        \Longleftrightarrow
+        \lambda\left(1-\rho^K\frac{1-\rho}{1-\rho^{K+1}} \right)
+        \geq0.7\\
+        \Longleftrightarrow
+        \underbrace{\frac{1-\frac{0.7}{\lambda}}{1-\rho}}_{A}
+        \geq \frac{\rho^K}{1-\rho^{K+1}}
+        \Longleftrightarrow
+        \rho^K\leq \frac{A}{1+A}
+    \end{multline*}
+    sustituyendo $A=\tfrac{1-0.7/0.8}{1-0.8}=\tfrac{5}{8}$
+    queda
+    \begin{equation*}
+        \rho^K\leq\frac{5}{3}
+        \Longleftrightarrow
+        K\leq\log_\rho\frac{5}{3}
+        \Longleftrightarrow
+        K\leq-2.29
+        \Longleftrightarrow
+        K\geq-2.29
+    \end{equation*}
+\end{frame}
+
 
 
 \begin{frame}[allowframebreaks]
