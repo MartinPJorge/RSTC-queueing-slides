@@ -809,6 +809,80 @@
 
 
 
+
+\section{Sistema M/M/N/N}
+\begin{frame}{\secname}
+    Si tenemos N servidores sin cola
+    también puede haber pérdidas.
+    \begin{figure}
+        \input{figs/mmnn.tex}
+    \end{figure}
+\end{frame}
+
+
+\subsection{Cadena de Markov}
+\begin{frame}{\secname: \subsecname}
+    Un sistema M/M/N/N es un proceso
+    estocástico markoviano, y se puede
+    modelar con una cadena de Markov
+    finita
+    \begin{figure}
+        \resizebox{!}{.15\textwidth}{%
+            \input{figs/cadena-mmnn.tex}
+        }
+    \end{figure}
+    La cadena tiene tasas de transición
+    no homogéneas
+    \begin{equation*}
+        q_{i+1,i}=(i+1)\mu,\ \forall i\leq N
+    \end{equation*}
+    
+    \begin{figure}
+        \resizebox{!}{.2\textwidth}{%
+            \input{figs/mmnn-full.tex}
+        }
+    \end{figure}
+\end{frame}
+
+
+\subsection{Ecuaciones de equilibrio}
+\begin{frame}{\secname: \subsecname}
+    \begin{lema}[Ecuaciones equilibrio
+        sistema M/M/N/N]
+        En un sistema M/M/N/N en régimen
+        estacionario, sus ecuaciones de
+        equilibrio resultan en
+        \begin{equation}
+            \pi_i=\begin{cases}
+                \left(
+                    \sum_{i=0}^N \frac{A^i}{i!}
+                \right)^{-1}, & i=0\\
+                \frac{A^i}{i!}\pi_0, &
+                \quad 0<i\leq N
+            \end{cases}
+        \end{equation}
+    \end{lema}
+
+    \vfill
+    \textit{Demostración}: de la
+    cadena deducimos
+    $\pi_i=\tfrac{A^i}{i!}\pi_0$ por
+    inducción, y usando la ley de probabilidad
+    total tenemos
+    \begin{equation*}
+        1 = \sum_{i=0}^N \pi_i
+        \Longleftrightarrow
+        1 = \pi_0\sum_{i=0}^N \frac{A^i}{i!}
+        \Longleftrightarrow
+        \pi_0=\left(
+            \sum_{i=0}^N \frac{A^i}{i!}
+        \right)^{-1}
+    \end{equation*}
+\end{frame}
+
+
+
+
 \begin{frame}[allowframebreaks]
         \frametitle{Referencias}
         \bibliographystyle{amsalpha}
