@@ -1,0 +1,70 @@
+\begin{tikzpicture}[
+declare function={effective(\x,\K)=\x*(1-\x^\K * (1-\x)/(1-\x^(\K+1)));}
+]
+
+
+
+
+
+
+
+\begin{axis}[every axis plot post/.append style={
+  mark=none,samples=100},
+  axis x line*=bottom,
+  axis y line*=left,
+  xlabel={$\lambda$},
+  ylabel={$\overline{\lambda}$},
+  %ymode=log,
+  ymin=0,
+  ymax=1,
+  enlargelimits=upper,
+  width=4in,
+  height=2in]
+
+
+  % K=1
+  \pgfmathsetmacro{\K}{1}
+  \addplot+[ultra thick, smooth,
+          color=HotPink1,domain=0:2.9] {
+              effective(\x,\K) 
+      }
+      node [pos=0.5,anchor=north west] {$K=1$};
+  \addplot [only marks,samples at={0.8},
+          color=HotPink1] {
+      effective(\x,\K)};
+
+  % K=3
+  \pgfmathsetmacro{\K}{3}
+  \addplot+[ultra thick, smooth,
+          color=HotPink3,domain=0:2.9] {
+              effective(\x,\K) 
+      }
+      node [pos=0.5,anchor=north west] {$K=3$};
+  \addplot [only marks,samples at={0.8},
+          color=HotPink3] {
+      effective(\x,\K)};
+
+  % K=9
+  \pgfmathsetmacro{\K}{9}
+  \addplot+[ultra thick, smooth,
+          color=HotPink4,domain=0:2.9] {
+              effective(\x,\K) 
+      }
+      node [pos=0.5,anchor=south east] {$K=9$};
+  \addplot [only marks,samples at={0.8},
+          color=HotPink4] {
+      effective(\x,\K)};
+
+
+
+
+  \addplot +[mark=none,dashed,black] coordinates {(.8, 0) (.8, 1)} node[pos=0.1,anchor=west] {$\lambda=0.8$};
+  \addplot +[mark=none,dashed,black] coordinates {(.0, .7) (3, .7)} node[pos=.05,anchor=south] {$0.7$};
+
+
+\end{axis}
+
+
+
+\end{tikzpicture}
+

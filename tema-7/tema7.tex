@@ -633,7 +633,7 @@
     \end{figure}
     lo cual sucede con probabilidad
     \begin{equation*}
-        \pi_K=\rho^k\frac{1-\rho}{1-\rho^{K+1}}
+        \pi_K=\rho^K\frac{1-\rho}{1-\rho^{K+1}}
     \end{equation*}
     según las ecuaciones de
     equilibrio~\eqref{eq:mm1k-equilibrium}.
@@ -676,20 +676,136 @@
         \underbrace{\frac{1-\frac{0.7}{\lambda}}{1-\rho}}_{A}
         \geq \frac{\rho^K}{1-\rho^{K+1}}
         \Longleftrightarrow
-        \rho^K\leq \frac{A}{1+A}
+        \rho^K\leq \frac{A}{1+A\rho}
     \end{multline*}
     sustituyendo $A=\tfrac{1-0.7/0.8}{1-0.8}=\tfrac{5}{8}$
+    y $\rho=\tfrac{8}{10}$
     queda
     \begin{equation*}
-        \rho^K\leq\frac{5}{3}
+        \rho^K\leq\frac{5}{12}
         \Longleftrightarrow
-        K\leq\log_\rho\frac{5}{3}
+        K\geq\log_\rho\frac{5}{12}
         \Longleftrightarrow
-        K\leq-2.29
-        \Longleftrightarrow
-        K\geq-2.29
+        K\geq 3.92
     \end{equation*}
 \end{frame}
+
+
+
+
+\begin{frame}{\secname: \subsecname}
+    \textit{Ejemplo}: sea un servidor con
+    tasa $\mu=1$~[usuarios/sec] y
+    $\lambda=0.8$~[usuarios/sec], calcule
+    el tamaño de cola de modo que el
+    caudal cursado $\overline{\lambda}$
+    quede por encima de 0.7~[usuarios/sec].
+
+    \vfill
+
+    \begin{figure}
+        \input{figs/caudal-efectivo-mm1k}
+    \end{figure}
+\end{frame}
+
+
+\subsection{métricas famosas}
+\begin{frame}{\secname: \subsecname}
+    \begin{lema}[Número medio usuarios M/M/1/K]
+        El número medio de usuarios en un
+        sistema M/M/1/K es
+        \begin{equation}
+            \mathbb{E}[N(t)]=
+            \frac{\rho}{1-\rho}-
+            \frac{(K+1)\rho^{K+1}}{1-\rho^{K+1}}
+        \end{equation}
+    \end{lema}
+
+    \vfill
+
+    \textit{Demostración}:
+    \begin{multline*}
+        \mathbb{E}[N(t)]=
+        \sum_{i=0}^{K+1}i \pi_i
+        =\pi_0\sum_{i=0}^K i\rho^i
+        =\pi_0\rho\frac{d}{dt}
+        \sum_{i=0}^K\rho^i
+        = \pi_0\rho \frac{d}{dt}
+        \frac{1-\rho^{K+1}}{1-\rho}\\
+        =\frac{1-\rho}{1-\rho^{K+1}}\rho
+        \frac{-(K+1)\rho^K(1-\rho)+(1-\rho^{K+1})}{(1-\rho)^2}=\ldots
+    \end{multline*}
+\end{frame}
+
+
+
+\begin{frame}{\secname: \subsecname}
+    Para aplicar Little hay que considerar
+    el caudal efectivo $\overline{\lambda}$.
+    \begin{figure}
+        \resizebox{!}{.15\textwidth}{%
+            \input{figs/half-mm1k.tex}
+        }
+    \end{figure}
+    En concreto
+    \begin{equation*}
+        \mathbb{E}[T(t)]=
+        \frac{\mathbb{E}[N(t)]}{\lambda(1-\pi_K)}
+    \end{equation*}
+    Y sabiendo que el tiempo medio de
+    espera de los atendidos es
+    \begin{equation*}
+        \mathbb{E}[W(t)]=
+        \mathbb{E}[T(t)]-\mathbb{E}[t_s]
+        =\frac{\mathbb{E}[N(t)]}{\lambda(1-\pi_K)}
+        - \frac{1}{\mu}
+    \end{equation*}
+    sacamos el número medio de usuarios
+    encolados con Little
+    \begin{equation*}
+        \mathbb{E}[Q(t)]=
+        \lambda(1-\pi_K)
+        \mathbb{E}[W(t)]=
+        \mathbb{E}[N(t)]-
+        \frac{\overline{\lambda}}{\mu}
+    \end{equation*}
+\end{frame}
+
+
+
+
+
+\begin{frame}{\secname: \subsecname}
+    \textit{Ejemplo}: sea un sistema
+    M/M/1/K con $K=10$,
+    $\lambda=0.8$~[usuarios/sec],
+    $\mu=1$~[usuarios/sec];
+    ¿cuál es el tiempo medio que pasa
+    un usuario atendido?
+    \vfill
+    
+    Primero sacabos el número medio
+    de usuarios
+    \begin{multline*}
+        \mathbb{E}[N(t)]=
+        \frac{\rho}{1-\rho}-
+        \frac{(K+1)\rho^{K+1}}{1-\rho^{K+1}}\\
+        =\frac{0.8}{1-0.8}-
+        \frac{(10+1)0.8^{10+1}}{1-0.8^{10+1}}
+        \simeq2.97~\text{[usuarios]}
+    \end{multline*}
+    y luego usamos Little
+    \begin{equation*}
+        \mathbb{E}[T(t)]=
+        \frac{\mathbb{E}[N(t)]}{\lambda(1-\pi_K)}
+        = \frac{2.97}{0.8
+        \left( 1- 0.8^{10}\frac{1-0.8}{1-0.8^{10+1}} \right)
+        }
+        \simeq 3.80~\text{[sec]}
+    \end{equation*}
+\end{frame}
+
+
 
 
 
