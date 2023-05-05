@@ -10,6 +10,7 @@
 \usefonttheme{professionalfonts}
 
 
+
 % Subfigures
 \usepackage{caption}
 \usepackage{subcaption}
@@ -18,6 +19,7 @@
 \usepackage{pifont}% http://ctan.org/pkg/pifont
 \newcommand{\cmark}{\ding{51}}%
 \newcommand{\xmark}{\ding{55}}%
+
 
 
 % License
@@ -98,12 +100,14 @@
 \usetikzlibrary{positioning}  %                 ...positioning nodes
 \usetikzlibrary{arrows}       %                 ...customizing arrows
 \usetikzlibrary{intersections}
-
+% math
+\usetikzlibrary{math}
 
 %%%%%%%%%
 %% PGF %%
 %%%%%%%%%
 \usepgfplotslibrary{fillbetween}
+\usepackage{pgffor} % loops
 
 
 %%% Insert section name before the section %%%
@@ -883,7 +887,115 @@
 
 
 
+
+\subsection{Probabilidad de bloqueo}
+\begin{frame}{\secname: \subsecname}
+    \begin{lema}[Probabilidad de bloqueo]
+        En un sistema M/M/N/N se bloquean
+        llegadas con probabilidad
+        \begin{equation}
+            E_B(N,A)=\pi_N=
+            \frac{\frac{A^N}{N!}}{\sum_{i=0}^N\frac{A^i}{i!}}
+        \end{equation}
+        y se conoce $E_B(N,A)$
+        como la 1ª distribución
+        de Earlang, o Earlang-B.
+    \end{lema}
+
+    \vfill
+
+    \textit{Ejemplo}: ¿cuál es la probabilidad
+    de bloqueo en un M/M/2/2 con una
+    intensidad de $A=1.2$ Earlangs?
+    \begin{figure}
+        \resizebox{!}{.1\textwidth}{%
+            \input{figs/mm22-full.tex}
+        }
+    \end{figure}
+    \begin{equation*}
+        E_B(N,A)=\pi_N=
+        \frac{\frac{A^N}{N!}}{\sum_{i=0}^N\frac{A^i}{i!}}
+        =\frac{1.2^2}{2!}\left(
+            \sum_{i=0}^2 \frac{1.2^i}{i!}
+        \right)^{-1}
+        = 0.25
+    \end{equation*}
+\end{frame}
+
+
+
+
+\begin{frame}{\secname: \subsecname}
+    \textit{Ejemplo}: sea un sistema
+    M/M/N/N con carga $A=2.6$ Earlangs,
+    ¿cuál es el mínimo
+    número de servidores para que
+    la probabilidad de bloqueo sea
+    menor al 20\%?
+
+    \begin{equation*}
+        N: E_B(N,A)=\pi_N
+        =\frac{\frac{A^N}{N!}}{\sum_{i=0}^N\frac{A^i}{i!}}
+        =\frac{\frac{2.6^N}{N!}}{\sum_{i=0}^N\frac{2.6^i}{i!}}\leq 0.2
+    \end{equation*}
+
+    \begin{figure}
+        \input{figs/earlangb.tex}
+    \end{figure}
+\end{frame}
+
+
+
+
+
+\subsection{Caudal cursado}
+\begin{frame}{\secname: \subsecname}
+    El caudal cursado $\overline{\lambda}$
+    es el flujo que no se rechaza:
+    \begin{figure}
+        \resizebox{!}{.3\textwidth}{%
+            \input{figs/mmnn-full-probs.tex}
+        }
+    \end{figure}
+    es decir
+    \begin{equation*}
+        \overline{\lambda}=
+        (1-\pi_B)\lambda
+    \end{equation*}
+\end{frame}
+
+
+
+\subsection{Métricas famosas}
+\begin{frame}{\secname: \subsecname}
+    \begin{lema}[Tiempo medio en sistema
+        M/M/N/N]
+        El tiempo medio en un sistema
+        M/M/N/N es
+        $\mathbb{E}[T(t)]=\frac{1}{\mu}$.
+    \end{lema}
+    
+    \begin{figure}
+        \resizebox{!}{.2\textwidth}{%
+            \input{figs/mmnn-full-probs.tex}
+        }
+    \end{figure}
+
+    \textit{Demostración}: como no
+    hay espera en cola $W(t)=0,\ \forall t$;
+    se tiene que
+    \begin{equation*}
+        \mathbb{E}[T(t)]=\mathbb{E}[t_s]
+        =\frac{1}{\mu}
+    \end{equation*}
+    y por Little sabemos
+    que $\mathbb{E}[N(t)]=\lambda(1-\pi_N)\mathbb{E}[T(t)]=A(1-\pi_N)$.
+\end{frame}
+
+
+
 \begin{frame}[allowframebreaks]
+        \nocite{amable}
         \frametitle{Referencias}
         \bibliographystyle{amsalpha}
         \bibliography{refs.bib}

@@ -14,7 +14,7 @@ text height=1cm,text depth=0.5cm,inner ysep=0pt] (wa) {};
 
 % the arrows and labels
 \draw[->] (se.east) -- +(20pt,0) node (seEnd) {};
-\draw[<-] (wa.west) -- +(-20pt,0) node[left] {$\lambda_1$};
+\draw[<-] (wa.west) -- +(-20pt,0) node[left] {};
 
 
 
@@ -61,6 +61,10 @@ text height=1cm,text depth=0.5cm,inner ysep=0pt] (wa) {};
 \node[circle,inner sep=0pt,minimum size=3pt,draw=black,fill=black] (joinIn) at ($(wa.west)-(10pt,0)$) {};
 \node[circle,inner sep=0pt,minimum size=3pt,draw=black,fill=black] (joinMid) at ($(wa2.west)-(15pt,0)$) {};
 \node[circle,inner sep=0pt,minimum size=3pt,draw=black,fill=black] (joinMidDown) at ($(wa3.east)+(20pt,0)$) {};
+
+
+% entrance lambda1
+\node[anchor=south west] at (joinIn.east) {$\lambda_1$};
 
 
 % the exit

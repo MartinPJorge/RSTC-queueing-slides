@@ -1,0 +1,85 @@
+\begin{tikzpicture}[
+declare function={free(\k,\I)=\I^\k/(\k!);}
+]
+
+
+
+%%%% DEFINE SUMATION USING
+%https://tex.stackexchange.com/a/526600/62559
+%\newcounter{isum}
+\pgfplotsset{summand/.initial=max}
+\pgfmathdeclarefunction{sum}{2}{%
+\begingroup%
+\pgfkeys{/pgf/fpu,/pgf/fpu/output format=fixed}%
+\edef\myfun{\pgfkeysvalueof{/pgfplots/summand}}%
+\pgfmathsetmacro{\mysum}{0}%
+\pgfmathsetmacro{\myx}{#2}%
+\pgfmathtruncatemacro{\imax}{#1}%
+\setcounter{isum}{0}%
+\loop
+\pgfmathsetmacro{\mysum}{\mysum+\myfun(\value{isum},#2)}%
+\ifnum\value{isum}<\imax\relax
+\stepcounter{isum}\repeat
+\pgfmathparse{\mysum}%
+\pgfmathsmuggle\pgfmathresult\endgroup%
+}%
+
+
+
+
+
+
+
+\begin{axis}[every axis plot post/.append style={
+  mark=none,samples=100},
+  axis x line*=bottom,
+  axis y line*=left,
+  xlabel={$A$},
+  ylabel={$E_B(N,A)$},
+  %ymode=log,
+  ymin=0,
+  ymax=1,
+  enlargelimits=upper,
+  width=4in,
+  height=2in]
+
+  % N=3
+  \pgfmathsetmacro{\N}{3}
+  \addplot+[summand=free,ultra thick,
+          smooth, color=HotPink1,
+      domain=0:15] {\x^\N / \N! / (sum(\N,\x))} node [anchor=south west] {$N=3$};%
+   \addplot [only marks,samples at={2.6},
+       color=HotPink1] {
+   \x^\N / \N! / (sum(\N,\x))};
+
+
+  % N=4
+  \pgfmathsetmacro{\N}{4}
+  \addplot+[summand=free,ultra thick,
+          smooth, color=HotPink2,
+      domain=0:15] {\x^\N / \N! / (sum(\N,\x))} node [anchor=west] {$N=4$};%
+   \addplot [only marks,samples at={2.6},
+       color=HotPink2] {
+   \x^\N / \N! / (sum(\N,\x))};
+
+  % N=5
+  \pgfmathsetmacro{\N}{5}
+  \addplot+[summand=free,ultra thick,
+          smooth, color=HotPink4,
+      domain=0:15] {\x^\N / \N! / (sum(\N,\x))} node [anchor=north west] {$N=5$};%
+   \addplot [only marks,samples at={2.6},
+       color=HotPink4] {
+   \x^\N / \N! / (sum(\N,\x))};
+
+
+
+  \addplot+[dashed,draw=black] coordinates {(0,0.2) (16,0.2)} node [pos=0,anchor=south west,color=black] {0.2};
+  \addplot+[dashed,draw=black] coordinates {(2.6,0) (2.6,1)} node[pos=.9,anchor=west] {$A=2.6$};
+
+
+\end{axis}
+
+
+
+\end{tikzpicture}
+
