@@ -1,0 +1,81 @@
+\begin{tikzpicture}[
+declare function={free(\k,\I)=\I^\k/(\k!);}
+]
+
+
+
+
+%%%% DEFINE SUMATION USING
+%https://tex.stackexchange.com/a/526600/62559
+%\newcounter{isum}
+\pgfplotsset{summand/.initial=max}
+\pgfmathdeclarefunction{sum}{2}{%
+\begingroup%
+\pgfkeys{/pgf/fpu,/pgf/fpu/output format=fixed}%
+\edef\myfun{\pgfkeysvalueof{/pgfplots/summand}}%
+\pgfmathsetmacro{\mysum}{0}%
+\pgfmathsetmacro{\myx}{#2}%
+\pgfmathtruncatemacro{\imax}{#1}%
+\setcounter{isum}{0}%
+\loop
+\pgfmathsetmacro{\mysum}{\mysum+\myfun(\value{isum},#2)}%
+\ifnum\value{isum}<\imax\relax
+\stepcounter{isum}\repeat
+\pgfmathparse{\mysum}%
+\pgfmathsmuggle\pgfmathresult\endgroup%
+}%
+
+
+
+
+
+
+
+\begin{axis}[every axis plot post/.append style={
+  mark=none,samples=100},
+  axis x line*=bottom,
+  axis y line*=left,
+  xlabel={$A$},
+  ylabel={$\pi_0$},
+  %ymode=log,
+  ymin=0,
+  ymax=1,
+  enlargelimits=upper,
+  width=4in,
+  height=2in]
+
+  % N=3
+  \pgfmathsetmacro{\N}{3}
+  \addplot+[summand=free,ultra thick, smooth,
+          color=HotPink1,domain=0:2.9] {
+      1/(sum(\N-1,\x) + \x^\N/\N! * 1/(1-\x/\N))}
+      node [pos=0.2,anchor=south east] {$N=3$};
+
+
+  % N=4
+  \pgfmathsetmacro{\N}{4}
+  \addplot+[summand=free,ultra thick, smooth,
+          color=HotPink2,domain=0:3.9] {
+      1/(sum(\N-1,\x) + \x^\N/\N! * 1/(1-\x/\N))}
+      node [pos=0.2,anchor=north west] {$N=4$};
+
+
+
+  % N=5
+  \pgfmathsetmacro{\N}{5}
+  \addplot+[summand=free,ultra thick, smooth,
+          color=HotPink3,domain=0:4.9] {
+      1/(sum(\N-1,\x) + \x^\N/\N! * 1/(1-\x/\N))}
+      node [pos=0.1,anchor=north west] {$N=5$};
+
+  \draw[color=black,dashed]
+        (axis cs:3,0) -- (axis cs:3,10);
+
+
+
+\end{axis}
+
+
+
+\end{tikzpicture}
+
