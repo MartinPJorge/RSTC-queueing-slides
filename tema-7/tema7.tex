@@ -677,12 +677,12 @@
         \lambda\left(1-\rho^K\frac{1-\rho}{1-\rho^{K+1}} \right)
         \geq0.7\\
         \Longleftrightarrow
-        \underbrace{\frac{1-\frac{0.7}{\lambda}}{1-\rho}}_{A}
+        \underbrace{\frac{1-\frac{0.7}{\lambda}}{1-\rho}}_{\alpha}
         \geq \frac{\rho^K}{1-\rho^{K+1}}
         \Longleftrightarrow
-        \rho^K\leq \frac{A}{1+A\rho}
+        \rho^K\leq \frac{\alpha}{1+\alpha\rho}
     \end{multline*}
-    sustituyendo $A=\tfrac{1-0.7/0.8}{1-0.8}=\tfrac{5}{8}$
+    sustituyendo $\alpha=\tfrac{1-0.7/0.8}{1-0.8}=\tfrac{5}{8}$
     y $\rho=\tfrac{8}{10}$
     queda
     \begin{equation*}
@@ -730,7 +730,7 @@
     \textit{Demostración}:
     \begin{multline*}
         \mathbb{E}[N(t)]=
-        \sum_{i=0}^{K}i \pi_i
+        \sum_{i=0}^{K+1}i \pi_i
         =\pi_0\sum_{i=0}^K i\rho^i
         =\pi_0\rho\frac{d}{dt}
         \sum_{i=0}^K\rho^i
@@ -960,7 +960,7 @@
     es decir
     \begin{equation*}
         \overline{\lambda}=
-        (1-\pi_N)\lambda
+        (1-\pi_B)\lambda
     \end{equation*}
 \end{frame}
 
