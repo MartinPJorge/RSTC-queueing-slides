@@ -379,10 +379,10 @@
 
 
 
-\subsection{Segunda distribución de Earlang}
+\subsection{Segunda distribución de Erlang}
 \begin{frame}{\secname: \subsecname}
     \begin{definicion}[Segunda distribución de
-        Earlang]
+        Erlang]
         Popularmente, la probabilidad de que
         un M/M/N esté vacío
                 \begin{equation*}
@@ -394,14 +394,14 @@
                 \right)^{-1}
                 \end{equation*}
         se conoce como la segunda
-        distribución de Earlang, y a la razón
-        $A$ se le llaman ``Earlangs''.
+        distribución de Erlang, y a la razón
+        $A$ se le llaman ``Erlangs''.
     \end{definicion}
 
     \vfill
 
     \textit{Ejemplo}: si tenemos tasas
-    $\lambda=10$ y $\mu=2$; los Earlangs
+    $\lambda=10$ y $\mu=2$; los Erlangs
     $A=\tfrac{\lambda}{\mu}=5$ me dicen que
     necesito $>5$ servidores; y con $N=7$
     tenemos
@@ -419,12 +419,12 @@
 
 
 
-\subsection{Distribución de Earlang-C}
+\subsection{Distribución de Erlang-C}
 \begin{frame}{\secname: \subsecname}
-    \begin{lema}[Earlang-C]
+    \begin{lema}[Erlang-C]
         La probabilidad de esperar en un
         sistema M/M/N viene dada por
-        la distribución Earlang-C:
+        la distribución Erlang-C:
         \begin{equation}
             E_C(N,A)=\mathbb{P}(N(t)\geq N)
             = \frac{A^N}{N!}\frac{1}{1-\rho}\pi_0
@@ -490,7 +490,7 @@
 \begin{frame}{\secname: \subsecname}
     \textit{Ejemplo}: sea un sistema con una
     carga de $A=\tfrac{\lambda}{\mu}=3$
-    Earlangs, ¿cuántos servidores $N$ hay
+    Erlangs, ¿cuántos servidores $N$ hay
     que poner para que, en media,
     haya menos de 10
     usuarios encolados?
@@ -515,7 +515,7 @@
 
 \begin{frame}{\secname: \subsecname}
     \textit{Ejemplo (cont.)}: vemos que con
-    una intensidad de $A=3$ Earlangs necesitamos
+    una intensidad de $A=3$ Erlangs necesitamos
     $N>3$ para que $\mathbb{E}[Q(t)]\leq 10$.
     \vfill
     \begin{figure}
@@ -732,9 +732,9 @@
         \mathbb{E}[N(t)]=
         \sum_{i=0}^{K+1}i \pi_i
         =\pi_0\sum_{i=0}^K i\rho^i
-        =\pi_0\rho\frac{d}{dt}
+        =\pi_0\rho\frac{d}{d\rho}
         \sum_{i=0}^K\rho^i
-        = \pi_0\rho \frac{d}{dt}
+        = \pi_0\rho \frac{d}{d\rho}
         \frac{1-\rho^{K+1}}{1-\rho}\\
         =\frac{1-\rho}{1-\rho^{K+1}}\rho
         \frac{-(K+1)\rho^K(1-\rho)+(1-\rho^{K+1})}{(1-\rho)^2}=\ldots
@@ -899,14 +899,14 @@
         \end{equation}
         y se conoce $E_B(N,A)$
         como la 1ª distribución
-        de Earlang, o Earlang-B.
+        de Erlang, o Erlang-B.
     \end{lema}
 
     \vfill
 
     \textit{Ejemplo}: ¿cuál es la probabilidad
     de bloqueo en un M/M/2/2 con una
-    intensidad de $A=1.2$ Earlangs?
+    intensidad de $A=1.2$ Erlangs?
     \begin{figure}
         \resizebox{!}{.1\textwidth}{%
             \input{figs/mm22-full.tex}
@@ -927,7 +927,7 @@
 
 \begin{frame}{\secname: \subsecname}
     \textit{Ejemplo}: sea un sistema
-    M/M/N/N con carga $A=2.6$ Earlangs,
+    M/M/N/N con carga $A=2.6$ Erlangs,
     ¿cuál es el mínimo
     número de servidores para que
     la probabilidad de bloqueo sea
