@@ -1,0 +1,96 @@
+\begin{tikzpicture}[
+declare function={free(\k,\I)=\I^\k/(\k!);}
+]
+
+
+
+
+%%%% DEFINE SUMATION USING
+%https://tex.stackexchange.com/a/526600/62559
+\newcounter{isum}
+\pgfplotsset{summand/.initial=max}
+\pgfmathdeclarefunction{sum}{2}{%
+\begingroup%
+\pgfkeys{/pgf/fpu,/pgf/fpu/output format=fixed}%
+\edef\myfun{\pgfkeysvalueof{/pgfplots/summand}}%
+\pgfmathsetmacro{\mysum}{0}%
+\pgfmathsetmacro{\myx}{#2}%
+\pgfmathtruncatemacro{\imax}{#1}%
+\setcounter{isum}{0}%
+\loop
+\pgfmathsetmacro{\mysum}{\mysum+\myfun(\value{isum},#2)}%
+\ifnum\value{isum}<\imax\relax
+\stepcounter{isum}\repeat
+\pgfmathparse{\mysum}%
+\pgfmathsmuggle\pgfmathresult\endgroup%
+}%
+
+
+
+
+
+
+
+\begin{axis}[every axis plot post/.append style={
+  mark=none,samples=100},
+  axis x line*=bottom,
+  axis y line*=left,
+  xlabel={$A$},
+  ylabel={$E_C(N,A)$},
+  ymode=log,
+  ymin=10e-4,
+  ymax=1,
+  enlargelimits=upper,
+  grid=both,
+  width=4in,
+  height=2in]
+
+  % N=3
+  \pgfmathsetmacro{\N}{3}
+  \addplot+[summand=free,ultra thick, smooth,
+          color=HotPink1,domain=0:3] {
+      \x^\N/\N! * 1/(1-\x/\N)
+      *1/( sum(\N-1,\x)+x^\N/\N!* 1/(1-\x/\N) )}
+      node [midway,anchor=south west] {};
+
+  % N=4
+  \pgfmathsetmacro{\N}{4}
+  \addplot+[dashed,summand=free,ultra thick, smooth,
+          color=HotPink2,domain=0:4] {
+      \x^\N/\N! * 1/(1-\x/\N)
+      *1/( sum(\N-1,\x)+x^\N/\N!* 1/(1-\x/\N) )}
+      node [pos=0.3,anchor=west] {};
+
+
+  % N=5
+  \pgfmathsetmacro{\N}{5}
+  \addplot+[summand=free,ultra thick, smooth,
+          color=HotPink3,domain=0:5] {
+      \x^\N/\N! * 1/(1-\x/\N)
+      *1/( sum(\N-1,\x)+x^\N/\N!* 1/(1-\x/\N) )}
+      node [pos=.5,anchor=east] {};
+
+  % N=6
+  \pgfmathsetmacro{\N}{6}
+  \addplot+[dashed,summand=free,ultra thick, smooth,
+          color=HotPink4,domain=0:5] {
+      \x^\N/\N! * 1/(1-\x/\N)
+      *1/( sum(\N-1,\x)+x^\N/\N!* 1/(1-\x/\N) )}
+      node [pos=.5,anchor=east] {};
+
+  \legend{$N=3$,$N=4$,$N=5$,$N=6$}
+
+
+
+
+
+
+
+
+
+\end{axis}
+
+
+
+\end{tikzpicture}
+
