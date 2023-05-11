@@ -73,3 +73,6 @@ tikzgen/*
 
 # Ignorar soluciones
 *solucion*tex
+
+# Add pitlane img
+!tema-7/figs/box-pitlane.pdf
