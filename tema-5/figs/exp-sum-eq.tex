@@ -1,0 +1,17 @@
+\begin{tikzpicture}
+    % Time axis
+    \draw[|->] (0,0) -- (5,0) node[anchor=west] {time [min]};
+
+    % ticks
+    \foreach \i in {1,...,5}
+        \draw (\i,.05) -- (\i,-.05);
+
+    % times
+    \draw[<->,color=Firebrick1,thick] (0,0.35) -- node[above,align=center] {Repostar\\$t_1$} (2,0.35);
+    \draw[<->,color=Firebrick4,thick,align=center] (2,0.35) -- node[above] {Pagar\\$t_2$} (4,0.35);
+
+    % Separation
+    \draw[dashed]
+        (2,2) -- (2,.05);
+
+\end{tikzpicture}

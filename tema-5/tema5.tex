@@ -113,7 +113,7 @@
 
 
 
-\title[Tema 5]{Tema 5: Introducción al Teletráfico y Teoría de Colas}
+\title[Tema 5]{Tema 5: Fundamentos de Teletráfico y Teoría de Colas}
 %% \subtitle{Redes y Servicios de Telecomunicaciones (RSTC)\\
 %% Grado en Ingeniería de Tecnologías y Servicios de Telecomunicación}
 %\author{M. Saiful Bari\inst{1} \and Mr X\inst{2}}
@@ -368,6 +368,7 @@ Si ya han pasado {\color{DodgerBlue1}$s$ [sec]}, ¿cuál es
 
 
 
+
 \subsection{Mínimo de variables exponenciales}
 
 \begin{frame}{\secname: \subsecname}
@@ -525,6 +526,207 @@ Si ya han pasado {\color{DodgerBlue1}$s$ [sec]}, ¿cuál es
 
 
 
+\subsection{Suma de exponenciales}
+
+
+\begin{frame}{\secname: \subsecname}
+    \textit{Ejemplo}: en media un coche
+    tarda en repostar
+    {\color{Firebrick1}$t_1=2$~[min]}.
+    Después tarda, en media,
+    {\color{Firebrick4}$t_2=4$~[min]}
+    en pagar.
+
+    \vfill
+
+    ¿Cuál es la probabilidad de que tarde
+    6~[min] en repostar y pagar?
+
+    \vfill
+
+    \begin{figure}
+        \input{figs/exp-sum}
+    \end{figure}
+
+\end{frame}
+
+
+\begin{frame}{\secname: \subsecname}
+    \begin{lema}[Suma de v.a. exponenciales
+        independientes]
+        Sean las v.a. exponenciales
+        independientes
+        {\color{Firebrick1}$t_1$} y
+        {\color{Firebrick4}$t_2$}, con
+        tasas
+        {\color{Firebrick1}$\lambda_1$} y
+        {\color{Firebrick4}$\lambda_2$}; se
+        tiene que:
+        \begin{equation}
+            \mathbb{P}({\color{Firebrick1}t_1}+{\color{Firebrick4}t_2}=t) = 
+            {\color{Firebrick1}\lambda_1}{\color{Firebrick4}\lambda_2}
+            \left(e^{-{\color{Firebrick4}\lambda_2} t}
+            \right)
+            \frac{e^{t({\color{Firebrick4}\lambda_2} - {\color{Firebrick1}\lambda_1})}-1}{{\color{Firebrick4}\lambda_2}-{\color{Firebrick1}\lambda_1}}
+            \label{eq:ind-sum}
+        \end{equation}
+    \end{lema}
+    
+    \vfill
+
+    \textit{Demostración}:
+    \begin{multline*}
+        \mathbb{P}({\color{Firebrick1}t_1}+{\color{Firebrick4}t_2}=t)
+        = \int_0^t f_{t_1}(\tau)f_{t_2}(t-\tau)\ d\tau = f_{t_1} * f_{t_2} (t)\\
+        =\int_0^t {\color{Firebrick1}\lambda_1} {\color{Firebrick4}\lambda_2}
+        e^{-{\color{Firebrick4}\lambda_2} t}
+        e^{\tau ({\color{Firebrick4}\lambda_2} - {\color{Firebrick1}\lambda_1})}
+        \ d\tau = \ldots
+    \end{multline*}
+\end{frame}
+
+
+
+
+
+\begin{frame}{\secname: \subsecname}
+    \textit{Ejemplo}: en media un coche
+    tarda en repostar
+    {\color{Firebrick1}$t_1=2$~[min]}.
+    Después tarda, en media,
+    {\color{Firebrick4}$t_2=4$~[min]}
+    en pagar.
+
+    \vfill
+
+    ¿Cuál es la probabilidad de que tarde
+    6~[min] en repostar y pagar?
+
+    \vfill
+
+    \begin{figure}
+        \input{figs/exp-sum}
+    \end{figure}
+
+
+    \begin{multline*}
+        \mathbb{P}({\color{Firebrick1}t_1}+{\color{Firebrick4}t_2}=6) = 
+        {\color{Firebrick1}\lambda_1}{\color{Firebrick4}\lambda_2}
+        \left(e^{-{\color{Firebrick4}\lambda_2} 6}
+        \right)
+        \frac{e^{6({\color{Firebrick4}\lambda_2} - {\color{Firebrick1}\lambda_1})}-1}{{\color{Firebrick4}\lambda_2}-{\color{Firebrick1}\lambda_1}}\\
+        =
+        {\color{Firebrick1}\frac{1}{2}}{\color{Firebrick4}\frac{1}{4}}
+        \left(e^{-{\color{Firebrick4}\frac{1}{4}} 6}
+        \right)
+        \frac{e^{6({\color{Firebrick4}\frac{1}{4}} - {\color{Firebrick1}\frac{1}{2}})}-1}{{\color{Firebrick4}\frac{1}{4}}-{\color{Firebrick1}\frac{1}{2}}} = 0.08667154589028295
+    \end{multline*}
+
+\end{frame}
+
+
+
+
+
+\begin{frame}{\secname: \subsecname}
+    \textit{Ejemplo}: en media un coche
+    tarda en repostar y pagar
+    ${\color{Firebrick1}t_1}=
+    {\color{Firebrick4}t_2}=2$~[min].
+
+    \vfill
+
+    ¿Cuál es la probabilidad de que tarde
+    4~[min] en repostar y pagar?
+
+    \vfill
+
+    \begin{figure}
+        \input{figs/exp-sum-eq}
+    \end{figure}
+\end{frame}
+
+
+
+\begin{frame}{\secname: \subsecname}
+    \begin{lema}[Suma de v.a. exponenciales
+        i.i.d]
+        Sean las v.a. exponenciales
+        independientes e idénticamete
+        distribuidas
+        {\color{Firebrick1}$t_1$} y
+        {\color{Firebrick4}$t_2$}, ambas
+        con tasa
+        {\color{Firebrick2}$\lambda$}, se
+        tiene que:
+        \begin{equation}
+            \mathbb{P}({\color{Firebrick1}t_1}+{\color{Firebrick4}t_2}=t) = 
+            {\color{Firebrick2}\lambda}^2
+            t
+            e^{-{\color{Firebrick2}\lambda} t}
+        \end{equation}
+    \end{lema}
+    \vfill
+
+    \textit{Demostración:}
+    Tomamos límite para
+    $x={\color{Firebrick1}\lambda_2}
+    -{\color{Firebrick4}\lambda_1}$
+    usando~\eqref{eq:ind-sum}:
+    \begin{multline*}
+        \lim_{x\to0}
+        {\color{Firebrick1}\lambda_1}{\color{Firebrick4}\lambda_2}
+        \left(e^{-{\color{Firebrick4}\lambda_2} t}
+        \right)
+        \underbrace{\frac{e^{t x}-1}{x}}_{\text{indeterminación}}\\
+        =
+        \lim_{x\to0}
+        {\color{Firebrick1}\lambda_1}{\color{Firebrick4}\lambda_2}
+        \left(e^{-{\color{Firebrick4}\lambda_2} t}
+        \right)
+        \frac{\lim_{n\to\infty}\sum_{k=0}^n\frac{(tx)^k}{k!}-1}{x}\\
+        =
+        \lim_{x\to0}
+        {\color{Firebrick1}\lambda_1}{\color{Firebrick4}\lambda_2}
+        \left(e^{-{\color{Firebrick4}\lambda_2} t}
+        \right)
+        \lim_{n\to\infty}\sum_{k=1}^n\frac{t^k x^{k-1}}{k!}
+        \underbrace{=}_{nota\footnote{Intercambio límites convergencia uniforme $e^x$}}
+        {\color{Firebrick2}\lambda}^2
+        e^{-{\color{Firebrick2}\lambda} t} t
+    \end{multline*}
+\end{frame}
+
+
+
+\begin{frame}{\secname: \subsecname}
+    \textit{Ejemplo}: en media un coche
+    tarda en repostar y pagar
+    ${\color{Firebrick1}t_1}=
+    {\color{Firebrick4}t_2}=2$~[min].
+
+    \vfill
+
+    ¿Cuál es la probabilidad de que tarde
+    4~[min] en repostar y pagar?
+
+    \vfill
+
+    \begin{figure}
+        \input{figs/exp-sum-eq}
+    \end{figure}
+
+    \begin{equation*}
+        \mathbb{P}({\color{Firebrick1}t_1}+{\color{Firebrick4}t_2}=4) = 
+        {\color{Firebrick2}\lambda}^2
+        t
+        e^{-{\color{Firebrick2}\lambda} t}
+        = \left({\color{Firebrick2}\frac{1}{2}} \right)^2
+        4\cdot  e^{-{\color{Firebrick2}\frac{1}{2}}\cdot4}
+        =
+        0.1353352832366127
+    \end{equation*}
+\end{frame}
 
 
 
