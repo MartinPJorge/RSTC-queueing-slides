@@ -994,6 +994,112 @@ Si ya han pasado {\color{DodgerBlue1}$s$ [sec]}, ¿cuál es
 
 
 
+\subsection{Descomposición}
+\begin{frame}{\secname: \subsecname}
+     \textit{Ejemplo}: una gasolinera
+     recibe $\lambda=\frac{1}{4}$~[coches/min].
+     Un coche es compacto con probabilidad
+     {\color{Firebrick1}$p=0.2$}, y
+     todoterreno con probabilidad
+     {\color{Firebrick4}$1-p=0.8$}.
+     ¿Cuál es la probabilidad
+     de que lleguen 2 compactos en 9~[min]?
+
+    \vfill
+
+    % askjl
+    \begin{figure}
+        \centering
+        \input{figs/decomposition}
+    \end{figure}
+\end{frame}
+
+
+\begin{frame}{\secname: \subsecname}
+    \begin{lema}[Descomposición proceso de Poisson]
+        Considere un proceso de Poisson
+        $N(t)$ con tasa
+        $\lambda$.
+        Si:
+        \begin{itemize}
+            \item {\color{Firebrick1}$N_1(t)$}
+        un proceso que asignar
+        una llegada con probabilidad
+        {\color{Firebrick1}$p$}; y
+            \item {\color{Firebrick4}$N_2(t)$}
+        un proceso que asignar
+        una llegada con probabilidad
+        {\color{Firebrick4}$1-p$}
+        \end{itemize}
+        entoces 
+        {\color{Firebrick1}$N_1(t)$},
+        {\color{Firebrick4}$N_2(t)$}
+        son procesos de Poisson con
+        tasas
+        {\color{Firebrick1}$\lambda p$},
+        {\color{Firebrick4}$\lambda (1-p)$};
+        respectivamente.
+    \end{lema}
+
+    \vfill
+
+    \textit{Demostración~\cite{amable}}:
+    \begin{multline*}
+        \mathbb{P}(
+        N_1(t)=n,N_2(t)=m)\\
+        =
+        \mathbb{P}\left(
+        N_1(t)=n
+        |\ N(t)=n+m)
+        \mathbb{P}(N(t)=n+m\right)\\
+        ={n+m\choose n}
+        p^n(1-p)^m \cdot
+        \frac{e^{-\lambda t}(\lambda t)^{n+m}}{(n+m)!}
+        =
+        {\color{Firebrick1}
+        \frac{e^{-\lambda t}(\lambda p t)^{n}}{n!}
+        }
+        {\color{Firebrick4}
+        \frac{e^{-\lambda t}(\lambda(1-p) t)^{m}}{m!}
+        }
+    \end{multline*}
+\end{frame}
+
+
+
+\begin{frame}{\secname: \subsecname}
+     \textit{Ejemplo}: una gasolinera
+     recibe $\lambda=\frac{1}{4}$~[coches/min].
+     Un coche es compacto con probabilidad
+     {\color{Firebrick1}$p=0.2$}, y
+     todoterreno con probabilidad
+     {\color{Firebrick4}$1-p=0.8$}.
+     ¿Cuál es la probabilidad
+     de que lleguen 2 compactos en 9~[min]?
+
+    \vfill
+
+    \begin{figure}
+        \centering
+        \resizebox{.5\textwidth}{!}{%
+            \input{figs/decomposition}%
+        }
+    \end{figure}
+
+    \vfill 
+
+    \begin{multline*}
+        \mathbb{P}(N_1(9)=2)
+        =\frac{e^{-\lambda p9}(\lambda p9)^{2}}{2!}\\
+        =\frac{e^{-\frac{1}{4}\cdot0.2\cdot 9}(\frac{1}{4}\cdot0.2\cdot9)^{2}}{2!}
+        =0.1587916087808796
+    \end{multline*}
+\end{frame}
+
+
+
+
+
 
 
 \subsection{PASTA}
