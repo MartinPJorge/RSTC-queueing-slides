@@ -1,0 +1,37 @@
+%%% \tikzset{node distance=1cm, % Minimum distance between two nodes. Change if necessary.
+%%%          every state/.style={ % Sets the properties for each state
+%%%            semithick,draw=HotPink3!50,
+%%%            fill=HotPink3!20},
+%%%          initial text={},     % No label on start arrow
+%%%          double distance=4pt, % Adjust appearance of accept states
+%%%          every edge/.style={  % Sets the properties for each transition
+%%%          draw, ->,>=stealth',     % Makes edges directed with bold arrowheads
+%%%            auto, thick},
+%%% }
+\begin{tikzpicture}
+   
+% Estados
+\node[state,fill=HotPink3!20] (2) [right=of 1] {$\phantom{-n}i\phantom{+n}$};
+\node[state] (3) [right=of 2] {$\phantom{-}i+1\phantom{1}$};
+\node (4) [right=of 3] {$\phantom{-}\ldots\phantom{-}$};
+\node[state] (5) [right=of 4] {$i+n-1$};
+\node[state,fill=HotPink3!20] (6) [right=of 5] {$\phantom{-}i+n\phantom{-}$};
+
+% Probabilidades
+\node[anchor=north] at (2.south) {$\pi_{i}(0)$};
+\node[anchor=north] at (3.south) {$\pi_{i+1}\left(\frac{t}{n} \right)$};
+\node[anchor=north] at (5.south) {$\pi_{i+n-1}\left(\frac{(n-1)t}{n} \right)$};
+\node[anchor=north] at (6.south) {$\pi_{i+n}\left(t \right)$};
+
+
+% Transiciones
+\draw [->,thick] (2.north east) to [bend left=55]  node[above] {$\lambda$}  (3.north west);
+\draw [->,thick] (3.north east) to [bend left=55]  node[above] {$\lambda$}  (4.north west);
+\draw [->,thick] (4.north east) to [bend left=55]  node[above] {$\lambda$}  (5.north west);
+\draw [->,thick] (5.north east) to [bend left=55]  node[above] {$\lambda$}  (6.north west);
+
+
+
+
+    
+\end{tikzpicture}

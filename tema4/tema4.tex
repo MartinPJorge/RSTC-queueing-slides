@@ -113,7 +113,7 @@
 
 
 
-\title[Tema 5]{Tema 5: Fundamentos de Teletráfico y Teoría de Colas}
+\title[Tema 4]{Tema 4: Fundamentos de Teletráfico y Teoría de Colas}
 %% \subtitle{Redes y Servicios de Telecomunicaciones (RSTC)\\
 %% Grado en Ingeniería de Tecnologías y Servicios de Telecomunicación}
 %\author{M. Saiful Bari\inst{1} \and Mr X\inst{2}}
@@ -121,7 +121,7 @@
 \titlegraphic{%
 \includegraphics[height=2.5cm]{figs/RSTC-grande.png}\\%
 \doclicenseIcon {\tiny \hspace{1em}\doclicenseText}\\%
-\href{https://github.com/MartinPJorge/RSTC-queueing-slides}{\includegraphics[height=1cm]{../tema-5/figs/github-logo.png}}%
+\href{https://github.com/MartinPJorge/RSTC-queueing-slides}{\includegraphics[height=1cm]{../tema4/figs/github-logo.png}}%
 }
 
 \author{\textcolor{white}{RSTC curso 2022-2023}}
@@ -1519,7 +1519,7 @@ Si ya han pasado {\color{DodgerBlue1}$s$ [sec]}, ¿cuál es
         + {\color{DodgerBlue1}\pi_{i-1}(t) \cdot (\lambda+\mu)
     \frac{\lambda}{\lambda+\mu}}
     + {\color{DodgerBlue4}\pi_{i+1}(t) \cdot \overbrace{(\lambda+\mu)}^{\nu_{i+1}}
-        \overbrace{\frac{\mu}{\lambda+\mu}}^{\pi_{i,i+1}(t)} }\\
+        \overbrace{\frac{\mu}{\lambda+\mu}}^{\pi_{i+1,i}(t)} }\\
         =-{\color{HotPink4}\pi_i(t)} {\color{Firebrick3}(\lambda+\mu)} 
         + {\color{DodgerBlue1}\pi_{i-1}(t) \lambda }
         + {\color{DodgerBlue4}\pi_{i+1}(t) \mu}
@@ -1561,6 +1561,70 @@ Si ya han pasado {\color{DodgerBlue1}$s$ [sec]}, ¿cuál es
     \end{equation*}
 
 \end{frame}
+
+
+
+\subsection{Irreducibilidad y Recurrencia}
+\begin{frame}{\secname: \subsecname}
+    Para garantizar la convergencia
+    y unicidad de
+    $\lim_{t\to\infty}\tfrac{d}{dt}
+    \pi_i(t)=0$,
+    la cadena debe ser~\cite{amable}:
+    \begin{itemize}
+        \item \textbf{Irreducible}.
+            Un estado $i$ puede alcanzar
+            cualquier otro $j$.
+        \item \textbf{Recurrente}.
+            Hay un tiempo medio finito
+            de volver a un estado.
+    \end{itemize}
+
+    \vfill
+
+    La recurrencia se garantiza
+    con\footnote{Según~\cite{recurrent}
+    la cadena es recurrente positiva.} $\lambda<\mu$.
+
+\end{frame}
+
+
+
+\begin{frame}{\secname: \subsecname}
+    Para demostrar que la cadena es
+    \textbf{irreducible} vemos
+    $\mathbb{P}(i+n \text{ en } t
+    | i \text{ en } 0)>0$.
+
+    \vfill
+
+    Una posible transición de $i$
+    a $i+n$ es:
+    
+    \begin{figure}
+         \resizebox{.8\textwidth}{!}{%
+            \input{figs/reach-nplus1}%
+         }
+    \end{figure}
+
+
+    \vfill
+
+    Lo de arriba sucede con probabilidad
+    \begin{equation}
+        \prod_{k=i}^{i+n} \pi_k\left(
+            \frac{(k-i)t}{n}
+        \right) > 0
+        \label{eq:instance}
+    \end{equation}
+    y $\mathbb{P}(i+n \text{ en } t
+    | i \text{ en } 0)>\eqref{eq:instance}
+    >0$.
+\end{frame}
+
+
+
+
 
 
 
