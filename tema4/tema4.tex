@@ -540,6 +540,7 @@ Si ya han pasado {\color{DodgerBlue1}$s$ [sec]}, ¿cuál es
     \vfill
 
     ¿Cuál es la probabilidad de que tarde
+    más de
     6~[min] en repostar y pagar?
 
     \vfill
@@ -560,14 +561,15 @@ Si ya han pasado {\color{DodgerBlue1}$s$ [sec]}, ¿cuál es
         {\color{Firebrick4}$t_2$}, con
         tasas
         {\color{Firebrick1}$\lambda_1$} y
-        {\color{Firebrick4}$\lambda_2$}; se
-        tiene que:
+        {\color{Firebrick4}$\lambda_2$}; 
+        su suma tiene función de
+        densidad:
         \begin{equation}
-            \mathbb{P}({\color{Firebrick1}t_1}+{\color{Firebrick4}t_2}=t) = 
-            {\color{Firebrick1}\lambda_1}{\color{Firebrick4}\lambda_2}
-            \left(e^{-{\color{Firebrick4}\lambda_2} t}
+            f_{{\color{Firebrick1}t_1}+{\color{Firebrick4}t_2}}(\tau) = 
+            \frac{{\color{Firebrick1}\lambda_1}{\color{Firebrick4}\lambda_2}}{{\color{Firebrick4}\lambda_2}-{\color{Firebrick1}\lambda_1}}
+            \left(e^{-{\color{Firebrick1}\lambda_1}\tau}
+                -e^{-{\color{Firebrick4}\lambda_2}\tau}
             \right)
-            \frac{e^{t({\color{Firebrick4}\lambda_2} - {\color{Firebrick1}\lambda_1})}-1}{{\color{Firebrick4}\lambda_2}-{\color{Firebrick1}\lambda_1}}
             \label{eq:ind-sum}
         \end{equation}
     \end{lema}
@@ -576,12 +578,12 @@ Si ya han pasado {\color{DodgerBlue1}$s$ [sec]}, ¿cuál es
 
     \textit{Demostración}:
     \begin{multline*}
-        \mathbb{P}({\color{Firebrick1}t_1}+{\color{Firebrick4}t_2}=t)
-        = \int_0^t f_{t_1}(\tau)f_{t_2}(t-\tau)\ d\tau = f_{t_1} * f_{t_2} (t)\\
-        =\int_0^t {\color{Firebrick1}\lambda_1} {\color{Firebrick4}\lambda_2}
-        e^{-{\color{Firebrick4}\lambda_2} t}
-        e^{\tau ({\color{Firebrick4}\lambda_2} - {\color{Firebrick1}\lambda_1})}
-        \ d\tau = \ldots
+        f_{{\color{Firebrick1}t_1}+{\color{Firebrick4}t_2}}(\tau)
+        = \int_0^\tau f_{t_1}(t)f_{t_2}(\tau-t)\ dt = f_{t_1} * f_{t_2} (\tau)\\
+        =\int_0^\tau {\color{Firebrick1}\lambda_1} {\color{Firebrick4}\lambda_2}
+        e^{-{\color{Firebrick4}\lambda_2} \tau}
+        e^{t ({\color{Firebrick4}\lambda_2} - {\color{Firebrick1}\lambda_1})}
+        \ dt = \ldots
     \end{multline*}
 \end{frame}
 
@@ -600,7 +602,7 @@ Si ya han pasado {\color{DodgerBlue1}$s$ [sec]}, ¿cuál es
     \vfill
 
     ¿Cuál es la probabilidad de que tarde
-    6~[min] en repostar y pagar?
+    más de 6~[min] en repostar y pagar?
 
     \vfill
 
@@ -610,16 +612,15 @@ Si ya han pasado {\color{DodgerBlue1}$s$ [sec]}, ¿cuál es
 
 
     \begin{multline*}
-        \mathbb{P}({\color{Firebrick1}t_1}+{\color{Firebrick4}t_2}=6) = 
-        {\color{Firebrick1}\lambda_1}{\color{Firebrick4}\lambda_2}
-        \left(e^{-{\color{Firebrick4}\lambda_2} 6}
-        \right)
-        \frac{e^{6({\color{Firebrick4}\lambda_2} - {\color{Firebrick1}\lambda_1})}-1}{{\color{Firebrick4}\lambda_2}-{\color{Firebrick1}\lambda_1}}\\
+        \mathbb{P}({\color{Firebrick1}t_1}+{\color{Firebrick4}t_2}>6) = 
+        \int_6^\infty f_{%
+        {\color{Firebrick1}t_1}+{\color{Firebrick4}t_2}}(t)\ dt
         =
-        {\color{Firebrick1}\frac{1}{2}}{\color{Firebrick4}\frac{1}{4}}
-        \left(e^{-{\color{Firebrick4}\frac{1}{4}} 6}
+        \frac{{\color{Firebrick1}\lambda_1}{\color{Firebrick4}\lambda_2}}{{\color{Firebrick4}\lambda_2}-{\color{Firebrick1}\lambda_1}}
+        \left(\frac{e^{-{\color{Firebrick1}\lambda_1}\tau}}{{\color{Firebrick1}\lambda_1}}
+        -\frac{e^{-{\color{Firebrick4}\lambda_2}\tau}}{{\color{Firebrick4}\lambda_2}}
         \right)
-        \frac{e^{6({\color{Firebrick4}\frac{1}{4}} - {\color{Firebrick1}\frac{1}{2}})}-1}{{\color{Firebrick4}\frac{1}{4}}-{\color{Firebrick1}\frac{1}{2}}} = 0.08667154589028295
+        \simeq 0.06
     \end{multline*}
 
 \end{frame}
@@ -637,7 +638,7 @@ Si ya han pasado {\color{DodgerBlue1}$s$ [sec]}, ¿cuál es
     \vfill
 
     ¿Cuál es la probabilidad de que tarde
-    4~[min] en repostar y pagar?
+    más 4~[min] en repostar y pagar?
 
     \vfill
 
@@ -657,13 +658,13 @@ Si ya han pasado {\color{DodgerBlue1}$s$ [sec]}, ¿cuál es
         {\color{Firebrick1}$t_1$} y
         {\color{Firebrick4}$t_2$}, ambas
         con tasa
-        {\color{Firebrick2}$\lambda$}, se
-        tiene que:
+        {\color{Firebrick2}$\lambda$},
+        su suma tiene función de densidad:
         \begin{equation}
-            \mathbb{P}({\color{Firebrick1}t_1}+{\color{Firebrick4}t_2}=t) = 
+            f_{{\color{Firebrick1}t_1}+{\color{Firebrick4}t_2}}(\tau) = 
             {\color{Firebrick2}\lambda}^2
-            t
-            e^{-{\color{Firebrick2}\lambda} t}
+            \tau
+            e^{-{\color{Firebrick2}\lambda} \tau}
         \end{equation}
     \end{lema}
     \vfill
@@ -675,25 +676,31 @@ Si ya han pasado {\color{DodgerBlue1}$s$ [sec]}, ¿cuál es
     usando~\eqref{eq:ind-sum}:
     \begin{multline*}
         \lim_{x\to0}
-        {\color{Firebrick1}\lambda_1}{\color{Firebrick4}\lambda_2}
-        \left(e^{-{\color{Firebrick4}\lambda_2} t}
-        \right)
-        \underbrace{\frac{e^{t x}-1}{x}}_{\text{indeterminación}}\\
+            \frac{{\color{Firebrick1}\lambda_1}{\color{Firebrick4}\lambda_2}}{x}
+            \left(e^{-{\color{Firebrick1}\lambda_1}\tau}
+                -e^{-{\color{Firebrick4}\lambda_2}\tau}
+            \right)
         =
         \lim_{x\to0}
         {\color{Firebrick1}\lambda_1}{\color{Firebrick4}\lambda_2}
-        \left(e^{-{\color{Firebrick4}\lambda_2} t}
+        \left(e^{-{\color{Firebrick4}\lambda_2} \tau}
         \right)
-        \frac{\lim_{n\to\infty}\sum_{k=0}^n\frac{(tx)^k}{k!}-1}{x}\\
+        \underbrace{\frac{e^{\tau x}-1}{x}}_{\text{indeterminación}}\\
         =
         \lim_{x\to0}
         {\color{Firebrick1}\lambda_1}{\color{Firebrick4}\lambda_2}
-        \left(e^{-{\color{Firebrick4}\lambda_2} t}
+        \left(e^{-{\color{Firebrick4}\lambda_2} \tau}
         \right)
-        \lim_{n\to\infty}\sum_{k=1}^n\frac{t^k x^{k-1}}{k!}
+        \frac{\lim_{n\to\infty}\sum_{k=0}^n\frac{(\tau x)^k}{k!}-1}{x}\\
+        =
+        \lim_{x\to0}
+        {\color{Firebrick1}\lambda_1}{\color{Firebrick4}\lambda_2}
+        \left(e^{-{\color{Firebrick4}\lambda_2} \tau}
+        \right)
+        \lim_{n\to\infty}\sum_{k=1}^n\frac{\tau^k x^{k-1}}{k!}
         \underbrace{=}_{nota\footnote{Intercambio límites convergencia uniforme $e^x$}}
         {\color{Firebrick2}\lambda}^2
-        e^{-{\color{Firebrick2}\lambda} t} t
+        e^{-{\color{Firebrick2}\lambda} \tau} \tau
     \end{multline*}
 \end{frame}
 
@@ -708,6 +715,7 @@ Si ya han pasado {\color{DodgerBlue1}$s$ [sec]}, ¿cuál es
     \vfill
 
     ¿Cuál es la probabilidad de que tarde
+    más de
     4~[min] en repostar y pagar?
 
     \vfill
@@ -717,14 +725,14 @@ Si ya han pasado {\color{DodgerBlue1}$s$ [sec]}, ¿cuál es
     \end{figure}
 
     \begin{equation*}
-        \mathbb{P}({\color{Firebrick1}t_1}+{\color{Firebrick4}t_2}=4) = 
+        \mathbb{P}({\color{Firebrick1}t_1}+{\color{Firebrick4}t_2}>4) = 
+        \int_4^\infty
         {\color{Firebrick2}\lambda}^2
-        t
-        e^{-{\color{Firebrick2}\lambda} t}
-        = \left({\color{Firebrick2}\frac{1}{2}} \right)^2
-        4\cdot  e^{-{\color{Firebrick2}\frac{1}{2}}\cdot4}
-        =
-        0.1353352832366127
+        \tau
+        e^{-{\color{Firebrick2}\lambda} \tau}\ d\tau
+        =\underbrace{\ldots}_{\text{partes}}
+        \simeq
+        0.30
     \end{equation*}
 \end{frame}
 
