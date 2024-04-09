@@ -686,21 +686,23 @@ Si ya han pasado {\color{DodgerBlue1}$s$ [sec]}, ¿cuál es
         \left(e^{-{\color{Firebrick4}\lambda_2} \tau}
         \right)
         \underbrace{\frac{e^{\tau x}-1}{x}}_{\text{indeterminación}}\\
-        =
-        \lim_{x\to0}
+        \underbrace{=}_{t=e^{2x}-1}
         {\color{Firebrick1}\lambda_1}{\color{Firebrick4}\lambda_2}
         \left(e^{-{\color{Firebrick4}\lambda_2} \tau}
         \right)
-        \frac{\lim_{n\to\infty}\sum_{k=0}^n\frac{(\tau x)^k}{k!}-1}{x}\\
+        \lim_{t\to0}
+        \frac{\tau}{\frac{1}{t}\log(1+t)}
         =
-        \lim_{x\to0}
         {\color{Firebrick1}\lambda_1}{\color{Firebrick4}\lambda_2}
         \left(e^{-{\color{Firebrick4}\lambda_2} \tau}
         \right)
-        \lim_{n\to\infty}\sum_{k=1}^n\frac{\tau^k x^{k-1}}{k!}
-        \underbrace{=}_{nota\footnote{Intercambio límites convergencia uniforme $e^x$}}
-        {\color{Firebrick2}\lambda}^2
-        e^{-{\color{Firebrick2}\lambda} \tau} \tau
+        \lim_{t\to0}
+        \frac{\tau}{\log(1+t)^{\frac{1}{t}}}\\
+        =
+        {\color{Firebrick1}\lambda_1}{\color{Firebrick4}\lambda_2}
+        \left(e^{-{\color{Firebrick4}\lambda_2} \tau}
+        \right)
+        \frac{\tau}{\log e}
     \end{multline*}
 \end{frame}
 
