@@ -1434,9 +1434,9 @@ Si ya han pasado {\color{DodgerBlue1}$s$ [sec]}, ¿cuál es
         \item el tiempo de estancia $T$ en un
             estado se distribuye como una
             exponencial de tasa
-            $\nu=\lambda_l+\lambda_s$:
+            $\nu=\lambda+\mu$:
             \begin{equation*}
-                \mathbb{P}(T>\tau)=\mathbb{P}(\min\{t_l,t_s\}>\tau)=e^{-(\lambda_l+\lambda_s)\tau}
+                \mathbb{P}(T>\tau)=\mathbb{P}(\min\{t_l,t_s\}>\tau)=e^{-(\lambda+\mu)\tau}
             \end{equation*}
             con $t_l,t_s$ las v.a.
             exponenciales del tiempo de
@@ -1450,8 +1450,8 @@ Si ya han pasado {\color{DodgerBlue1}$s$ [sec]}, ¿cuál es
                 + \mathbb{P}(N(t+1)=k-1|\ N(t)=k)\\
                 = \mathbb{P}(t_l<t_s)
                 + \mathbb{P}(t_s<t_l)
-                = \frac{\lambda_l}{\lambda_l+\lambda_s}
-                + \frac{\lambda_s}{\lambda_l+\lambda_s} = 1
+                = \frac{\lambda}{\lambda+\mu}
+                + \frac{\mu}{\lambda+\mu} = 1
             \end{multline*}
     \end{enumerate}
 
