@@ -563,19 +563,14 @@
         (1-\pi_0) \mathbb{P}(t_s\leq\tau)\\
         =(1-\rho) \int_0^\tau
         f_{t_l+t_s}(t)\ dt
-        + \rho e^{-\mu\tau}
-        = (1-\rho)\int_0^\tau
-        f_{t_l}\ast f_{t_s}(t)\ dt
-        + \rho e^{-\mu\tau}\\
-        = (1-\rho)\int_0^\tau \int_0^t
-        f_{t_l}(t-\theta) f_{t_s}(\theta)
-        \ d\theta \ dt
-        + \rho e^{-\mu\tau}\\
-        = (1-\rho)\int_0^\tau \int_0^t
-        e^{-\lambda(t-\theta)} e^{-\mu\theta}
-        \ d\theta \ dt
-        + \rho e^{-\mu\tau}
-        = \ldots
+        + \rho (1-e^{-\mu\tau})\\
+        =(1-\rho)\left(
+        1-\frac{\mu}{\mu-\lambda}
+        e^{-\lambda\tau}
+        +\frac{\lambda}{\mu-\lambda}
+        e^{-\mu\tau}
+        \right)
+        + \rho (1-e^{-\mu\tau})\\
         = 1-e^{-\lambda\tau}
     \end{multline*}
 \end{frame}
@@ -849,7 +844,7 @@
 
 \begin{frame}{\secname: \subsecname}
     \textit{Ejemplo (cont.)}: miremos qué
-    carga tiene cada cola\footnote{$\mu_2=\mu_3=\mu_1$.}.
+    carga tiene cada cola\footnote{$\mu_2=\mu_3=\mu_1$.}\footnote{$\lambda_1=\lambda+\lambda_3$.}.
 
     \begin{itemize}
         \item carga cola $i=1$:
