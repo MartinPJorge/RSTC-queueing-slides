@@ -130,7 +130,7 @@
 }
 
 
-\author{\textcolor{white}{RSTC curso 2023-2024}}
+\author{\textcolor{white}{RSTC curso 2024-2025}}
 %\author{Jorge Martín Pérez\inst{1}}
 %\institute{
 %    \inst{1}
@@ -222,11 +222,11 @@
 
 
 \section{Sistema M/G/1}
-\subsection{No Markoviano}
+\subsection{No vale Cadena de Markov}
 \begin{frame}{\secname: \subsecname}
     Tiempo de servicio sigue una distribución
     general\footnote{Por ejemplo,
-    $G(\mu)=U(\tfrac{1}{2\mu}, \tfrac{2}{3\mu})$}
+    $G(\mu)=U(0,\tfrac{2}{\mu})$}
     $t_s\sim G(\mu)$.
 
     \begin{figure}
@@ -256,14 +256,13 @@
         \mathbb{P}(\min\{t_l,t_s\}>\tau)=
         \mathbb{P}(t_l>\tau)
         \mathbb{P}(t_s>\tau)\\
-        =
-        \left(1 - \frac{\tau}{\mu} \right)
-        e^{-\lambda\tau} \neq e^{-\nu_i \tau}
+        = 
+        e^{-\lambda\tau} \mathbb{P}(t_s>\tau) \neq e^{-\nu_i \tau}
     \end{multline}
-    con $t_s\sim G(\mu)=U\left(\tfrac{1}{2\mu},
-    \tfrac{2}{3\mu}\right),\
-    \tau\in\left[\tfrac{1}{2\mu},
-    \tfrac{2}{3\mu}\right]$.
+    con $t_s\sim G(\mu)=U\left(0,\tfrac{2}{\mu}\right),\
+    \tau\in\left[0,\tfrac{2}{\mu}\right]$.
+
+    \emph{Problema}: $t_s$ tiene memoria.
 \end{frame}
 
 
@@ -290,7 +289,7 @@
         \mathbb{E}[W(t)]&=
         \mathbb{E}[Q(t)]\tfrac{1}{\mu}
         + \mathbb{E}[R(t)]\\
-        &\implies \mathbb{E}[(W(t))]=
+        &\implies \mathbb{E}[W(t)]=
         \frac{\mathbb{E}[R(t)]}{1-\rho}
     \end{align*}
 \end{frame}
@@ -377,7 +376,7 @@
 
 
 
-\subsection{Ejemplos distribuciones servicio}
+\subsection{Ejemplos de distribuciones de servicio}
 \begin{frame}{\secname: \subsecname}
     \textit{Ejemplo}: supongamos un tiempo
     de servicio $t_s\sim Exp(\mu)$.
@@ -457,7 +456,7 @@
 \end{frame}
 
 
-\subsection{M/M/1 como caso peor}
+\subsection{Comparación con M/M/1}
 \begin{frame}{\secname: \subsecname}
     El tiempo medio de servicio
     $\mathbb{E}[T(t)]$
