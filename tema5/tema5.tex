@@ -6,6 +6,7 @@
 \usepackage[utf8]{inputenc}
 \usepackage{mathtools}
 \usepackage{multicol}
+\usepackage[spanish]{babel}
 %\usepackage[x11names]{xcolor}
 \usefonttheme{professionalfonts}
 
@@ -222,7 +223,7 @@
 
 
 \section{Sistema M/G/1}
-\subsection{No vale Cadena de Markov}
+\subsection{No vale la CTMC del M/M/1}
 \begin{frame}{\secname: \subsecname}
     Tiempo de servicio sigue una distribución
     general\footnote{Por ejemplo,
@@ -443,7 +444,7 @@
     \begin{itemize}
         \item $t_s\sim Exp(\mu)\implies
             \mathbb{E}[t_s^2]=\frac{1}{\mu^2}+
-            \frac{1}{\mu^2}$;
+            \frac{1}{\mu^2}=\frac{2}{\mu^2}$;
         \item $t_s\sim U\left(0,\tfrac{2}{\mu}
             \right)
             \implies
@@ -460,7 +461,8 @@
 \begin{frame}{\secname: \subsecname}
     El tiempo medio de servicio
     $\mathbb{E}[T(t)]$
-    es pesimista en un M/M/1.
+    del M/M/1
+    es peor en el ejemplo. 
 
     \vfill
 
