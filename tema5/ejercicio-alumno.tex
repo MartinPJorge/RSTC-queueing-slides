@@ -1,0 +1,110 @@
+\documentclass{upmassignment}
+\usepackage[spanish]{babel}
+\usepackage{ifthen}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+
+
+
+% Para mostrar/ocultar soluciones
+\newboolean{show}
+%\setboolean{show}{true}
+\setboolean{show}{false}
+\usepackage{environ}
+\NewEnviron{solucion}{
+  \ifshow
+      \begin{answer}\BODY\end{answer}
+  \fi}
+
+
+
+
+
+
+\coursetitle{Creating assignments}
+\courselabel{RSTC}
+\exercisesheet{Ejercicio de Alumno}{Tema 5}
+\student{\ }%
+\semester{Segundo Semestre}
+\date{\today}
+\university{Universidad Politécnica de Madrid}
+\school{Departamento de Ingeniería de Sistemas Telemáticos}
+%\usepackage[pdftex]{graphicx}
+%\usepackage{subfigure}
+
+
+\setlength{\textwidth}{5.0in}
+\linespread{1.3}
+\renewcommand{\PB}{{\bfseries Problema}}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{document}
+
+Considere un router de cola infinito cuyo tiempo de enrutado tiene
+una varianza $V$. El tiempo entre llegadas al router sigue una
+distribución exponencial de tasa $\lambda$.
+El tiempo de servicio del router
+tiene una media de $\tfrac{1}{\mu}$\,\textrm{sec}.
+
+
+\begin{problemlist}
+    \pbitem ¿Qué carga aguanta el router para que
+    un paquete tarde, en media, menos de $x$\,\textrm{sec} en salir?
+
+    \begin{solucion}
+        \input{../../RSTC-solutions/tema-6/solucion-problema1.tex}
+    \end{solucion}
+
+    \pbitem Suponga que el 10\% del tráfico
+    procesado sale de la red y un 90\%
+    del tráfico restante pasa a otro
+    router con el doble de tasa de servicio
+    y tiempo de servicio exponencial.
+    ¿Qué carga debe tener el primer
+    router para que la probabilidad
+    de tener $K=(1,1)$ paquetes en sendos
+    routers sea mayor a un 10\%?
+
+
+    \begin{solucion}
+        \input{../../RSTC-solutions/tema-6/solucion-problema2.tex}
+    \end{solucion}
+
+    \pbitem Suponga que el segundo router
+    sigue un tiempo de servicio
+    determinista.
+    ¿Cuál sería el tiempo medio en
+    atravesar los dos routers?
+
+    \begin{solucion}
+        \input{../../RSTC-solutions/tema-6/solucion-problema3.tex}
+    \end{solucion}
+
+
+    % \pbitem La salida de paquetes en una cola
+    % M/M/1 sigue un proceso de Poisson de tasa
+    % $\mu-\lambda$. Por tanto, el tiempo que
+    % pasa un paquete en el router es una v.a. exponencial de tasa $\mu-\lambda$. Con esta información, ¿qué capacidad de tasa de conmutación
+    % $\mu$ debe tener el router para que haya una probabilidad del 99.999\% de que un paquete se sirva en menos de 1 [ms]?
+
+    % \begin{solucion}
+    %     \input{../../RSTC-solutions/tema-5/solucion-problema-4.tex}
+    % \end{solucion}
+\end{problemlist}
+
+\end{document}
+
+
