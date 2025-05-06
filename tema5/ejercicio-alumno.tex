@@ -8,8 +8,8 @@
 
 % Para mostrar/ocultar soluciones
 \newboolean{show}
-%\setboolean{show}{true}
-\setboolean{show}{false}
+\setboolean{show}{true}
+%\setboolean{show}{false}
 \usepackage{environ}
 \NewEnviron{solucion}{
   \ifshow
@@ -65,10 +65,12 @@ tiene una media de $\tfrac{1}{\mu}$\,\textrm{sec}.
     un paquete tarde, en media, menos de $x$\,\textrm{sec} en salir?
 
     \begin{solucion}
-        \input{../../RSTC-solutions/tema-6/solucion-problema1.tex}
+        \input{../../RSTC-solutions/tema-5/solucion-problema1.tex}
     \end{solucion}
 
-    \pbitem Suponga que el 10\% del tráfico
+    \pbitem Suponga que el tiempo
+    de servicio del router es exponencial,
+    el 10\% del tráfico
     procesado sale de la red y un 90\%
     del tráfico restante pasa a otro
     router con el doble de tasa de servicio
@@ -80,7 +82,7 @@ tiene una media de $\tfrac{1}{\mu}$\,\textrm{sec}.
 
 
     \begin{solucion}
-        \input{../../RSTC-solutions/tema-6/solucion-problema2.tex}
+        \input{../../RSTC-solutions/tema-5/solucion-problema2.tex}
     \end{solucion}
 
     \pbitem Suponga que el segundo router
@@ -90,19 +92,9 @@ tiene una media de $\tfrac{1}{\mu}$\,\textrm{sec}.
     atravesar los dos routers?
 
     \begin{solucion}
-        \input{../../RSTC-solutions/tema-6/solucion-problema3.tex}
+        \input{../../RSTC-solutions/tema-5/solucion-problema3.tex}
     \end{solucion}
 
-
-    % \pbitem La salida de paquetes en una cola
-    % M/M/1 sigue un proceso de Poisson de tasa
-    % $\mu-\lambda$. Por tanto, el tiempo que
-    % pasa un paquete en el router es una v.a. exponencial de tasa $\mu-\lambda$. Con esta información, ¿qué capacidad de tasa de conmutación
-    % $\mu$ debe tener el router para que haya una probabilidad del 99.999\% de que un paquete se sirva en menos de 1 [ms]?
-
-    % \begin{solucion}
-    %     \input{../../RSTC-solutions/tema-5/solucion-problema-4.tex}
-    % \end{solucion}
 \end{problemlist}
 
 \end{document}
