@@ -8,8 +8,8 @@
 
 % Para mostrar/ocultar soluciones
 \newboolean{show}
-\setboolean{show}{true}
-%\setboolean{show}{false}
+%\setboolean{show}{true}
+\setboolean{show}{false}
 \usepackage{environ}
 \NewEnviron{solucion}{
   \ifshow
@@ -62,7 +62,7 @@ tiene una media de $\tfrac{1}{\mu}$\,\textrm{sec}.
 
 \begin{problemlist}
     \pbitem ¿Qué carga aguanta el router para que
-    un paquete tarde, en media, menos de $x$\,\textrm{sec} en salir?
+    un paquete tarde, en media, menos de $x$\,\textrm{sec} en salir? Exprese la solución en función de $V,x,\mu$.
 
     \begin{solucion}
         \input{../../RSTC-solutions/tema-5/solucion-problema1.tex}
@@ -77,7 +77,7 @@ tiene una media de $\tfrac{1}{\mu}$\,\textrm{sec}.
     y tiempo de servicio exponencial.
     ¿Qué carga debe tener el primer
     router para que la probabilidad
-    de tener $K=(1,1)$ paquetes en sendos
+    de tener $K=(0,0)$ paquetes en sendos
     routers sea mayor a un 10\%?
 
 
