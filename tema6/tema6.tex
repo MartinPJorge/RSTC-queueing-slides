@@ -677,20 +677,12 @@
         \lambda\left(1-\rho^K\frac{1-\rho}{1-\rho^{K+1}} \right)
         \geq0.7\\
         \Longleftrightarrow
-        \underbrace{\frac{1-\frac{0.7}{\lambda}}{1-\rho}}_{\alpha}
-        \geq \frac{\rho^K}{1-\rho^{K+1}}
-        \Longleftrightarrow
-        \rho^K\leq \frac{\alpha}{1+\alpha\rho}
+        \underbrace{1-\frac{0.7}{\lambda}}_{=\alpha}
+        \geq \rho^k \frac{1-\rho}{1-\rho^{k+1}}
     \end{multline*}
-    sustituyendo $\alpha=\tfrac{1-0.7/0.8}{1-0.8}=\tfrac{5}{8}$
-    y $\rho=\tfrac{8}{10}$
     queda
     \begin{equation*}
-        \rho^K\leq\frac{5}{12}
-        \Longleftrightarrow
-        K\geq\log_\rho\frac{5}{12}
-        \Longleftrightarrow
-        K\geq 3.92
+        k\geq \log_{\rho}\left( -\frac{\alpha}{(1-\alpha)\rho -1} \right)=3.92
     \end{equation*}
 \end{frame}
 
