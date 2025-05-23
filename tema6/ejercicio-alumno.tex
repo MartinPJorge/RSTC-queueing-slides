@@ -24,8 +24,8 @@
 
 % Para mostrar/ocultar soluciones
 \newboolean{show}
-%\setboolean{show}{true}
-\setboolean{show}{false}
+\setboolean{show}{true}
+%\setboolean{show}{false}
 \usepackage{environ}
 \NewEnviron{solucion}{
   \ifshow
@@ -41,7 +41,7 @@
 
 \coursetitle{Creating assignments}
 \courselabel{RSTC}
-\exercisesheet{Ejercicio de Alumno}{Temas 6 y 7}
+\exercisesheet{Ejercicio de Alumno}{Tema 6}
 \student{\ }%
 \semester{Segundo Semestre}
 \date{\today}
@@ -78,10 +78,10 @@ Emilia-Romagna --
 
 \vspace{1em}
 
-\begin{minipage}{\textwidth}
-    \centering
-    \includegraphics[width=.32\textwidth]{figs/box-pitlane.pdf}
-\end{minipage}
+% \begin{minipage}{\textwidth}
+%     \centering
+%     \includegraphics[width=.32\textwidth]{figs/box-pitlane.pdf}
+% \end{minipage}
 
 \begin{problemlist}
     \pbitem El acceso a boxes tiene
@@ -142,7 +142,7 @@ Emilia-Romagna --
     Cada canal tarda un tiempo exponencial
     en transmitir los mensajes, y tiene
     una tasa de 100~[paquetes/sec].
-    Los pilotos reciben un flujo de voz de
+    Los pilotos emiten un flujo de voz de
     10~[paquetes/sec], y si los canales 
     están ocupados, el mensaje espera en cola.
     ¿Cuántos canales radio debe haber para
