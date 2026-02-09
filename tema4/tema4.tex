@@ -1,5 +1,9 @@
-\documentclass[xcolor={x11names}]{beamer}
+\PassOptionsToPackage{x11names}{xcolor}
+%\documentclass[xcolor={x11names}]{beamer}
+\documentclass{beamer}
 \usetheme{Madrid}
+
+\usepackage[spanish]{babel}
 
 \usepackage{amssymb}
 \usepackage{ulem}
@@ -388,7 +392,7 @@ Si ya han pasado {\color{DodgerBlue1}$s$ [sec]}, ¿cuál es
 
 \begin{frame}{\secname: \subsecname}
     \begin{lema}[Mínimo de v.a. exponenciales]
-        Sean las v.a.\footnote{v.a. significa variable aleatoria} exponenciales
+        Sean las variables aleatorias (v.a.) exponenciales
         {\color{Firebrick1}$t_1$} y
         {\color{Firebrick4}$t_2$}, con
         tasas
@@ -1794,7 +1798,7 @@ Si ya han pasado {\color{DodgerBlue1}$s$ [sec]}, ¿cuál es
         \mathbb{E}[N(t)]=
         \sum_{i=0}^\infty i \pi_i
         =(1-\rho)\rho \sum_{i=1}^\infty i\rho^{i-1}
-        = (1-\rho)\rho \frac{d}{dt}\sum_{i=1}^\infty \rho^i = \ldots = \frac{\rho}{1-\rho}
+        = (1-\rho)\rho \frac{d}{d\rho}\sum_{i=1}^\infty \rho^i = \ldots = \frac{\rho}{1-\rho}
     \end{equation*}
 \end{frame}
 
