@@ -1,0 +1,96 @@
+\documentclass{upmassignment}
+\usepackage[spanish]{babel}
+\usepackage{ifthen}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+
+
+
+% Para mostrar/ocultar soluciones
+\newboolean{show}
+\setboolean{show}{true}
+%\setboolean{show}{false}
+\usepackage{environ}
+\NewEnviron{solucion}{
+  \ifshow
+      \begin{answer}\BODY\end{answer}
+  \fi}
+
+
+
+
+
+
+\coursetitle{Creating assignments}
+\courselabel{RSTC}
+\exercisesheet{Ejercicio de Alumno}{Tema 5}
+\student{\ }%
+\semester{Segundo Semestre}
+\date{\today}
+\university{Universidad Politécnica de Madrid}
+\school{Departamento de Ingeniería de Sistemas Telemáticos}
+%\usepackage[pdftex]{graphicx}
+%\usepackage{subfigure}
+
+
+\setlength{\textwidth}{5.0in}
+\linespread{1.3}
+\renewcommand{\PB}{{\bfseries Problema}}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{document}
+
+
+Considere un switch con tamaño de cola infinita
+al que llega tráfico Poissoniano de tasa
+$\lambda$. Sabiendo que el tiempo de
+servicio del switch sigue una distribución
+uniforme $U(a,\tfrac{2}{\mu}-a)$, responda
+justificadamente a las siguientes preguntas:
+
+\begin{problemlist}
+    \pbitem Obtenga el tiempo medio
+        de tránsito por el sistema.
+
+    \begin{solucion}
+        \input{../../RSTC-solutions/tema-6/solucion2026-problema1.tex}
+    \end{solucion}
+
+
+    \pbitem Encuentre el valor de $a$
+        que minimiza el tiempo medio residual.
+        \begin{solucion}
+            \input{../../RSTC-solutions/tema-6/solucion2026-problema2.tex}
+        \end{solucion}
+
+    \pbitem Suponga que el tiempo de servicio
+        del switch es exponencial de tasa
+        $\mu$. El $p$ porciento del
+        tráfico saliente va a otro switch
+        idéntico con tasa de servicio $2\mu$,
+        i el $1-p$ porciento restante sale
+        del sistema.
+        ¿Cuál es el tiempo medio de
+        tránsito de un paquete?
+        \begin{solucion}
+            \input{../../RSTC-solutions/tema-6/solucion2026-problema3.tex}
+        \end{solucion}
+
+\end{problemlist}
+
+\end{document}
+
+
